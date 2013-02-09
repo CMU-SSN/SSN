@@ -13,39 +13,40 @@ components, described below.
 2. Ruby 1.9.3-p385
 
 ### Setting up the environment
-1. Clone the repo and navigate to the social-network-engine folder
++ Clone the repo and navigate to the social-network-engine folder
 
 ```
 git clone git@github.com:CMU-SSN/SSN.git
 cd social-network-engine
 ```	
 
-2. Run bundler and install all of the required gems
++ Run bundler and install all of the required gems
 
 ```
 bundle install
 ```
 
-3. Download the vagrant VirtualBox image from http://goo.gl/PxXLn (requires Google Apps login) [TODO: host this somewhere public]
-4. Add the image to vagrant
++ Download the vagrant VirtualBox image from http://goo.gl/PxXLn (requires Google Apps login) [TODO: host this somewhere public]
+
++ Add the image to vagrant
 
 ```
 vagrant add box [path to image download]
 ```
 
-5. Start the vagrant VM
++ Start the vagrant VM
 
 ```
 vagrant up
 ```
 
-6. Login to the vagrant VM
++ Login to the vagrant VM
 
 ```
 vagrant ssh
 ```
 
-7. Start the rails server
++ Start the rails server
 
 ```
 cd /vagrant
