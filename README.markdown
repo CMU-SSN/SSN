@@ -15,31 +15,43 @@ components, described below.
 ### Setting up the environment
 1. Clone the repo and navigate to the social-network-engine folder
 
-	git clone git@github.com:CMU-SSN/SSN.git
-	cd social-network-engine
-	
+```
+git clone git@github.com:CMU-SSN/SSN.git
+cd social-network-engine
+```	
+
 2. Run bundler and install all of the required gems
 
-	bundle install
-	
+```
+bundle install
+```
+
 3. Download the vagrant VirtualBox image from http://goo.gl/PxXLn (requires Google Apps login) [TODO: host this somewhere public]
 4. Add the image to vagrant
 
-	vagrant add box [path to image download]
+```
+vagrant add box [path to image download]
+```
 
 5. Start the vagrant VM
 
-	vagrant up
-	
+```
+vagrant up
+```
+
 6. Login to the vagrant VM
 
-	vagrant ssh
-	
+```
+vagrant ssh
+```
+
 7. Start the rails server
 
-	cd /vagrant
-	bundle exec rails s
-	
+```
+cd /vagrant
+bundle exec rails s
+```
+
 For more vagrant commands, see http://www.vagrantup.com
 
 	
@@ -47,4 +59,6 @@ For more vagrant commands, see http://www.vagrantup.com
 
 1.  Stop the vagrant VM
 
-	vagrant halt
+```
+vagrant halt
+```
