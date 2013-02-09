@@ -11,6 +11,10 @@ components, described below.
 ### Dependencies
 1. VirtualBox (v4.2.6 or newer)
 2. Ruby 1.9.3-p385
+3. Vagrant Gem
+	```
+	gem install vagrant
+	```
 
 ### Setting up the environment
 1. Clone the repo and navigate to the social-network-engine folder
