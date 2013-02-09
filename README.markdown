@@ -36,7 +36,7 @@ components, described below.
 4. Add the image to vagrant
 
 	```
-	vagrant add box [path to image download]
+	vagrant add box ssn_development [path to image download]
 	```
 
 5. Start the vagrant VM
