@@ -1,4 +1,6 @@
 Sne::Application.routes.draw do
+  match 'login' => 'mobile_pages#login'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
