@@ -12,6 +12,7 @@ components, described below.
 1. VirtualBox (v4.2.6 or newer)
 2. Ruby 1.9.3-p385
 3. Vagrant Gem
+
 	```
 	gem install vagrant
 	```
