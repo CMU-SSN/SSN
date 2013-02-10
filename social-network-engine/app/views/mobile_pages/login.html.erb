@@ -2,6 +2,23 @@
 <script>
 
     window.fbAsyncInit = function () {
+        var logIn = function () {
+            $(function () {
+                $("#login").click();
+            });
+        };
+
+        var onStatusChange = function (response) {
+            if (response.status === 'connected') {
+                logIn();
+
+            } else if (response.status === 'not_authorized') {
+                // not_authorized
+            } else {
+                // not_logged_in
+                alert("not logged in");
+            }
+        };
         // init the FB JS SDK
         FB.init({
             appId:'287810881345472', // App ID from the App Dashboard
@@ -13,17 +30,11 @@
 
         // Additional initialization code such as adding Event Listeners goes here
         FB.getLoginStatus(function (response) {
-            if (response.status === 'connected') {
-                $(function () {
-                    $("#login").click();
-                });
+            onStatusChange(response);
+        });
 
-            } else if (response.status === 'not_authorized') {
-                // not_authorized
-            } else {
-                // not_logged_in
-                alert("not logged in");
-            }
+        FB.Event.subscribe('auth.authResponseChange', function (response) {
+            onStatusChange(response);
         });
 
     };
