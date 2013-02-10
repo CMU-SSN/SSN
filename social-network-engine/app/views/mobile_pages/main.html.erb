@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <title>SSN</title>
+    <title>SSN Feed</title>
 </head>
 <div data-role="page" >
     <div data-theme="b" data-role="header" data-nobackbtn="true">
@@ -10,6 +10,14 @@
 		<a href="needs2.html.erb" class="ui-btn-right" data-icon="grid" data-theme="b">Needs2</a>
     </div>
     <div data-role="content" class="feed-container">
+		<div class="feed-post feed-item feed-post-content"> 
+			<div data-role="fieldcontain" class="feed-post-fieldcontain">
+				<fieldset data-role="controlgroup" class="feed-post-fieldset">
+					<textarea id="feedPost" placeholder="Type feed entry here"></textarea>
+				</fieldset>
+			</div>
+			<a href="" data-role="button" data-theme="b">Post</a>
+		</div>
 		<div class="first-feed-item feed-item"> 
 			<a class="feed-top" href="jamesProfile.html.erb">
 				<img src="assets/James.jpg" class="feed-user-image">
@@ -59,7 +67,7 @@
 				<p class="feed-text"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 			</div>			
 		</div>
-		<div class="feed-item"> 
+		<div class="last-feed-item feed-item"> 
 			<a class="feed-top" href="jamesProfile.html.erb">
 				<img src="assets/Brian.jpg" class="feed-user-image">
 				<div class="feed-heading">

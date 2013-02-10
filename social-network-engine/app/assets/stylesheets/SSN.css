@@ -27,8 +27,7 @@ a
   border-bottom-right-radius:6px;
   border-bottom-left-radius:6px; 
   border-bottom:0px
-}  
-
+}
 .feed-user-image
 {
   height:60px;
@@ -68,3 +67,29 @@ a
   display:block;
 }
 
+.feed-post-content
+{
+  border-top-left-radius:6px;
+  border-top-right-radius:6px;
+  border-bottom-right-radius:6px;
+  border-bottom-left-radius:6px; 
+  margin-bottom:4px;
+}  
+
+.feed-post-fieldcontain
+{
+  border-bottom:0px !important;
+  padding:0px !important;
+}
+
+.feed-post-fieldset
+{
+  margin:0px !important;
+}
+.profile-info
+{
+  margin-top:20px;
+  display:inline-block;
+  width:100%;
+  margin:15px 10px 0px; 
+}
