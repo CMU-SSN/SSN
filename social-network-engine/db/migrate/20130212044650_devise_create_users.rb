@@ -33,6 +33,9 @@ class DeviseCreateUsers < ActiveRecord::Migration
       ## Token authenticatable
       # t.string :authentication_token
 
+      # Facebook token
+      t.string   :facebook_token
+      t.datetime :token_expiration
 
       t.timestamps
     end
