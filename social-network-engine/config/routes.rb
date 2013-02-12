@@ -1,5 +1,7 @@
 Sne::Application.routes.draw do
-  devise_for :users
+  get "facebook_tap_app/main"
+
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   match 'login' => 'mobile_pages#login'
   match 'main' => 'mobile_pages#main'
