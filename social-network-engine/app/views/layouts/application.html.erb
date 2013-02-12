@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Sne</title>
+  <title>The City of Palo Alto's Survivable Social Network</title>
   <%= stylesheet_link_tag    "application", "jqueryMobile/jquery.mobile-1.2.0", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
 
 <%= yield %>
 
