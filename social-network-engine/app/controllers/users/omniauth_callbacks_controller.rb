@@ -1,21 +1,24 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
-    print "\n\n\nHere at Facebook auth callback!\n\n\n"
-    print request.env["omniauth.auth"]
-    print "\n\n"
+    auth = request.env["omniauth.auth"]
+    @user = User.where(:provider => auth.provider, :uid => auth.uid).first
 
-    @user = User.find_for_facebook_oauth(request.env["omniauth.auth"], current_user)
+    if @user.nil?
+      # User is new, continue flow
+      @user = User.create(#name:auth.extra.raw_info.name,
+          provider:auth.provider,
+          uid:auth.uid,
+          email:auth.info.email,
+          password:Devise.friendly_token[0,20],
+          token:auth.credentials.token,
+          token_expiration:auth.credentials.expires_at)
 
-    print @user.to_s
-    print "\n\n\n"
-    redirect_to new_user_registration_url
-
-#    if @user.persisted?
-#      sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
-#      set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
-#    else
-#      session["devise.facebook_data"] = request.env["omniauth.auth"]
-#      redirect_to new_user_registration_url
-#    end
+      sign_in @user
+      redirect_to "/facebook_tab_app/create_account"
+    else
+      # User already existed, take to done
+      sign_in @user
+      redirect_to "/facebook_tab_app/done"
+    end
   end
 end
