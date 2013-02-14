@@ -1,5 +1,7 @@
 Sne::Application.routes.draw do
-  get "facebook_tap_app/main"
+  get "facebook_tab_app/signup"
+  get "facebook_tab_app/create_account"
+  get "facebook_tab_app/done"
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
