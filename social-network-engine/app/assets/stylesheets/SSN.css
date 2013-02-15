@@ -1,95 +1,77 @@
-a 
-{
-  text-decoration: none;
+a {
+    text-decoration: none;
 }
 
-.feed-container
-{
-  background-color: gray;
-  padding: 7px !important;
-} 
-
-.feed-item
-{
-  background-color: white;
-  padding:7px;
-  border-bottom:2px solid gray;
-} 
-
-.first-feed-item
-{
-  border-top-left-radius:6px;
-  border-top-right-radius:6px;
-} 
-
-.last-feed-item
-{
-  border-bottom-right-radius:6px;
-  border-bottom-left-radius:6px; 
-  border-bottom:0px
-}
-.feed-user-image
-{
-  height:60px;
-  display:inline-block;
+.feed-container {
+    background-color: gray;
+    padding: 7px !important;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-bottom: 0px
 }
 
-.feed-heading
-{
-  display:inline-block;
-  vertical-align:top;
+.feed-item {
+    background-color: white;
+    padding: 7px;
+    border-bottom: 2px solid gray;
 }
 
-.feed-name
-{
-  margin:0px 10px;
-  color:#234887;
+
+.feed-user-image {
+    height: 60px;
+    display: inline-block;
 }
 
-.feed-time
-{
-  margin:5px 10px 0px; 
-  color:#79818F;
-  font-weight:normal;
+.feed-heading {
+    display: inline-block;
+    vertical-align: top;
 }
 
-.feed-text
-{
-  margin:4px;
+.feed-name {
+    margin: 0px 10px;
+    color: #234887;
 }
 
-.feed-image
-{
-  width:100%;
-}
-.feed-top
-{
-  display:block;
+.feed-time {
+    margin: 5px 10px 0px;
+    color: #79818F;
+    font-weight: normal;
 }
 
-.feed-post-content
-{
-  border-top-left-radius:6px;
-  border-top-right-radius:6px;
-  border-bottom-right-radius:6px;
-  border-bottom-left-radius:6px; 
-  margin-bottom:4px;
-}  
-
-.feed-post-fieldcontain
-{
-  border-bottom:0px !important;
-  padding:0px !important;
+.feed-text {
+    margin: 4px;
 }
 
-.feed-post-fieldset
-{
-  margin:0px !important;
+.feed-image {
+    width: 100%;
 }
-.profile-info
-{
-  margin-top:20px;
-  display:inline-block;
-  width:100%;
-  margin:15px 10px 0px; 
+
+.feed-top {
+    display: block;
+}
+
+.feed-post-content {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    margin-bottom: 4px;
+}
+
+.feed-post-fieldcontain {
+    border-bottom: 0px !important;
+    padding: 0px !important;
+}
+
+.feed-post-fieldset {
+    margin: 0px !important;
+}
+
+.profile-info {
+    margin-top: 20px;
+    display: inline-block;
+    width: 100%;
+    margin: 15px 10px 0px;
 }
