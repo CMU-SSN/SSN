@@ -31,7 +31,7 @@
                     <% end %>
                   </h2>
 
-                  <p class="feed-time">Posted 35 minutes ago</p>
+                  <p class="feed-time">Posted <%= time_ago_in_words(post.created_at) %> ago</p>
                 </div>
               </a>
 
