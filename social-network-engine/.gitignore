@@ -29,3 +29,4 @@ coverage/*
 *.ids
 .vagrant
 *.vagrant
+Vagrantfile
