@@ -16,7 +16,7 @@ Devise.setup do |config|
   require 'devise/orm/active_record'
 
   require 'omniauth-facebook'
-  config.omniauth :facebook, "326359867485372", "346397947ee825f6c46528a9cba1a507", :strategy_class => OmniAuth::Strategies::Facebook
+  config.omniauth :facebook, "326359867485372", "f2b0069cb13b5ae86f2647460f46e68b", :strategy_class => OmniAuth::Strategies::Facebook
 
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is
