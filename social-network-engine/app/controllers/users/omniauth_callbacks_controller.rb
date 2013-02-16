@@ -14,7 +14,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           token_expiration:auth.credentials.expires_at)
 
       sign_in @user
-      redirect_to "/facebook_tab_app/create_account"
+      redirect_to "/facebook_tab_app/load_account"
     else
       # User already existed, take to done
       sign_in @user
