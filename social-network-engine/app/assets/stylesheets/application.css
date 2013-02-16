@@ -11,3 +11,18 @@
  *= require jquery.mobile-1.2.0
  *= require_tree .
  */
+
+.center {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.center-85 {
+	margin: auto 15%;
+	text-align: center;
+}
+
+.logo {
+	width: 250px;
+	height: 250px;
+}

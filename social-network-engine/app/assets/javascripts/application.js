@@ -14,3 +14,7 @@
 //= require jquery_ujs
 //= require jquery.mobile-1.2.0
 //= require_tree .
+
+function ssn_hide_header() {
+	$("div[data-role='header']").hide();
+}
