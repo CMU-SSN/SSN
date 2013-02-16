@@ -1,0 +1,32 @@
+<%= content_for :header do %>
+  <h2>Palo Alto SSN - Creation</h2>
+<% end %>
+<%= content_for :content do %>
+  <p>Please make an SSN account</p>
+  <%= form_for @user, :url => { :action => "create_account" } do |f| %>
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+      <h2>Please fix the following issues to create your account:</h2>
+        <ul>
+          <% @job.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <br />
+    <div class="field"><span class="smallerTitle">
+      <%= f.label :email %></span><br />
+      <%= f.email_field :email %>
+    </div>
+    <div class="field"><span class="smallerTitle">
+      <%= f.label :password %></span><br />
+      <%= f.password_field :password %>
+    </div>
+    <div class="field"><span class="smallerTitle">
+      <%= f.label :password_confirmation %></span><br />
+      <%= f.password_field :password_confirmation %>
+    </div>
+    <%= f.submit "Create Account" %>
+  <% end %>
+<% end %>
