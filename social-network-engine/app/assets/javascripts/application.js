@@ -10,7 +10,7 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require ./jquery-1.8.2.min
+//= require jquery
 //= require jquery_ujs
-//= require ./jquery.mobile-1.2.0.min
+//= require jquery.mobile-1.2.0
 //= require_tree .
