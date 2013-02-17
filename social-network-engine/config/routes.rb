@@ -9,7 +9,6 @@ Sne::Application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
-  match 'login' => 'mobile_pages#login'
   match 'main' => 'posts#index'
-  root :to => 'mobile_pages#login'
+  root :to => 'posts#index'
 end
