@@ -7,20 +7,22 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     @user = User.where(:provider => auth.provider, :uid => auth.uid).first
 
-    # Get user profile picture
-    profile_pics_path = "#{Rails.root}/public/profile-pics"
-    FileUtils.mkdir_p(profile_pics_path) unless File.exists?(profile_pics_path)
-
-    profile_pic_name =  "profile-pics/#{Digest::MD5.hexdigest(auth['info']['image'])}.jpg"
-
-    open("#{Rails.root}/public/#{profile_pic_name}", 'wb') do |f|
-      f << open(auth['info']['image']).read unless auth['info'].nil?
-    end
-
     if @user.nil?
       # The user came from the signup flow
       if params[:state] == "signup"
         # User is new, continue flow
+
+        # Get user profile picture
+        profile_pics_path = "#{Rails.root}/public/profile-pics"
+        FileUtils.mkdir_p(profile_pics_path) unless File.exists?(profile_pics_path)
+
+        profile_pic_name =  "profile-pics/#{Digest::MD5.hexdigest(auth['info']['image'])}.jpg"
+
+        open("#{Rails.root}/public/#{profile_pic_name}", 'wb') do |f|
+          f << open(auth['info']['image']).read unless auth['info'].nil?
+        end
+
+        # Create user's account
         @user = User.create(#name:auth.extra.raw_info.name,
             name:auth['info']['name'],
             profile_pic:profile_pic_name,
