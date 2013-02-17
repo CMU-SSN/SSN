@@ -1,7 +1,8 @@
 <%= content_for :header do %>
-  <h2>Palo Alto SSN - Signup</h2>
+  <h2>Palo Alto SSN - Create Account</h2>
 <% end %>
 <%= content_for :content do %>
-  <p>Signup to SSN. We ask for.</p>
-  <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook, :state => "signup"), { :rel => "external" } %>
+  <p>The Palo Alto Survibable Social Network is an effort by the city to construct a social network that is usable during a dissaster. Through SSN you'll be able to get status updates from the city, get health updates from the people you love, and connect with your neighbors to give and receive help during an emergency.</p>
+  <p>On the next page, we will ask for your permission to access some of your profile information. We ask for our basic data to customize your experience and your friends list to link you with your neighbors already in SSN.</p>
+  <%= link_to "Create an Account", user_omniauth_authorize_path(:facebook, :state => "signup"), { :rel => "external" } %>
 <% end %>
