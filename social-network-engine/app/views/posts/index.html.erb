@@ -1,17 +1,15 @@
-<%= content_for :content do %>
-<div data-role="page">
-  <div data-theme="b" data-role="header" data-nobackbtn="true">
+<% content_for :header do %>
     <h3>SSN</h3>
-    <a href="needs.html.erb" class="ui-btn-right" data-icon="grid" data-theme="b">Needs</a>
-  </div>
-  <div data-role="content" class="feed-container">
+    <a href="needs.html.erb" class="ui-btn-right" data-icon="grid" data-theme="c">Needs</a>
+<% end %>
+<% content_for :content do %>
     <div class="feed-item">
-		<%= form_for @post, :url => { :action => "create" }, :html => { :method => :post } do |f| %>
-			<%= f.text_area :text, :placeholder => "Enter new posts here"%>
-			<%= f.submit "Post"%>
-		<% end %>
-	</div>
-  
+      <%= form_for @post, :url => {:action => "create"}, :html => {:method => :post} do |f| %>
+          <%= f.text_area :text, :placeholder => "Enter new posts here" %>
+          <%= f.submit "Post" %>
+      <% end %>
+    </div>
+
     <% unless @posts.nil? %>
         <% @posts.each do |post| %>
             <div class="feed-item">
@@ -41,6 +39,4 @@
     <% else %>
         No posts yet.
     <% end %>
-  </div>
-</div>
 <% end %>
