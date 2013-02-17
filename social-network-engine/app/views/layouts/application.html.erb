@@ -2,20 +2,25 @@
 <html>
 <head>
   <title>The City of Palo Alto's Survivable Social Network</title>
-	<%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
 </head>
 <body>
-	<div data-theme="c" data-role="page">
-		<div data-role="header">
-			<%= yield :header %>
-		</div>
-		<div data-role="content">
-			<%= yield :content %>
-		</div>
-	</div>
-	<%= yield :scripts %>
+<div data-theme="c" data-role="page">
+  <div data-role="header">
+    <%= yield :header %>
+    <!--
+    <% if user_signed_in? %>
+        <%= link_to('Logout', destroy_user_session_path, :class => "ui-btn-right", :data => {:theme => "c"}, :method => :delete) %>
+    <% end %>
+    -->
+  </div>
+  <div data-role="content">
+    <%= yield :content %>
+  </div>
+</div>
+<%= yield :scripts %>
 </body>
 </html>

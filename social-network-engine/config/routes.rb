@@ -1,6 +1,5 @@
 Sne::Application.routes.draw do
-  resources :posts
-
+  resources :posts, :only => [:index, :create]
 
   get "facebook_tab_app/signup"
   get "facebook_tab_app/load_account"
