@@ -12,9 +12,13 @@ class FacebookTabAppController < ApplicationController
 
   def create_account
     @user = current_user
-    @user.update_attributes(params[:user])
-    @user.save!
-    redirect_to "/facebook_tab_app/done"
+    no_errors = @user.update_attributes(params[:user])
+
+    if no_errors
+      redirect_to "/facebook_tab_app/done"
+    else
+      render 'load_account'
+    end
   end
 
   def done
