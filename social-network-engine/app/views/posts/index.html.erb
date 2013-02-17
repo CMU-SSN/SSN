@@ -10,7 +10,7 @@
       <% end %>
     </div>
 
-    <% unless @posts.nil? %>
+    <% if !@posts.nil? && @posts.length > 0 %>
         <% @posts.each do |post| %>
             <div class="feed-item">
               <a class="feed-top" href="jamesProfile.html.erb">
@@ -37,6 +37,8 @@
             </div>
         <% end %>
     <% else %>
-        No posts yet.
+        <div class="feed-item">
+          No posts yet.
+        </div>
     <% end %>
 <% end %>
