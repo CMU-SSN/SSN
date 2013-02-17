@@ -1,8 +1,8 @@
 <%= content_for :header do %>
-  <h2>Palo Alto SSN - Creation</h2>
+  <h2>Palo Alto SSN - Create Account</h2>
 <% end %>
 <%= content_for :content do %>
-  <p>Please make an SSN account</p>
+  <p>We've already started creating your SSN account by importing your Facebook information.</p><p>Please choose a password. Note that this should <b>NOT</b> be your Facebook password.</p>
   <%= form_for @user, :url => { :action => "create_account" } do |f| %>
     <% if @user.errors.any? %>
       <div id="error_explanation">
@@ -16,15 +16,15 @@
     <% end %>
     <br />
     <div>
-      <%= f.label :email %><br />
-      <%= f.email_field :email, :readonly => true %>
+      <%= f.label :email %>:&nbsp;<b><%= @user.email %></b>
     </div>
+    <br />
     <div>
-      <%= f.label :password %><br />
+      <%= f.label :password %>
       <%= f.password_field :password %>
     </div>
     <div>
-      <%= f.label :password_confirmation %><br />
+      <%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation %>
     </div>
     <%= f.submit "Create Account" %>
