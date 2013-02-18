@@ -1,34 +1,31 @@
 <%= content_for :content do %>
-    <div class="center">
-      <%= image_tag("sample_neighborhood_logo.png", :class => "logo") %>
-      <h3>City of Palo Alto SSN</h3>
-      <h4>Welcome to the Cool City Neighborhood</h4>
-    </div>
+	<div class="center">
+		<%= image_tag("sample_neighborhood_logo.png", :class => "logo") %>
+		<h3>City of Palo Alto SSN</h3>
+		<h4>Welcome to the Cool City Neighborhood</h4>
+	</div>
+	
+	<%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook), { :rel => "external" } %>
 
-    <div>
-      <%= devise_error_messages! %>
+	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+	    <div data-role="fieldcontain" class="ui-hide-label">
+	      <%= f.label :email %>
+	      <%= f.email_field :email, :autofocus => true, :placeholder => "Email" %>
+	    </div>
+	    <div data-role="fieldcontain" class="ui-hide-label">
+	      <%= f.label :password %>
+	      <%= f.password_field :password, :placeholder => "Password" %>
+	    </div>
 
-      <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-          <div data-role="fieldcontain" class="ui-hide-label">
-            <%= f.label :email %>
-            <%= f.email_field :email, :autofocus => true, :placeholder => "Email" %>
-          </div>
-          <div data-role="fieldcontain" class="ui-hide-label">
-            <%= f.label :password %>
-            <%= f.password_field :password, :placeholder => "Password" %>
-          </div>
+	    <% if devise_mapping.rememberable? -%>
+				<div data-role="fieldcontain" class="ui-hide-label">
+				  <input type="checkbox" name="user[remember_me]" id="user_remember_me" value="1"/>
+				  <label for="user_remember_me">Keep me signed in</label>
+				</div>
+	    <% end -%>
 
-          <% if devise_mapping.rememberable? -%>
-              <div data-role="fieldcontain" class="ui-hide-label">
-                <input type="checkbox" name="user[remember_me]" id="user_remember_me" value="1"/>
-                <label for="user_remember_me">Keep me signed in</label>
-                </fieldset>
-          <% end -%>
-
-          <div><%= f.submit "Sign in" %></div>
-      <% end %>
-      </div>
-    </div>
+	    <%= f.submit "Sign in" %>
+	<% end %>
 <% end %>
 
 <%= content_for :scripts do %>
