@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   def ImportFriends(facebook_friend_ids)
     # Look for existing users in specified Facebook friends
     facebook_friend_ids.each do |i|
+      # TODO(vmarmol): Do all these lookups at once.
       potential_friend = User.find_by_uid(i)
 
       # Unknown friends are potential friends, known users are friends
