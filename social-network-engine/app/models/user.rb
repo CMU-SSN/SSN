@@ -10,5 +10,4 @@ class User < ActiveRecord::Base
   has_many :posts, :dependent => :destroy
   has_many :potential_friends
   has_many :friends
-  #has_many :users, :source => :friend, :through => :friends
 end
