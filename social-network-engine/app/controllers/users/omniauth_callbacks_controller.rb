@@ -33,8 +33,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
             token:auth.credentials.token,
             token_expiration:Time.at(auth.credentials.expires_at).to_datetime)
 
-
-
         sign_in @user
         redirect_to "/facebook_tab_app/load_account"
       else
