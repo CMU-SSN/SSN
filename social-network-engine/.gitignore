@@ -30,3 +30,4 @@ coverage/*
 .vagrant
 *.vagrant
 Vagrantfile
+public/profile-pics/*

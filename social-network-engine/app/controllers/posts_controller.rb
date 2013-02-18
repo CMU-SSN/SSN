@@ -1,8 +1,11 @@
 class PostsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+
+    @posts = Post.order("updated_at DESC").all
+    @post = Post.new
 
     respond_to do |format|
       format.html # index.html.erb
@@ -40,16 +43,12 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(params[:post])
+    current_user.posts.create! params[:post]
 
     respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render json: @post, status: :created, location: @post }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+      flash[:notice] = "Post created successfully!"
+      format.html { redirect_to '/posts#index', notice: 'Post was successfully created.' }
+      format.json { render json: @post, status: :created, location: @post }
     end
   end
 

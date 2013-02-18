@@ -1,6 +1,5 @@
 Sne::Application.routes.draw do
-  resources :posts
-
+  resources :posts, :only => [:index, :create]
 
   get "facebook_tab_app/signup"
   get "facebook_tab_app/load_account"
@@ -9,7 +8,6 @@ Sne::Application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
-  match 'login' => 'mobile_pages#login'
   match 'main' => 'posts#index'
-  root :to => 'mobile_pages#login'
+  root :to => 'posts#index'
 end

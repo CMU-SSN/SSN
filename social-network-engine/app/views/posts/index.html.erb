@@ -1,24 +1,18 @@
-<head>
-  <title>SSN Feed</title>
-</head>
-<div data-role="page">
-  <div data-theme="b" data-role="header" data-nobackbtn="true">
+<% content_for :header do %>
     <h3>SSN</h3>
-    <a href="needs.html.erb" class="ui-btn-right" data-icon="grid" data-theme="b" style="margin-right:90px;">Needs</a>
-    <a href="needs2.html.erb" class="ui-btn-right" data-icon="grid" data-theme="b">Needs2</a>
-  </div>
-  <div data-role="content" class="feed-container">
-    <div class="feed-post feed-item feed-post-content">
-      <div data-role="fieldcontain" class="feed-post-fieldcontain">
-        <fieldset data-role="controlgroup" class="feed-post-fieldset">
-          <textarea id="feedPost" placeholder="Type feed entry here"></textarea>
-        </fieldset>
-      </div>
-      <a href="" data-role="button" data-theme="b">Post</a>
+    <a href="needs.html.erb" class="ui-btn-right" data-icon="grid" data-theme="c">Needs</a>
+<% end %>
+<% content_for :content do %>
+    <div class="feed-item">
+      <%= form_for @post, :url => {:action => "create"}, :html => {:method => :post} do |f| %>
+          <%= f.text_area :text, :placeholder => "Enter new posts here" %>
+          <%= f.submit "Post" %>
+      <% end %>
     </div>
-    <% unless @posts.nil? %>
+
+    <% if !@posts.nil? && @posts.length > 0 %>
         <% @posts.each do |post| %>
-            <div class="first-feed-item feed-item">
+            <div class="feed-item">
               <a class="feed-top" href="jamesProfile.html.erb">
                 <img src="<%= post.user.profile_pic %>" class="feed-user-image">
 
@@ -43,7 +37,8 @@
             </div>
         <% end %>
     <% else %>
-        No posts yet.
+        <div class="feed-item">
+          No posts yet.
+        </div>
     <% end %>
-  </div>
-</div>
+<% end %>
