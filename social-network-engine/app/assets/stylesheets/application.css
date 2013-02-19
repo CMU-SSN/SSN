@@ -17,12 +17,16 @@
 	text-align: center;
 }
 
-.center-85 {
+.width-85 {
 	margin: auto 15%;
-	text-align: center;
 }
 
 .logo {
 	width: 250px;
 	height: 250px;
+}
+
+.logo-small {
+	width: 150px;
+	height: 150px;
 }

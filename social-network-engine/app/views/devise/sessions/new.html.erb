@@ -1,12 +1,15 @@
 <%= content_for :content do %>
 	<div class="center">
 		<%= image_tag("sample_neighborhood_logo.png", :class => "logo") %>
-		<h3>City of Palo Alto SSN</h3>
-		<h4>Welcome to the Cool City Neighborhood</h4>
+		<h3>City of Palo Alto SSN :: Cool City Neighborhood</h3>
 	</div>
-	
-	<%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook), { :rel => "external" } %>
-
+	<br />
+	<div class="center width-85">
+		<h3><%= link_to "Sign In With Facebook", user_omniauth_authorize_path(:facebook), :rel => 'external' %></h3>
+		<h4>
+			Or Using Your Local SSN Account
+		</h4>
+	</div>
 	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 	    <div data-role="fieldcontain" class="ui-hide-label">
 	      <%= f.label :email %>
@@ -24,7 +27,7 @@
 				</div>
 	    <% end -%>
 
-	    <%= f.submit "Sign in" %>
+	    <%= f.submit "Sign in", :data => { :role => 'button', :icon => 'arrow-r', :iconpos => 'right', :theme => 'b' }%>
 	<% end %>
 <% end %>
 

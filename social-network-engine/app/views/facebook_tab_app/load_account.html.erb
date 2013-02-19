@@ -1,32 +1,40 @@
-<%= content_for :header do %>
-  <h2>Palo Alto SSN - Create Account</h2>
-<% end %>
 <%= content_for :content do %>
-  <p>We've already started creating your SSN account by importing your Facebook information.</p><p>Please choose a password. Note that this should <b>NOT</b> be your Facebook password.</p>
-  <%= form_for @user, :url => { :action => "create_account" } do |f| %>
-    <% if @user.errors.any? %>
-      <div id="error_explanation">
-      <h2>Please fix the following issues to create your account:</h2>
-        <ul>
-          <% @user.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-    <br />
-    <div>
-      <%= f.label :email %>:&nbsp;<b><%= @user.email %></b>
-    </div>
-    <br />
-    <div>
-      <%= f.label :password %>
-      <%= f.password_field :password %>
-    </div>
-    <div>
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation %>
-    </div>
-    <%= f.submit "Create Account" %>
-  <% end %>
+		<div class="center">
+			<%= image_tag("sample_neighborhood_logo.png", :class => "logo-small") %>
+			<h3>City of Palo Alto SSN :: Cool City Neighborhood</h3>
+		</div>
+		<hr class="width-85" />
+		<div class="width-85">
+			<p>Welcome to the Cool City Neighborhood SSN node.  Please choose a password for your account.  Note that this password should <b>NOT</b> be the same as your Facebook password.</p><br/>
+		  <%= form_for @user, :url => { :action => "create_account" } do |f| %>
+		    <% if @user.errors.any? %>
+		      <div id="error_explanation">
+		      <h2>Please fix the following issues to create your account:</h2>
+		        <ul>
+		          <% @user.errors.full_messages.each do |msg| %>
+		            <li><%= msg %></li>
+		          <% end %>
+		        </ul>
+		      </div>
+		    <% end %>
+		    <div>
+		     	Username: &nbsp;<b><%= @user.email %></b><br />
+		    </div>
+		    <div data-role="fieldcontain" class="ui-hide-label">
+		      <%= f.label :password %>
+		      <%= f.password_field :password, :autofocus => true, :placeholder => "Password" %>
+		    </div>
+		    <div data-role="fieldcontain" class="ui-hide-label">
+		      <%= f.label :password_confirmation %>
+		      <%= f.password_field :password_confirmation, :placeholder => "Password Again" %>
+		    </div>
+		    <%= f.submit "Create Account" %>
+		  <% end %>
+		</div>
+<% end %>
+
+<%= content_for :scripts do %>
+    <script type="text/javascript">
+        ssn_hide_header();
+    </script>
 <% end %>

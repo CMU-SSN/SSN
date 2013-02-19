@@ -1,6 +1,8 @@
 <% content_for :header do %>
-    <h3>SSN</h3>
-    <a href="needs.html.erb" class="ui-btn-right" data-icon="grid" data-theme="c">Needs</a>
+		<%= link_to "Sign Out", destroy_user_session_path, :method => "delete", :target => '_self', :class => "ui-btn-left" %>
+    <h3>All Posts</h3> 
+		<!--Commenting out for the demo this week, let's not show anything that doesn't work - BB-->
+    <!--a href="needs.html.erb" class="ui-btn-right" data-icon="grid" data-theme="c">Needs</a-->
 <% end %>
 <% content_for :content do %>
     <div class="feed-item">
