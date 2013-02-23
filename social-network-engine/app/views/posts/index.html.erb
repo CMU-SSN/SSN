@@ -7,8 +7,10 @@
 <% content_for :content do %>
     <div class="feed-item">
       <%= form_for @post, :url => {:action => "create"}, :html => {:method => :post} do |f| %>
+          <%= f.hidden_field :latitude %>
+          <%= f.hidden_field :longitude %>
           <%= f.text_area :text, :placeholder => "Enter new posts here" %>
-          <%= f.submit "Post" %>
+          <%= f.submit "Post", :id=>"submit-post" %>
       <% end %>
     </div>
     <div id="posts" data-token="<%= @token %>" >
