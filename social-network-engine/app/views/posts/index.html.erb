@@ -1,7 +1,7 @@
 <% content_for :header do %>
-		<%= link_to "Sign Out", destroy_user_session_path, :method => "delete", :target => '_self', :class => "ui-btn-left" %>
-    <h3>All Posts</h3> 
-		<!--Commenting out for the demo this week, let's not show anything that doesn't work - BB-->
+    <%= link_to "Sign Out", destroy_user_session_path, :method => "delete", :target => '_self', :class => "ui-btn-left" %>
+    <h3>All Posts</h3>
+    <!--Commenting out for the demo this week, let's not show anything that doesn't work - BB-->
     <!--a href="needs.html.erb" class="ui-btn-right" data-icon="grid" data-theme="c">Needs</a-->
 <% end %>
 <% content_for :content do %>
@@ -11,36 +11,67 @@
           <%= f.submit "Post" %>
       <% end %>
     </div>
+    <div id="posts" data-token="<%= @token %>" >
+      <% if !@posts.nil? && @posts.length > 0 %>
+          <% @posts.each do |post| %>
+              <div class="feed-item">
+                <a class="feed-top" href="jamesProfile.html.erb">
+                  <img src="<%= post.user.profile_pic %>" class="feed-user-image">
 
-    <% if !@posts.nil? && @posts.length > 0 %>
-        <% @posts.each do |post| %>
-            <div class="feed-item">
-              <a class="feed-top" href="jamesProfile.html.erb">
-                <img src="<%= post.user.profile_pic %>" class="feed-user-image">
+                  <div class="feed-heading">
+                    <h2 class="feed-name">
+                      <% if post.user.name %>
+                          <%= post.user.name %>
+                      <% else %>
+                          Anonymous
+                      <% end %>
+                    </h2>
 
-                <div class="feed-heading">
-                  <h2 class="feed-name">
-                    <% if post.user.name %>
-                        <%= post.user.name %>
-                    <% else %>
-                        Anonymous
-                    <% end %>
-                  </h2>
+                    <p class="feed-time">Posted <%= time_ago_in_words(post.created_at) %> ago</p>
+                  </div>
+                </a>
 
-                  <p class="feed-time">Posted <%= time_ago_in_words(post.created_at) %> ago</p>
+                <div>
+                  <p class="feed-text">
+                    <%= post.text %>
+                  </p>
                 </div>
-              </a>
-
-              <div>
-                <p class="feed-text">
-                  <%= post.text %>
-                </p>
               </div>
-            </div>
-        <% end %>
-    <% else %>
-        <div class="feed-item">
-          No posts yet.
-        </div>
-    <% end %>
+          <% end %>
+      <% else %>
+          <div class="feed-item">
+            No posts yet.
+          </div>
+      <% end %>
+    </div>
+
 <% end %>
+
+<% content_for :scripts do %>
+    <script id="postTemplate" type="text/x-jsrender">
+      <div class="feed-item">
+        <a class="feed-top">
+          <img src="{{>creator_pic}}" class="feed-user-image">
+
+          <div class="feed-heading">
+            <h2 class="feed-name">
+              {{>creator_name}}
+            </h2>
+
+            <p class="feed-time">Posted 1 minute ago</p>
+          </div>
+        </a>
+
+        <div>
+          <p class="feed-text">
+            {{>text}}
+          </p>
+        </div>
+      </div>
+    </script>
+
+    <%= javascript_include_tag 'post/post' %>
+<% end %>
+
+
+
