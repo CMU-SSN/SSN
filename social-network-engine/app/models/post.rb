@@ -12,6 +12,7 @@ class Post < ActiveRecord::Base
     geo = results.first
     unless geo.nil?
       obj.city = geo.city
+      obj.zipcode = geo.postal_code
     end
   end
   after_validation :reverse_geocode

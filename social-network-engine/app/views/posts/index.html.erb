@@ -29,7 +29,7 @@
                       <% end %>
                     </h2>
 
-                    <p class="feed-time">Posted <%= time_ago_in_words(post.created_at) %> ago</p>
+                    <p class="feed-time"><%= time_ago_in_words(post.created_at) %> ago near <%= post.city %> <%= post.zipcode %></p>
                   </div>
                 </a>
 
@@ -60,8 +60,8 @@
               {{>creator_name}}
             </h2>
 
-            <p class="feed-time">Posted
-              <abbr class="timeago" title="{{>updated_at}}">{{>updated_at}}</abbr>
+            <p class="feed-time">
+              <abbr class="timeago" title="{{>updated_at}}">{{>updated_at}}</abbr> near {{>city}} {{>zipcode}}
             </p>
           </div>
         </a>

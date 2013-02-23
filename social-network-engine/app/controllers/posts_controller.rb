@@ -13,7 +13,12 @@ class PostsController < ApplicationController
     end
 
     posts = @posts.collect do |post|
-      {:text=>post.text, :creator_name=>post.user.name, :creator_pic=>post.user.profile_pic, :updated_at=>post.updated_at}
+      {:text => post.text,
+       :creator_name => post.user.name,
+       :creator_pic => post.user.profile_pic,
+       :updated_at => post.updated_at,
+       :city => post.city,
+       :zipcode => post.zipcode}
     end
 
     @token = @posts.first.id if !@posts.nil? && !@posts.first.nil?
