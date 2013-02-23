@@ -3,13 +3,29 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+    id = params['token']
+    if id.nil? || id.length == 0
 
-    @posts = Post.order("updated_at DESC").all
+      @posts = Post.includes(:user).order("updated_at DESC").limit(100)
+    else
+      @posts = Post.includes(:user).where("id>:id", {:id => id}).order("updated_at DESC").limit(100)
+      #@posts = Post.find(:all, :include=>:user, :conditions=>["id > ?", DateTime.parse(timestamp)] )
+    end
+
+    posts = @posts.collect do |post|
+      {:text=>post.text, :creator_name=>post.user.name, :creator_pic=>post.user.profile_pic, :updated_at=>post.updated_at}
+    end
+
+    @token = @posts.first.id if !@posts.nil? && !@posts.first.nil?
+
+
     @post = Post.new
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @posts }
+      format.json do
+        render :json => {:code => 200, :data => posts, :token => @token}
+      end
     end
   end
 
