@@ -21,6 +21,8 @@ $('document').ready(function () {
                     $("#posts").prepend(
                         $("#postTemplate").render(data.data)
                     );
+
+                    $(".timeago").timeago().removeClass("timeago");
                 }
                 else if (data.code === 500) {
                 }
