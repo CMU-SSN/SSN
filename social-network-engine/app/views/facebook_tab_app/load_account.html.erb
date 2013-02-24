@@ -28,7 +28,7 @@
 		      <%= f.label :password_confirmation %>
 		      <%= f.password_field :password_confirmation, :placeholder => "Password Again" %>
 		    </div>
-		    <%= f.submit "Create Account" %>
+		    <%= f.submit "Create Account", :data => { :role => 'button', :icon => 'arrow-r', :iconpos => 'right', :theme => 'b' } %>
 		  <% end %>
 		</div>
 <% end %>
