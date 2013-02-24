@@ -31,3 +31,4 @@ coverage/*
 *.vagrant
 Vagrantfile
 public/profile-pics/*
+._noip*
