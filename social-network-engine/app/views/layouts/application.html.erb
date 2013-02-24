@@ -14,7 +14,7 @@
       <%= link_to "Sign Out", destroy_user_session_path, :method => "delete", :target => '_self', :class => "ui-btn-left" %>
     <% end %>
     <%= yield :header %>
-    <%= link_to "Search", search_path, :target => '_self', :class => "ui-btn-right" %>
+    <%= link_to "Search", search_path, :target => '_self', :class => "ui-btn-right", :data => { :role => "button", :icon =>"search", :iconpos => "left" }%>
   </div>
   <div data-role="content">
     <%= yield :content %>
