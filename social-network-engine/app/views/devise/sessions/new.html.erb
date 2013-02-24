@@ -4,8 +4,8 @@
 		<h3>City of Palo Alto SSN :: Cool City Neighborhood</h3>
 	</div>
 	<br />
-	<div class="center width-85">
-		<h3><%= link_to "Sign In With Facebook", user_omniauth_authorize_path(:facebook), :rel => 'external' %></h3>
+	<div class="center">
+		<%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook), :rel => 'external',  :data => { :role => 'button', :theme => 'b', :icon => 'arrow-r', :iconpos => 'right' }%>
 		<h4>
 			Or Using Your Local SSN Account
 		</h4>
