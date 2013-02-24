@@ -12,7 +12,7 @@ class SearchController < ApplicationController
       # Search users
       user_query = "%#{@query}%"
       @results = User.find(:all, :limit => 50, :conditions => ["name LIKE ?", user_query])
-      @results.map!{|u| { :type => "user", :user => u }}
+      @results.map!{|u| SearchResult::CreateUserResult(u)}
     end
   end
 end
