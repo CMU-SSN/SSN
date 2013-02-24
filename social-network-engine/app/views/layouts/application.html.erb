@@ -10,12 +10,11 @@
 <body>
 <div data-theme="c" data-role="page">
   <div data-role="header">
-    <%= yield :header %>
-    <!--
     <% if user_signed_in? %>
-        <%= link_to('Logout', destroy_user_session_path, :class => "ui-btn-right", :data => {:theme => "c"}, :method => :delete) %>
+      <%= link_to "Sign Out", destroy_user_session_path, :method => "delete", :target => '_self', :class => "ui-btn-left" %>
     <% end %>
-    -->
+    <%= yield :header %>
+    <%= link_to "Search", search_path, :target => '_self', :class => "ui-btn-right" %>
   </div>
   <div data-role="content">
     <%= yield :content %>
