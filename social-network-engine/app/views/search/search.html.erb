@@ -5,7 +5,7 @@
   <div class="feed-item">
     <%= form_tag search_path do %>
         <%= text_field_tag 'q', @query, :placeholder => "Enter search here", :type => "search"%>
-        <%= submit_tag 'Search' %>
+        <%= submit_tag 'Search', :data => { :role => 'button', :theme => 'b' } %>
     <% end %>
   </div>
   <% # Display results if a search has been made %>
