@@ -15,7 +15,7 @@
       <% @results.each do |result| %>
         <div class="feed-item">
           <% # Find out what type of result this is and display that template %>
-          <% if result[:type] == "user" %>
+          <% if result[:type] == SearchResult::Type::USER %>
             <% # User template shows the user's name and his photo with a link to the user's profile%>
             <% # TODO(vmarmol): Change this link when we have profile links %>
             <a class="feed-top" href="/profile/when/it/exists">
