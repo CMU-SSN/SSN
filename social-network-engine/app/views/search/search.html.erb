@@ -4,7 +4,7 @@
 <% content_for :content do %>
   <div class="feed-item">
     <%= form_tag search_path do %>
-        <%= text_field_tag 'q', @query, :placeholder => "Enter search here" %>
+        <%= text_field_tag 'q', @query, :placeholder => "Enter search here", :type => "search"%>
         <%= submit_tag 'Search' %>
     <% end %>
   </div>
