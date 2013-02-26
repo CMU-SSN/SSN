@@ -9,11 +9,11 @@ module SearchResult
 
     def self.ToName(type)
       if type == POST
-        "Post"
+        "Posts"
       elsif type == USER
-        "User"
+        "Users"
       else
-        "Organization"
+        "Organizations"
       end
     end
   end
