@@ -21,7 +21,7 @@ module SearchResult
   end
 
   # Number of entries per page of results
-  PAGE_SIZE = 10
+  PAGE_SIZE = 5
 
   def self.CreatePostResult(post)
     result = {
@@ -53,6 +53,6 @@ module SearchResult
   end
 
   def self.HasNext(results)
-    results.length >= PAGE_SIZE.to_i
+    results.length > PAGE_SIZE.to_i
   end
 end
