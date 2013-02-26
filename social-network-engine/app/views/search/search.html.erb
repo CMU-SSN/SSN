@@ -21,7 +21,8 @@
   <% if not @results.nil? %>
     <% # A search was done. Display results or sorry if none %>
     <% if @results.length > 0 %>
-      <% @results.each do |result| %>
+      <% # Only show PAGE_SIZE results (there might be more for paging) %>
+      <% @results.slice(0, SearchResult::PAGE_SIZE).each do |result| %>
         <div class="feed-item">
           <% # TODO(vmarmol): Refactor some of the common templates %>
           <% # Find out what type of result this is and display that template %>
