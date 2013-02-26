@@ -2,11 +2,13 @@ module SearchHelper
 end
 
 module SearchResult
+  # Types of search results
   module Type
     POST = 1
     USER = 2
     ORGANIZATION = 3
 
+    # Gets the pluralized string name of the search result type
     def self.ToName(type)
       if type == POST
         "Posts"
@@ -17,6 +19,9 @@ module SearchResult
       end
     end
   end
+
+  # Number of entries per page of results
+  PAGE_SIZE = 10
 
   def self.CreatePostResult(post)
     result = {
@@ -43,8 +48,11 @@ module SearchResult
       active_class = 'ui-btn-active'
     end
 
-    print "Got: " + active_class.to_s
-    type_link = view.search_path + "?type=" + current_type.to_s + "&q=" + query.to_s
+    type_link = view.search_path(:type => current_type.to_s, :q => query.to_s)
     view.link_to Type::ToName(current_type), type_link, :class => active_class
+  end
+
+  def self.HasNext(results)
+    results.length >= PAGE_SIZE.to_i
   end
 end

@@ -1,12 +1,12 @@
 class SearchController < ApplicationController
   before_filter :authenticate_user!
 
-  # Number of entries per page of results
-  PAGE_SIZE = 10
+  # TODO(vmarmol): The fact that I have to put to_i everywhere lets me know I don't know Ruby's "magic"
 
   def search
     @query = params[:q]
     @type = params[:type]
+    @page_num = params[:page]
     @results = nil
 
     # Default to posts
@@ -14,21 +14,27 @@ class SearchController < ApplicationController
       @type = SearchResult::Type::POST
     end
 
+    # Default to 0th page
+    if @page_num.nil? or @page_num.empty?
+      @page_num = 0
+    end
+
     # Search if a query was specified
     if not @query.nil? and not @query.strip().empty?
       @results = []
+      offset = @page_num.to_i * SearchResult::PAGE_SIZE.to_i
 
       # Search posts
       if @type.to_i == SearchResult::Type::POST.to_i
         post_query = "%#{@query}%"
-        @results = Post.find(:all, :limit => PAGE_SIZE, :conditions => ["text LIKE ?", post_query], :order => "created_at DESC")
+        @results = Post.find(:all, :limit => SearchResult::PAGE_SIZE, :conditions => ["text LIKE ?", post_query], :order => "created_at DESC", :offset => offset)
         @results.map!{|p| SearchResult::CreatePostResult(p)}
       end
 
       # Search users
       if @type.to_i == SearchResult::Type::USER.to_i
         user_query = "%#{@query}%"
-        @results = User.find(:all, :limit => PAGE_SIZE, :conditions => ["name LIKE ?", user_query])
+        @results = User.find(:all, :limit => SearchResult::PAGE_SIZE, :conditions => ["name LIKE ?", user_query], :offset => offset)
         @results.map!{|u| SearchResult::CreateUserResult(u)}
       end
 
