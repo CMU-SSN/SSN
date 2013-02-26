@@ -7,26 +7,56 @@
         <%= text_field_tag 'q', @query, :placeholder => "Enter search here", :type => "search"%>
         <%= submit_tag 'Search', :data => { :role => 'button', :theme => 'b' } %>
     <% end %>
+    <% if not @results.nil? %>
+      <div data-role="navbar">
+        <ul>
+          <li><%= SearchResult::GetTypeLink(self, @type, SearchResult::Type::POST, @query) %></li>
+          <li><%= SearchResult::GetTypeLink(self, @type, SearchResult::Type::USER, @query) %></li>
+          <li><%= SearchResult::GetTypeLink(self, @type, SearchResult::Type::ORGANIZATION, @query) %></li>
+        </ul>
+      </div>
+    <% end %>
   </div>
   <% # Display results if a search has been made %>
-  <% if !@results.nil? %>
+  <% if not @results.nil? %>
     <% # A search was done. Display results or sorry if none %>
     <% if @results.length > 0 %>
       <% @results.each do |result| %>
         <div class="feed-item">
+          <% # TODO(vmarmol): Refactor some of the common templates %>
           <% # Find out what type of result this is and display that template %>
-          <% if result[:type] == SearchResult::Type::USER %>
+          <% if result[:type].to_i == SearchResult::Type::USER.to_i %>
             <% # User template shows the user's name and his photo with a link to the user's profile%>
             <% # TODO(vmarmol): Change this link when we have profile links %>
             <a class="feed-top" href="/profile/when/it/exists">
               <img src="<%= result[:user].profile_pic %>" class="feed-user-image">
-
               <div class="feed-heading">
                 <h2 class="feed-name">
                   <%= result[:user].name %>
                 </h2>
               </div>
             </a>
+          <% elsif result[:type].to_i == SearchResult::Type::POST.to_i %>
+            <% # TODO(vmarmol): Change this link when we have profile links %>
+            <a class="feed-top" href="/profile/when/it/exists">
+              <img src="<%= result[:post].user.profile_pic %>" class="feed-user-image">
+              <div class="feed-heading">
+                <h2 class="feed-name">
+                  <% if result[:post].user.name %>
+                      <%= result[:post].user.name %>
+                  <% else %>
+                      Anonymous
+                  <% end %>
+                </h2>
+
+                <p class="feed-time"><%= time_ago_in_words(result[:post].created_at) %> ago near <%= result[:post].city %> <%= result[:post].zipcode %></p>
+              </div>
+            </a>
+            <div>
+              <p class="feed-text">
+                <%= result[:post].text %>
+              </p>
+            </div>
           <% end %>
         </div>
       <% end %>
