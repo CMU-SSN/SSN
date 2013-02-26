@@ -1,6 +1,9 @@
 class SearchController < ApplicationController
   before_filter :authenticate_user!
 
+  # Number of entries per page of results
+  PAGE_SIZE = 10
+
   def search
     @query = params[:q]
     @type = params[:type]
@@ -18,14 +21,14 @@ class SearchController < ApplicationController
       # Search posts
       if @type.to_i == SearchResult::Type::POST.to_i
         post_query = "%#{@query}%"
-        @results = Post.find(:all, :limit => 50, :conditions => ["text LIKE ?", post_query], :order => "created_at DESC")
+        @results = Post.find(:all, :limit => PAGE_SIZE, :conditions => ["text LIKE ?", post_query], :order => "created_at DESC")
         @results.map!{|p| SearchResult::CreatePostResult(p)}
       end
 
       # Search users
       if @type.to_i == SearchResult::Type::USER.to_i
         user_query = "%#{@query}%"
-        @results = User.find(:all, :limit => 50, :conditions => ["name LIKE ?", user_query])
+        @results = User.find(:all, :limit => PAGE_SIZE, :conditions => ["name LIKE ?", user_query])
         @results.map!{|u| SearchResult::CreateUserResult(u)}
       end
 
