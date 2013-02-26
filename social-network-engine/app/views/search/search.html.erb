@@ -60,6 +60,16 @@
           <% end %>
         </div>
       <% end %>
+      <% # Pagination controls%>
+      <% # If we are not at the first page, show "Previous"  %>
+      <div class="center">
+        <% if not @page_num.nil? and @page_num.to_i > 0 %>
+          <%= link_to "Previous", search_path(:q => @query, :type => @type.to_s, :page =>  (@page_num.to_i - 1).to_s), :data => { :role => 'button', :icon => 'arrow-l', :iconpos => 'left', :theme => 'b', :inline => true } %>
+        <% end %>
+        <% if SearchResult::HasNext(@results) %>
+          <%= link_to "Next", search_path(:q => @query, :type => @type.to_s, :page =>  (@page_num.to_i + 1).to_s), :data => { :role => 'button', :icon => 'arrow-r', :iconpos => 'right', :theme => 'b', :inline => true } %>
+        <% end %>
+      </div>
     <% else %>
       <div class="center feed-item">
         <h3>Sorry, no results were found...</h3>
