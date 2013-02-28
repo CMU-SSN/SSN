@@ -24,6 +24,7 @@ a {
 .feed-heading {
     display: inline-block;
     vertical-align: top;
+    max-width: 220px;
 }
 
 .feed-name {
