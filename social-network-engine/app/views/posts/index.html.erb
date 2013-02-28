@@ -9,10 +9,10 @@
           <%= f.hidden_field :latitude %>
           <%= f.hidden_field :longitude %>
           <%= f.text_area :text, :placeholder => "Enter new posts here" %>
-          <%= f.submit "Post", :id=>"submit-post", :data => { :role => 'button', :theme => 'b' } %>
+          <%= f.submit "Post", :id => "submit-post", :data => {:role => 'button', :theme => 'b'} %>
       <% end %>
     </div>
-    <div id="posts" data-token="<%= @token %>" >
+    <div id="posts" data-token="<%= @token %>">
       <% if !@posts.nil? && @posts.length > 0 %>
           <% @posts.each do |post| %>
               <div class="feed-item">
@@ -27,8 +27,12 @@
                           Anonymous
                       <% end %>
                     </h2>
-
-                    <p class="feed-time"><%= time_ago_in_words(post.created_at) %> ago near <%= post.city %> <%= post.zipcode %></p>
+                    <% if !post.city.nil? || !post.zipcode.nil? %>
+                        <p class="feed-time"><%= time_ago_in_words(post.created_at) %> ago
+                          near <%= post.city %> <%= post.zipcode %></p>
+                    <% else %>
+                        <p class="feed-time"><%= time_ago_in_words(post.created_at) %> ago</p>
+                    <% end %>
                   </div>
                 </a>
 
@@ -60,7 +64,11 @@
             </h2>
 
             <p class="feed-time">
+              {{if city || zipcode}}
               <abbr class="timeago" title="{{>updated_at}}">{{>updated_at}}</abbr> near {{>city}} {{>zipcode}}
+              {{else}}
+              <abbr class="timeago" title="{{>updated_at}}">{{>updated_at}}</abbr>
+              {{/if}}
             </p>
           </div>
         </a>

@@ -42,18 +42,35 @@ $('document').ready(function () {
         e.stopPropagation();
 
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
+            var watchID = navigator.geolocation.watchPosition(function (position) {
                     if (position && position.coords && position.coords.latitude && position.coords.longitude) {
                         $("#post_latitude").val(position.coords.latitude);
                         $("#post_longitude").val(position.coords.longitude);
                     }
 
+                    navigator.geolocation.clearWatch(watchID);
                     $("#new_post").submit();
-                }, function (err) {
+                }, function (error) {
+
+                    navigator.geolocation.clearWatch(watchID);
+                    switch (error.code) {
+                        case error.TIMEOUT:
+                            alert('Timeout when retrieving your location');
+                            // Don't submit for this case
+                            return;
+                        case error.POSITION_UNAVAILABLE:
+                            break;
+                        case error.PERMISSION_DENIED:
+                            break;
+                        case error.UNKNOWN_ERROR:
+                            break;
+                    }
+
                     $("#new_post").submit();
                 },
                 {
-                    timeout: 3000
+                    timeout: 30000,
+                    enableHighAccuracy: true
                 });
 
             return;
