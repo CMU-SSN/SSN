@@ -18,7 +18,8 @@ Devise.setup do |config|
   require 'omniauth-facebook'
 
   unless Rails.env.production?
-    config.omniauth :facebook, "326359867485372", "f2b0069cb13b5ae86f2647460f46e68b", :strategy_class => OmniAuth::Strategies::Facebook
+    CONFIG = YAML.load_file(Rails.root.join("config/facebook.yml"))[Rails.env]
+    config.omniauth :facebook, CONFIG['app_id'], CONFIG['secret_key'], :strategy_class => OmniAuth::Strategies::Facebook
   else
     config.omniauth :facebook, ENV['FB_ID'], ENV['FB_KEY'], :strategy_class => OmniAuth::Strategies::Facebook
   end
