@@ -2,6 +2,8 @@ require "bundler/capistrano"
 
 server "ssn.cmusv.mobi", :web, :app, :db, primary: true
 
+set :deploy_subdir, "social-network-engine"
+
 set :application, "SSN"
 set :user, "jason"
 set :deploy_to, "/home/#{user}/apps/#{application}"
