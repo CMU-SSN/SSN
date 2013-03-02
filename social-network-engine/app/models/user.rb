@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   attr_accessible :name, :profile_pic, :email, :password, :password_confirmation, :remember_me, :token_expiration, :provider, :uid, :token
   has_many :posts, :dependent => :destroy
   has_many :friends
+  has_and_belongs_to_many :organizations
 
   def ImportFriends(facebook_friend_ids)
     # Look for existing users in specified Facebook friends
