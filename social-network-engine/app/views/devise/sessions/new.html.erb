@@ -1,11 +1,10 @@
 <%= content_for :content do %>
-	<div class="center">
+	<div class="center white no-shadow">
 		<%= image_tag("sample_neighborhood_logo.png", :class => "logo") %>
 		<h3>City of Palo Alto SSN :: Cool City Neighborhood</h3>
 	</div>
-	<br />
-	<div class="center">
-		<%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook), :rel => 'external',  :data => { :role => 'button', :theme => 'b', :icon => 'arrow-r', :iconpos => 'right' }%>
+	<div class="center white no-shadow">
+		<%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook), :rel => 'external', :class => 'facebook-link', :data => { :role => 'button', :theme => 'b', :icon => 'facebook', :iconpos => 'left' }%>
 		<h4>
 			Or Using Your Local SSN Account
 		</h4>
@@ -34,5 +33,6 @@
 <%= content_for :scripts do %>
     <script type="text/javascript">
         ssn_hide_header();
+				ssn_hide_footer();
     </script>
 <% end %>
