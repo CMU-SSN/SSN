@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130302174236) do
+ActiveRecord::Schema.define(:version => 20130302220756) do
 
   create_table "friends", :force => true do |t|
     t.integer  "user_id"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20130302174236) do
     t.float    "longitude"
     t.string   "city"
     t.string   "zipcode"
+    t.boolean  "status"
   end
 
   create_table "potential_friends", :force => true do |t|

@@ -1,5 +1,10 @@
 $('document').ready(function () {
 
+    $("body").delegate(".update-status", "click", function() {
+		$("#post_status").val(true);
+		$("#post_text").val($(this).attr("value"));
+        $("#new_post").submit();
+	});
     // auto refresh posts
     setInterval(function () {
         var token = $('#posts').data('token');
@@ -37,7 +42,9 @@ $('document').ready(function () {
     }, 10000);
 
     // intercept post button clicking event
-    $("body").delegate("#submit-post", "click", function (e) {
+    $("body").delegate("#submit-post", "click", submitPost(e) );
+	
+	function submitPost(e){
         e.preventDefault();
         e.stopPropagation();
 
@@ -77,5 +84,5 @@ $('document').ready(function () {
         }
 
         $("#new_post").submit();
-    });
+    }
 });

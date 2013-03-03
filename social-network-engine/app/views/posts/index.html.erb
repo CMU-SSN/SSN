@@ -5,11 +5,19 @@
 <% end %>
 <% content_for :content do %>
     <div class="feed-item">
-      <%= form_for @post, :url => {:action => "create"}, :html => {:method => :post} do |f| %>
+	Quick Status:
+	<a class="update-status" data-role="button" data-inline="true" data-theme="b" data-mini="true" data-icon="ssn-good" value="<%= Post::GOOD_STATUS %>">Good</a>
+	<a class="update-status" data-role="button" data-inline="true" data-theme="b" data-mini="true" data-icon="ssn-exclamation" value="<%= Post::HELP_STATUS %>">Help</a>
+	<a class="update-status" data-role="button" data-inline="true" data-theme="b" data-mini="true" data-icon="ssn-exclamation-red" value="<%= Post::IMMEDIATE_HELP_STATUS %>">Need Immediate Help</a>
+    </div>
+
+    <div class="feed-item">
+      <%= form_for @post, :url => {:action => "create"}, :html => {:method => :post, :class => "new-post"} do |f| %>
           <%= f.hidden_field :latitude %>
-          <%= f.hidden_field :longitude %>
+          <%= f.hidden_field :longitude %>		  
+		  <%= f.hidden_field :status, :value => "false" %>
           <%= f.text_area :text, :placeholder => "Enter new posts here" %>
-          <%= f.submit "Post", :id => "submit-post", :data => {:role => 'button', :theme => 'b'} %>
+          <%= f.submit "Post", :id => "submit-post", :data => {:role => "button", :theme => "b"} %>
       <% end %>
     </div>
     <div id="posts" data-token="<%= @token %>">
@@ -17,8 +25,7 @@
           <% @posts.each do |post| %>
               <div class="feed-item">
                 <a class="feed-top" href="jamesProfile.html.erb">
-                  <img src="<%= post.user.profile_pic %>" class="feed-user-image">
-
+				  <img src="<%= post.user.profile_pic %>" class="feed-user-image">
                   <div class="feed-heading">
                     <h2 class="feed-name">
                       <% if post.user.name %>
@@ -37,9 +44,30 @@
                 </a>
 
                 <div>
+				<% if !post.status? %>
                   <p class="feed-text">
                     <%= post.text %>
                   </p>
+				<% else %>
+				
+					<% if post.text == Post::GOOD_STATUS  %>
+						<div class="status-green">
+							<%= image_tag("status-check.png", :class => "status-img") %>
+							<h4 class="status-text">Quick Status - <%= post.text %></h4>
+						</div>					
+					<% elsif post.text == Post::HELP_STATUS %>
+						<div class="status-yellow">
+							<%= image_tag("help.png", :class => "status-img") %>
+							<h4 class="status-text">Quick Status - <%= post.text %></h4>
+						</div>				
+				
+					<% elsif post.text == Post::IMMEDIATE_HELP_STATUS %>
+						<div class="status-red">
+							<%= image_tag("help.png", :class => "status-img") %>
+							<h4 class="status-text">Quick Status - <%= post.text %></h4>
+						</div>	
+					<% end %>			
+				<% end %>
                 </div>
               </div>
           <% end %>
