@@ -19,9 +19,9 @@ Devise.setup do |config|
 
   unless Rails.env.production?
     CONFIG = YAML.load_file(Rails.root.join("config/facebook.yml"))[Rails.env]
-    config.omniauth :facebook, CONFIG['app_id'], CONFIG['secret_key'], :strategy_class => OmniAuth::Strategies::Facebook
+    config.omniauth :facebook, CONFIG['app_id'], CONFIG['secret_key'], :scope => "email,manage_pages"
   else
-    config.omniauth :facebook, ENV['FB_ID'], ENV['FB_KEY'], :strategy_class => OmniAuth::Strategies::Facebook
+    config.omniauth :facebook, ENV['FB_ID'], ENV['FB_KEY'], :scope => "email,manage_pages"
   end
 
 
