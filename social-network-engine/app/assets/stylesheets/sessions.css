@@ -1,0 +1,21 @@
+.white {
+	color: white;
+}
+
+.no-shadow {
+	text-shadow: none;
+}
+
+.ui-icon-facebook {
+	background: url("glyphicons/glyphicons_410_facebook.png");
+	background-size: 20px 20px;
+	border-radius: 0px;
+}
+
+.facebook-link {
+	width: 65%;
+	background: #133783;
+	text-shadow: none;
+	color: white;
+	border: 1px solid #22;
+}
