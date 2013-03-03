@@ -1,0 +1,124 @@
+.ui-icon {
+	width: 20px;
+	height: 20px;
+}
+
+.ui-icon-check-in {
+	background: url("glyphicons/glyphicons_152_check.png");
+	background-size: 20px 20px;
+	border-radius: 0px;
+}
+
+.ui-icon-post {
+	background: url("glyphicons/glyphicons_244_conversation.png");
+	background-size: 20px 20px;
+	border-radius: 0px;
+}
+
+.ui-icon-profile {
+	background: url("glyphicons/glyphicons_003_user.png");
+	background-size: 20px 20px;
+	border-radius: 0px;
+}
+
+.ui-icon-settings {
+	background: url("glyphicons/glyphicons_136_cogwheel.png");
+	background-size: 20px 20px;
+	border-radius: 0px;
+}
+
+.ui-icon-picture {
+	background: url("glyphicons/glyphicons_011_camera.png");
+	background-size: 20px 20px;
+	border-radius: 0px;
+}
+
+.ui-icon-link {
+	background: url("glyphicons/glyphicons_050_link.png");
+	background-size: 20px 20px;
+	border-radius: 0px;
+}
+
+.status-bar {
+	font-size: 1em;
+	color: white;
+	text-shadow: none;
+}
+
+.blue {
+	background-color: #221C8C;
+}
+
+.orange {
+	background-color: #D97236;
+}
+
+.brown {
+	background-color: #73644B;
+}
+
+.gray {
+	background-color: #333333;
+}
+
+.status-bar p {
+	float: left;
+	margin: 0;
+	padding-top: 8px;
+}
+
+.status-bar a {
+	float: right;
+}
+
+.status-bar fieldset {
+	clear: both;
+	display: block;
+	padding-top: 10px;
+	border-radius: 0px;
+	margin-top: 10px;
+}
+
+.feed-item {
+    background: url("paper_fibers.png");
+	background-repeat: repeat;
+	border-radius: .3em;
+	margin-bottom: 15px;
+	padding-left: 10px;
+	padding-right: 10px;
+	box-shadow: 1px 1px 3px #555;
+}
+
+.feed-header img {
+	height: 60px;
+	width: 60px;
+	float: left;
+	margin-top: -5px;
+	margin-left: -15px;
+	border: 2px solid #EEE;
+	border-radius: 0.3em;
+	box-shadow: 1px 1px 3px #555;
+}
+
+.feed-header h2 {
+	font-size: 1em;
+	margin-left: 58px;
+	padding-top: 10px;
+}
+
+.feed-header p {
+	font-size: 0.8em;
+	margin-left: 58px;
+	margin-top: -7px;
+	color: #999;
+}
+
+.feed-content {
+	padding-top: 3px;
+	padding-bottom: 5px;
+}
+
+.feed-content p {
+	font-size: 0.9em;
+}
+
