@@ -28,23 +28,27 @@ class FacebookTabAppController < ApplicationController
         # Only look at organizations that we administer
         orgs.select!{|o| not o["perms"].find_index("ADMINISTER").nil?}
 
-        # Add the user as an admin
+        # Add the user as an admin if he is not already
+        my_orgs = @user.organizations
         orgs.each do |org|
-          org_object = Organization.find_by_facebook_id(org["id"])
+          if my_orgs.index{|o| o.facebook_id == org["id"]}.nil?
+            org_object = Organization.find_by_facebook_id(org["id"])
 
-          # Create the organization if it does not already exist
-          if org_object.nil?
-            org_object = Organization.create!(:name => org["name"],
-                                              :facebook_id => org["id"])
+            # Create the organization if it does not already exist
+            if org_object.nil?
+              org_object = Organization.create!(:name => org["name"],
+                                                :facebook_id => org["id"])
+            end
+
+            # Make this user an admin
+            org_object.users << @user
           end
-
-          # Make this user an admin
-          org_object.users << @user
         end
 
         # If there are organizations, load those
-        if not orgs.empty?
-          @organizations = @user.organizations
+        @user.reload
+        @organizations = @user.organizations
+        if not @organizations.empty?
           render 'load_organizations'
         else
           redirect_to "/facebook_tab_app/done"
@@ -56,29 +60,35 @@ class FacebookTabAppController < ApplicationController
   end
 
   def load_organizations
-   # We already have set the user as an admin on all Organizations so only
-   # delete them from Organizations they do not want to be associated with.
-   if not params[:orgs_num].nil?
-     params.each do |param|
-       key = param.first
-       value = param.second
+    # We already have set the user as an admin on all Organizations so only
+    # delete them from Organizations they do not want to be associated with.
+    if not params[:orgs_num].nil?
+      params.each do |param|
+        key = param.first
+        value = param.second
 
-       # Delete the organization objects with value 0
-       # (params form: "org_<organization ID>")
-       if key.starts_with? "org_" and value == "0"
-         org = Organization.find_by_id(key.split("_")[1].to_i)
+        # Delete the organization objects with value 0
+        # (params form: "org_<organization ID>")
+        if key.starts_with? "org_" and value == "0"
+          org = Organization.find_by_id(key.split("_")[1].to_i)
 
-         # Only delete the Organization if this user is the only admin
-         if not org.nil? and org.users.length == 1
-           org.destroy
-         end
-       end
-     end
+          # Only delete the Organization if this user is the only admin
+          if not org.nil? and org.users.length == 1
+            org.destroy
+          end
+        end
+      end
 
-     render 'done'
-   end
+      render 'done'
+    end
   end
 
   def done
+    @user = current_user
+
+    # Redirect users not signed in
+    if @user.nil?
+      redirect_to "/facebook_tab_app/signup"
+    end
   end
 end
