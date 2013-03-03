@@ -24,5 +24,14 @@ describe User do
       @victor.friends.index{|i| i[:friend_id] == @james.id}.should_not be_nil
       @victor.friends.index{|i| i[:friend_id] == @jason.id}.should be_nil
     end
+
+    it "should not re-add Facebook friends that are already my friends" do
+      @victor.friends << Friend.new(:friend => @brian, :user => @victor)
+      @victor.ImportFriends([@brian.uid, @james.uid])
+      @victor.friends.length.should equal(2)
+      @victor.friends.index{|i| i[:friend_id] == @brian.id}.should_not be_nil
+      @victor.friends.index{|i| i[:friend_id] == @james.id}.should_not be_nil
+      @victor.friends.index{|i| i[:friend_id] == @jason.id}.should be_nil
+    end
   end
 end
