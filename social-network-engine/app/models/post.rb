@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-  attr_accessible :text, :address, :latitude, :longitude
+  attr_accessible :text, :address, :latitude, :longitude, :status
   belongs_to :user
   validates :text, :length => {
       :minimum   => 1,
@@ -16,4 +16,15 @@ class Post < ActiveRecord::Base
     end
   end
   after_validation :reverse_geocode
+  
+  GOOD_STATUS = "Good"
+  HELP_STATUS = "Help"
+  IMMEDIATE_HELP_STATUS = "Need Immediate Help"
+  ALL_STATUSES = [GOOD_STATUS, HELP_STATUS, IMMEDIATE_HELP_STATUS] 
+ 
+  validates_inclusion_of :text, :in => ALL_STATUSES, :if => :status?
+  
+  def status?
+    status == true
+  end
 end
