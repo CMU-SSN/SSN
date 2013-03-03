@@ -12,13 +12,14 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :organizations
 
   def ImportFriends(facebook_friend_ids)
+    self_friends = self.friends
     # Look for existing users in specified Facebook friends
     facebook_friend_ids.each do |i|
       # TODO(vmarmol): Do all these lookups at once.
       potential_friend = User.find_by_uid(i)
 
-      # Add friends that exist
-      if not potential_friend.nil?
+      # Add friends that exist and aren't my friends already
+      if not potential_friend.nil? and self_friends.index{|f| f.friend_id == potential_friend.id}.nil?
         self.friends << Friend.new(:user =>self, :friend => potential_friend)
       end
     end
