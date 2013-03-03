@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130223231719) do
+ActiveRecord::Schema.define(:version => 20130302220756) do
 
   create_table "friends", :force => true do |t|
     t.integer  "user_id"
@@ -19,6 +19,20 @@ ActiveRecord::Schema.define(:version => 20130223231719) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "organizations", :force => true do |t|
+    t.string   "name"
+    t.string   "facebook_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "organizations_users", :id => false, :force => true do |t|
+    t.integer "organization_id"
+    t.integer "user_id"
+  end
+
+  add_index "organizations_users", ["organization_id", "user_id"], :name => "index_organizations_users_on_organization_id_and_user_id"
 
   create_table "posts", :force => true do |t|
     t.string   "text"
@@ -30,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20130223231719) do
     t.float    "longitude"
     t.string   "city"
     t.string   "zipcode"
+    t.boolean  "status"
   end
 
   create_table "users", :force => true do |t|

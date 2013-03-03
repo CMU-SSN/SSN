@@ -22,6 +22,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           f << open(auth['info']['image']).read unless auth['info'].nil?
         end
 
+        # Check if the token expires
+        if not auth.credentials.expires.nil? and not auth.credentials.expires
+          expiration_date = Time.now().advance(:years => 100).to_datetime
+        else
+          expiration_date = Time.at(auth.credentials.expires_at).to_datetime
+        end
+
         # Create user's account
         @user = User.create(#name:auth.extra.raw_info.name,
             name:auth['info']['name'],
@@ -31,7 +38,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
             email:auth.info.email,
             password:Devise.friendly_token[0,20],
             token:auth.credentials.token,
-            token_expiration:Time.at(auth.credentials.expires_at).to_datetime)
+            token_expiration:expiration_date)
 
         sign_in @user
         redirect_to "/facebook_tab_app/load_account"
@@ -41,8 +48,18 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     else
       # Sign user in and refresh Facebook token
       sign_in @user
-      @user.update_attributes!(:token => auth.credentials.token,
-          :token_expiration => Time.at(auth.credentials.expires_at).to_datetime)
+
+      # Check if the token expires
+      if not auth.credentials.expires.nil? and not auth.credentials.expires
+        # Say it expires in 100 years
+        @user.update_attributes!(
+          :token => auth.credentials.token,
+          :token_expiration => Time.now().advance(:years => 100).to_datetime)
+      else
+        @user.update_attributes!(
+            :token => auth.credentials.token,
+            :token_expiration => Time.at(auth.credentials.expires_at).to_datetime)
+     end
 
       # Redirect to done if the user is in the signup flow
       if params[:state] == "signup"
