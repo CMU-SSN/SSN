@@ -4,40 +4,28 @@
     <!--a href="needs.html.erb" class="ui-btn-right" data-icon="grid" data-theme="c">Needs</a-->
 <% end %>
 <% content_for :content do %>
-    <div class="feed-item">
-      <%= form_for @post, :url => {:action => "create"}, :html => {:method => :post} do |f| %>
-          <%= f.hidden_field :latitude %>
-          <%= f.hidden_field :longitude %>
-          <%= f.text_area :text, :placeholder => "Enter new posts here" %>
-          <%= f.submit "Post", :id => "submit-post", :data => {:role => 'button', :theme => 'b'} %>
-      <% end %>
-    </div>
     <div id="posts" data-token="<%= @token %>">
       <% if !@posts.nil? && @posts.length > 0 %>
           <% @posts.each do |post| %>
               <div class="feed-item">
-                <a class="feed-top" href="jamesProfile.html.erb">
-                  <img src="<%= post.user.profile_pic %>" class="feed-user-image">
-
-                  <div class="feed-heading">
-                    <h2 class="feed-name">
-                      <% if post.user.name %>
-                          <%= post.user.name %>
-                      <% else %>
-                          Anonymous
-                      <% end %>
-                    </h2>
-                    <% if !post.city.nil? || !post.zipcode.nil? %>
-                        <p class="feed-time"><%= time_ago_in_words(post.created_at) %> ago
-                          near <%= post.city %> <%= post.zipcode %></p>
-                    <% else %>
-                        <p class="feed-time"><%= time_ago_in_words(post.created_at) %> ago</p>
-                    <% end %>
-                  </div>
-                </a>
-
-                <div>
-                  <p class="feed-text">
+								<div class="feed-header">
+									<img src="<%= post.user.profile_pic %>" />
+									<h2>
+										<% if post.user.name %>
+	                      <%= post.user.name %>
+	                  <% else %>
+	                      Anonymous
+	                  <% end %>
+								  </h2>
+								  <% if !post.city.nil? || !post.zipcode.nil? %>
+                      <p><%= time_ago_in_words(post.created_at) %> ago
+                        near <%= post.city %> <%= post.zipcode %></p>
+                  <% else %>
+                      <p><%= time_ago_in_words(post.created_at) %> ago</p>
+                  <% end %>
+								</div>
+                <div class="feed-content">
+									<p>
                     <%= post.text %>
                   </p>
                 </div>
@@ -49,7 +37,72 @@
           </div>
       <% end %>
     </div>
+<% end %>
 
+<% content_for :dialogs do %>
+	<!-- Check-In Dialog Page Starts Here -->
+	<div data-role="page" id="checkInDialog">
+		<div data-role="header" class="ui-icon-alt">
+			<h2>Check-In</2>
+		</div>
+		<div data-role="content">
+			Filler for now
+	  </div>
+	</div>
+
+	<!-- Post Dialog Page Starts Here -->
+	<div data-role="page" id="newPostDialog">
+		<div data-role="header" class="ui-icon-alt">
+			<h2>Add Post</h2>
+		</div>
+		<div id="postAsBar" class="ui-bar status-bar gray">
+			<p id="postAsName">Posting as Brian Bailey</p>
+			<%= link_to "Switch", "#", :id => "postAsSwitch", :class => "ui-btn-right ui-icon-alt", :data => { :role => "button", :mini => "true", :icon => "arrow-d", :iconpos => "right" } %>
+			<fieldset data-role="controlgroup" id="organizationPicker">
+				<input type="radio" name="post_as" id="post_as_self" value="self" checked="checked">
+				<label for="post_as_self">Brian Bailey</label>
+				<input type="radio" name="post_as" id="post_as_org1" value="org1">
+				<label for="post_as_org1">City of Palo Alto</label>
+				<input type="radio" name="post_as" id="post_as_org2" value="org2">
+				<label for="post_as_org2">My Cool Organization</label>
+			<fieldset>
+		</div>
+		<div data-role="content">
+		  <%= form_for @post, :url => {:action => "create"}, :html => {:method => :post} do |f| %>
+	        <%= f.hidden_field :latitude %>
+	        <%= f.hidden_field :longitude %>
+	        <%= f.text_area :text, :placeholder => "What's happening?" %>
+					<div data-role="navbar">
+						<ul>
+							<li><%= link_to "Attach Picture", "#", :data => { :role => "button", :icon =>"picture", :iconpos => "top" } %></li>
+							<li><%= link_to "Attach Link", "#", :data => { :role => "button", :icon =>"link", :iconpos => "top", :rel => "dialog", :transition => "pop" } %></li>
+						</ul>
+					</div>
+	        <%= f.submit "Post", :id => "submit-post", :data => {:role => 'button', :theme => 'b'} %>
+	    <% end %>
+
+	  </div>
+	</div>
+	
+	<!-- Profile Dialog Page Starts Here -->
+	<div data-role="page" id="profileDialog">
+		<div data-role="header" class="ui-icon-alt">
+			<h2>My Profile</2>
+		</div>
+		<div data-role="content">
+			Filler for now
+	  </div>
+	</div>
+	
+	<!-- Settings Dialog Page Starts Here -->
+	<div data-role="page" id="settingsDialog">
+		<div data-role="header" class="ui-icon-alt">
+			<h2>Settings</2>
+		</div>
+		<div data-role="content">
+			Filler for now
+	  </div>
+	</div>
 <% end %>
 
 <% content_for :scripts do %>
@@ -81,8 +134,37 @@
       </div>
     </script>
 
+		<script type="text/javascript">
+			$("#organizationPicker").hide();
+			$("#postAsSwitch").click(function() {
+				if ($("#organizationPicker").is(":visible")) {
+					$("#organizationPicker").hide();
+					$("#postAsSwitch").find(".ui-icon").removeClass("ui-icon-arrow-u");
+					$("#postAsSwitch").find(".ui-icon").addClass("ui-icon-arrow-d");
+				}
+				else {
+					$("#organizationPicker").show();
+					$("#postAsSwitch").find(".ui-icon").removeClass("ui-icon-arrow-d");
+					$("#postAsSwitch").find(".ui-icon").addClass("ui-icon-arrow-u");					
+				}
+			});
+			$("#organizationPicker").find("input[name='post_as']").click(function() {
+				if (this.value == "self") {
+					$("#postAsBar").removeClass("orange");
+					$("#postAsBar").addClass("gray");
+				}
+				else {
+					$("#postAsBar").removeClass("gray");
+					$("#postAsBar").addClass("orange");
+				}
+				var label = $("label[for='"+$(this).attr('id')+"']");
+				$("#postAsName").text("Posting as " + label.text());
+			});
+		</script>
     <%= javascript_include_tag 'post/post' %>
 <% end %>
+
+
 
 
 
