@@ -20,9 +20,9 @@ class User < ActiveRecord::Base
     # Look for existing users who are Facebook friends
     User.find(:all, :conditions => ["uid IN (?)", facebook_friend_ids]).each do |potential_friend|
 
-      # Add friends that exist and aren't my friends already
-      if not potential_friend.nil? and self_friends.index{|f| f.friend_id == potential_friend.id}.nil?
-        self.friends << Friend.new(:user =>self, :friend => potential_friend)
+      # Add friends that aren't my friends already
+      if self_friends.index{|f| f.id == potential_friend.id}.nil?
+        self.friends << potential_friend
       end
     end
   end
