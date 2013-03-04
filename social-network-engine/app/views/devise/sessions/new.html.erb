@@ -18,14 +18,12 @@
 	      <%= f.label :password %>
 	      <%= f.password_field :password, :placeholder => "Password" %>
 	    </div>
-
 	    <% if devise_mapping.rememberable? -%>
 				<div data-role="fieldcontain" class="ui-hide-label">
 				  <input type="checkbox" name="user[remember_me]" id="user_remember_me" value="1"/>
 				  <label for="user_remember_me">Keep me signed in</label>
 				</div>
 	    <% end -%>
-
 	    <%= f.submit "Sign in", :data => { :role => 'button', :icon => 'arrow-r', :iconpos => 'right', :theme => 'b' }%>
 	<% end %>
 <% end %>
