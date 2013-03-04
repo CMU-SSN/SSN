@@ -51,8 +51,8 @@ ActiveRecord::Schema.define(:version => 20130304013011) do
 
   create_table "posts", :force => true do |t|
     t.string   "text"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.integer  "user_id"
     t.string   "address"
     t.float    "latitude"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20130304013011) do
     t.string   "city"
     t.string   "zipcode"
     t.boolean  "status"
+    t.integer  "organization_id"
   end
 
   create_table "potential_friends", :force => true do |t|
