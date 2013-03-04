@@ -39,7 +39,6 @@
 												<%= image_tag("help.png", :class => "status-img") %>
 												<h4 class="status-text">Quick Status - <%= post.text %></h4>
 											</div>				
-				
 										<% elsif post.text == Post::IMMEDIATE_HELP_STATUS %>
 											<div class="status-red">
 												<%= image_tag("help.png", :class => "status-img") %>
@@ -50,11 +49,7 @@
                 </div>
               </div>
           <% end %>
-      <% else %>
-          <div class="feed-item">
-            No posts yet.
-          </div>
-      <% end %>
+			<% end %>
     </div>
 <% end %>
 
@@ -74,22 +69,25 @@
 		<div data-role="header" class="ui-icon-alt">
 			<h2>Add Post</h2>
 		</div>
-		<div id="postAsBar" class="ui-bar status-bar gray">
-			<p id="postAsName">Posting as Brian Bailey</p>
-			<%= link_to "Switch", "#", :id => "postAsSwitch", :class => "ui-btn-right ui-icon-alt", :data => { :role => "button", :mini => "true", :icon => "arrow-d", :iconpos => "right" } %>
-			<fieldset data-role="controlgroup" id="organizationPicker">
-				<input type="radio" name="post_as" id="post_as_self" value="self" checked="checked">
-				<label for="post_as_self">Brian Bailey</label>
-				<input type="radio" name="post_as" id="post_as_org1" value="org1">
-				<label for="post_as_org1">City of Palo Alto</label>
-				<input type="radio" name="post_as" id="post_as_org2" value="org2">
-				<label for="post_as_org2">My Cool Organization</label>
-			<fieldset>
-		</div>
+		<% if current_user.organizations.length != 0 %>
+			<div id="postAsBar" class="ui-bar status-bar gray">
+				<p id="postAsName">Posting as Brian Bailey</p>
+				<%= link_to "Switch", "#", :id => "postAsSwitch", :class => "ui-btn-right ui-icon-alt", :data => { :role => "button", :mini => "true", :icon => "arrow-d", :iconpos => "right" } %>
+				<fieldset data-role="controlgroup" id="organizationPicker">
+					<input type="radio" name="post_as" id="self" value="self" checked="checked">
+					<label for="self"><%= current_user.name %></label>
+					<% current_user.organizations.each do |org| %>
+						<input type="radio" name="post_as" id="<%= org.id %>" value="<%= org.id %>">
+						<label for="<%= org.id %>" id="<%= org.id %>_label"><%= org.name %></label>
+					<% end %>
+				<fieldset>
+			</div>
+		<% end %>
 		<div data-role="content">
 		  <%= form_for @post, :url => {:action => "create"}, :html => {:method => :post} do |f| %>
 	        <%= f.hidden_field :latitude %>
 	        <%= f.hidden_field :longitude %>
+					<%= hidden_field_tag "post[organization_id]" %>
 	        <%= f.text_area :text, :placeholder => "What's happening?" %>
 					<div data-role="navbar">
 						<ul>
@@ -176,8 +174,11 @@
 					$("#postAsBar").removeClass("gray");
 					$("#postAsBar").addClass("orange");
 				}
-				var label = $("label[for='"+$(this).attr('id')+"']");
-				$("#postAsName").text("Posting as " + label.text());
+				
+				var organization = $("label[for='"+$(this).attr('id')+"']");
+				
+				$("#postAsName").text("Posting as " + organization.text());
+				$("input[name='post[post_as]']").val($(this).attr('id'));
 			});
 		</script>
     <%= javascript_include_tag 'post/post' %>
