@@ -13,13 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20130304013011) do
 
-  create_table "friends", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "friend_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "friends_users", :id => false, :force => true do |t|
     t.integer "friend_id"
     t.integer "user_id"
@@ -53,13 +46,6 @@ ActiveRecord::Schema.define(:version => 20130304013011) do
     t.string   "city"
     t.string   "zipcode"
     t.boolean  "status"
-  end
-
-  create_table "potential_friends", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "friend_facebook_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
   end
 
   create_table "users", :force => true do |t|
