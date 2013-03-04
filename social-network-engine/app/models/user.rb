@@ -8,7 +8,11 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :profile_pic, :email, :password, :password_confirmation, :remember_me, :token_expiration, :provider, :uid, :token
   has_many :posts, :dependent => :destroy
-  has_many :friends
+
+  # The user's friends
+  has_and_belongs_to_many :friends, :class_name => "User", :foreign_key => "user_id", :association_foreign_key => "friend_id", :join_table => "friends_users"
+
+  # The organizations the user administers
   has_and_belongs_to_many :organizations
 
   def ImportFriends(facebook_friend_ids)
