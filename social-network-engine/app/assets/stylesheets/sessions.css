@@ -14,8 +14,6 @@
 
 .facebook-link {
 	width: 65%;
-	background: #133783;
-	text-shadow: none;
-	color: white;
-	border: 1px solid #22;
+	margin-left: auto;
+	margin-right: auto;
 }
