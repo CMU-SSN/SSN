@@ -13,7 +13,12 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :friends, :class_name => "User", :foreign_key => "user_id", :association_foreign_key => "friend_id", :join_table => "friends_users"
 
   # The organizations the user administers
+  has_and_belongs_to_many :organizations_managed, :class_name => "Organization", :foreign_key => "user_id", :association_foreign_key => "organization_id", :join_table => "organization_administrators"
+
+  # The organizations the user is interested in
   has_and_belongs_to_many :organizations
+
+  has_many :organizations
 
   def ImportFriends(facebook_friend_ids)
     self_friends = self.friends
