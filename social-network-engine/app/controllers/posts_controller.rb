@@ -3,14 +3,8 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    id = params['token']
-    if id.nil? || id.length == 0
-
-      @posts = Post.includes(:user).order("updated_at DESC").limit(100)
-    else
-      @posts = Post.includes(:user).where("id>:id", {:id => id}).order("updated_at DESC").limit(100)
-      #@posts = Post.find(:all, :include=>:user, :conditions=>["id > ?", DateTime.parse(timestamp)] )
-    end
+    # Filter all posts for the current user that happened after the specified token
+    @posts = Post::Filter(current_user, 100, params['token'])
 
     posts = @posts.collect do |post|
       {:text => post.text,

@@ -12,26 +12,26 @@ describe User do
     it "should add Facebook friends with an SSN account to the user's friends" do
       @victor.ImportFriends([@brian.uid, @james.uid])
       @victor.friends.length.should equal(2)
-      @victor.friends.index{|i| i[:friend_id] == @brian.id}.should_not be_nil
-      @victor.friends.index{|i| i[:friend_id] == @james.id}.should_not be_nil
-      @victor.friends.index{|i| i[:friend_id] == @jason.id}.should be_nil
+      @victor.friends.index{|f| f.id == @brian.id}.should_not be_nil
+      @victor.friends.index{|f| f.id == @james.id}.should_not be_nil
+      @victor.friends.index{|f| f.id == @jason.id}.should be_nil
     end
 
     it "should add Facebook friends with an SSN account and ignore those without an account" do
       @victor.ImportFriends([@brian.uid, @james.uid, "101", "102"])
       @victor.friends.length.should equal(2)
-      @victor.friends.index{|i| i[:friend_id] == @brian.id}.should_not be_nil
-      @victor.friends.index{|i| i[:friend_id] == @james.id}.should_not be_nil
-      @victor.friends.index{|i| i[:friend_id] == @jason.id}.should be_nil
+      @victor.friends.index{|f| f.id == @brian.id}.should_not be_nil
+      @victor.friends.index{|f| f.id == @james.id}.should_not be_nil
+      @victor.friends.index{|f| f.id == @jason.id}.should be_nil
     end
 
     it "should not re-add Facebook friends that are already my friends" do
-      @victor.friends << Friend.new(:friend => @brian, :user => @victor)
+      @victor.friends << @brian
       @victor.ImportFriends([@brian.uid, @james.uid])
       @victor.friends.length.should equal(2)
-      @victor.friends.index{|i| i[:friend_id] == @brian.id}.should_not be_nil
-      @victor.friends.index{|i| i[:friend_id] == @james.id}.should_not be_nil
-      @victor.friends.index{|i| i[:friend_id] == @jason.id}.should be_nil
+      @victor.friends.index{|f| f.id == @brian.id}.should_not be_nil
+      @victor.friends.index{|f| f.id == @james.id}.should_not be_nil
+      @victor.friends.index{|f| f.id == @jason.id}.should be_nil
     end
   end
 end

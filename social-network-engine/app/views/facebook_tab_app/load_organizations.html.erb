@@ -25,8 +25,13 @@
                # implementation will return a 0 if unchecked and 1 if checked.
             %>
             <%= hidden_field_tag org_id, 0 %>
-            <%= check_box_tag org_id, 1, true %>
-            <label for="<%= org_id %>"><%= org.name %></label>
+            <label for="<%= org_id %>">
+              <%= check_box_tag org_id, 1, true %>
+              <%= org.name %>
+              <% if org.is_city %>
+                <i>-&nbsp;(SSN City)</i>
+              <% end %>
+            </label>
           <% end %>
         </fieldset>
         <%= hidden_field_tag "orgs_num", @organizations.length %>
