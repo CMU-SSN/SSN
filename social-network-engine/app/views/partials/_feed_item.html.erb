@@ -1,0 +1,47 @@
+<div class="feed-item">
+  <a class="feed-top" href="jamesProfile.html.erb">
+    <img src="<%= post.user.profile_pic %>" class="feed-user-image">
+    <div class="feed-heading">
+      <h2 class="feed-name">
+        <% if post.user.name %>
+            <%= post.user.name %>
+        <% else %>
+            Anonymous
+        <% end %>
+      </h2>
+      <% if !post.city.nil? || !post.zipcode.nil? %>
+          <p class="feed-time"><%= time_ago_in_words(post.created_at) %> ago
+            near <%= post.city %> <%= post.zipcode %></p>
+      <% else %>
+          <p class="feed-time"><%= time_ago_in_words(post.created_at) %> ago</p>
+      <% end %>
+    </div>
+  </a>
+
+  <div>
+    <% if !post.status? %>
+        <p class="feed-text">
+          <%= post.text %>
+        </p>
+    <% else %>
+
+        <% if post.text == Post::GOOD_STATUS  %>
+            <div class="status-green">
+              <%= image_tag("status-check.png", :class => "status-img") %>
+              <h4 class="status-text">Quick Status - <%= post.text %></h4>
+            </div>
+        <% elsif post.text == Post::HELP_STATUS %>
+            <div class="status-yellow">
+              <%= image_tag("help.png", :class => "status-img") %>
+              <h4 class="status-text">Quick Status - <%= post.text %></h4>
+            </div>
+
+        <% elsif post.text == Post::IMMEDIATE_HELP_STATUS %>
+            <div class="status-red">
+              <%= image_tag("help.png", :class => "status-img") %>
+              <h4 class="status-text">Quick Status - <%= post.text %></h4>
+            </div>
+        <% end %>
+    <% end %>
+  </div>
+</div>
