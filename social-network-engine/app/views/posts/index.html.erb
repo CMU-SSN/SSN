@@ -47,18 +47,35 @@
 
             <p class="feed-time">
               {{if city || zipcode}}
-              <abbr class="timeago" title="{{>updated_at}}">{{>updated_at}}</abbr> near {{>city}} {{>zipcode}}
+                <abbr class="timeago" title="{{>updated_at}}">{{>updated_at}}</abbr> near {{>city}} {{>zipcode}}
               {{else}}
-              <abbr class="timeago" title="{{>updated_at}}">{{>updated_at}}</abbr>
+                <abbr class="timeago" title="{{>updated_at}}">{{>updated_at}}</abbr>
               {{/if}}
             </p>
           </div>
         </a>
 
         <div>
-          <p class="feed-text">
-            {{>text}}
-          </p>
+          {{if !status}}
+              <p class="feed-text">
+                {{>text}}
+              </p>
+          {{else text == "Good"}}
+              <div class="status-green">
+                <img alt="{{>text}}" class="status-img" src="/assets/status-check.png"/>
+                <h4 class="status-text">Quick Status - {{>text}}</h4>
+              </div>
+          {{else text == "Help"}}
+              <div class="status-yellow">
+                <img alt="{{>text}}" class="status-img" src="/assets/help.png"/>
+                <h4 class="status-text">Quick Status - {{>text}}</h4>
+              </div>
+          {{else text == "Need Immediate Help"}}
+              <div class="status-red">
+                <img alt="{{>text}}" class="status-img" src="/assets/help.png"/>
+                <h4 class="status-text">Quick Status - {{>text}}</h4>
+              </div>
+          {{/if}}
         </div>
       </div>
     </script>
