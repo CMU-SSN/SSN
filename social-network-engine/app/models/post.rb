@@ -53,7 +53,9 @@ class Post < ActiveRecord::Base
     end
 
     # Include the user information
-    Post.includes(:user).find(:all, :conditions => conditions, :limit => limit,
+    Post.includes([:user, :organization]).find(:all,
+        :conditions => conditions,
+        :limit => limit,
         :order => "updated_at DESC")
   end
 end
