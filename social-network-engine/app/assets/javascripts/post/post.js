@@ -42,7 +42,7 @@ $('document').ready(function () {
     }, 10000);
 
     // intercept post button clicking event
-    $("body").delegate("#submit-post", "click", submitPost(e) );
+    $("body").delegate("#submit-post", "click", submitPost );
 	
 	function submitPost(e){
         e.preventDefault();
