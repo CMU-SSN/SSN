@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130302220756) do
+ActiveRecord::Schema.define(:version => 20130304013011) do
 
   create_table "friends", :force => true do |t|
     t.integer  "user_id"
@@ -20,11 +20,26 @@ ActiveRecord::Schema.define(:version => 20130302220756) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "friends_users", :id => false, :force => true do |t|
+    t.integer "friend_id"
+    t.integer "user_id"
+  end
+
+  add_index "friends_users", ["friend_id", "user_id"], :name => "index_friends_users_on_friend_id_and_user_id"
+
+  create_table "organization_administrators", :id => false, :force => true do |t|
+    t.integer "organization_id"
+    t.integer "user_id"
+  end
+
+  add_index "organization_administrators", ["organization_id", "user_id"], :name => "index_organization_administrators_on_organization_id_and_user_id"
+
   create_table "organizations", :force => true do |t|
     t.string   "name"
     t.string   "facebook_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.boolean  "is_city"
   end
 
   create_table "organizations_users", :id => false, :force => true do |t|
@@ -36,8 +51,8 @@ ActiveRecord::Schema.define(:version => 20130302220756) do
 
   create_table "posts", :force => true do |t|
     t.string   "text"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.integer  "user_id"
     t.string   "address"
     t.float    "latitude"
@@ -45,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20130302220756) do
     t.string   "city"
     t.string   "zipcode"
     t.boolean  "status"
+    t.integer  "organization_id"
   end
 
   create_table "users", :force => true do |t|
