@@ -18,8 +18,6 @@ class User < ActiveRecord::Base
   # The organizations the user is interested in
   has_and_belongs_to_many :organizations
 
-  has_many :organizations
-
   def ImportFriends(facebook_friend_ids)
     self_friends = self.friends
     # Look for existing users who are Facebook friends
