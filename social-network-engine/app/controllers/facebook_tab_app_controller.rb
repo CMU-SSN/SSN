@@ -29,7 +29,7 @@ class FacebookTabAppController < ApplicationController
         orgs.select!{|o| not o["perms"].find_index("ADMINISTER").nil?}
 
         # Add the user as an admin if he is not already
-        my_orgs = @user.organizations
+        my_orgs = @user.organizations_managed
         orgs.each do |org|
           if my_orgs.index{|o| o.facebook_id == org["id"]}.nil?
             org_object = Organization.find_by_facebook_id(org["id"])
@@ -44,17 +44,17 @@ class FacebookTabAppController < ApplicationController
             end
 
             # Make this user an admin
-            org_object.users << @user
+            org_object.managers << @user
           end
         end
 
         # If there are organizations, load those
         @user.reload
-        @organizations = @user.organizations
+        @organizations = @user.organizations_managed
         if not @organizations.empty?
           render 'load_organizations'
         else
-          redirect_to "/facebook_tab_app/done"
+          render 'done'
         end
       else
         render 'load_account'
@@ -76,7 +76,7 @@ class FacebookTabAppController < ApplicationController
           org = Organization.find_by_id(key.split("_")[1].to_i)
 
           # Only delete the Organization if this user is the only admin
-          if not org.nil? and org.users.length == 1
+          if not org.nil? and org.managers.length == 1
             org.destroy
           end
         end
