@@ -1,6 +1,7 @@
 class Post < ActiveRecord::Base
   attr_accessible :text, :address, :latitude, :longitude, :status
   belongs_to :user
+  belongs_to :organization
   validates :text, :length => {
       :minimum   => 1,
       :maximum   => 140,
@@ -30,7 +31,7 @@ class Post < ActiveRecord::Base
 
   # Filters all posts to those this user is interested in. Also limits the posts
   # returned and allows the specification of an offset.
-  def self.Filter(user, limit, offset)
+  def self.Filter(user, limit, last_id)
     # Get the IDs of all organizations the user is following
     org_ids = user.organizations.map{|o| o.id}
 
@@ -40,6 +41,19 @@ class Post < ActiveRecord::Base
     # Get the IDs of all friends
     friend_ids = user.friends.map{|f| f.id}
 
-    Post.find(:all, :conditions => ["user_id IN (?) or organization_id IN (?)", friend_ids, org_ids], :limit => limit, :offset => offset, :order => "created_at DESC")
+    # Include the user's own posts
+    friend_ids << user.id
+
+    # Get posts after the last ID if one was specified
+    if last_id.nil? || last_id.length == 0
+      conditions = ["user_id IN (?) OR organization_id IN (?)", friend_ids, org_ids]
+
+    else
+      conditions = ["id > ? AND (user_id IN (?) OR organization_id IN (?))", last_id, friend_ids, org_ids]
+    end
+
+    # Include the user information
+    Post.includes(:user).find(:all, :conditions => conditions, :limit => limit,
+        :order => "updated_at DESC")
   end
 end
