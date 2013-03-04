@@ -43,8 +43,9 @@ class FacebookTabAppController < ApplicationController
                  :is_city => (org["category"] == "Government organization"))
             end
 
-            # Make this user an admin
+            # Make this user an admin and interested in the organization
             org_object.managers << @user
+            org_object.users << @user
           end
         end
 
