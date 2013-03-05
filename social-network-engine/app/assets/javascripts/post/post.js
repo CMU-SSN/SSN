@@ -8,37 +8,22 @@ $(document).ready(function () {
     // auto refresh posts
     setInterval(function () {
         var token = $('#posts').data('token');
-        $.ajax({
-            type: 'GET',
-            url: '/posts',
-            dataType: 'json',
-            data: {token: token},
-            context: $(this),
-            timeout: 25000,
-            beforeSend: function (data) {
-            },
-            success: function (data) {
-                if (data.code === 200) {
-                    if (data.token) {
-                        $('#posts').data('token', data.token);
-                    }
+        $.get('/refresh', { token: token }).done(function(data){
+            var jqHtml = $(data);
+            var newToken = jqHtml.children("#token").text();
+            if (newToken)
+            {
+                $("#posts").data('token', newToken);
+            }
 
-                    $("#posts").prepend(
-                        $("#postTemplate").render(data.data)
-                    );
+            var feedItems = jqHtml.children(".feed-item");
 
-                    $(".timeago").timeago().removeClass("timeago");
-                }
-                else if (data.code === 500) {
-                }
-
-            },
-            error: function (data) {
-
-            },
-            complete: function (data) {
+            if (feedItems.length > 0)
+            {
+                $("#posts").prepend(feedItems);
             }
         });
+
     }, 10000);
 
     // intercept post button clicking event

@@ -7,6 +7,8 @@ Sne::Application.routes.draw do
 
   match '/search' => 'search#search'
 
+  match '/refresh' => 'posts#refresh'
+
   devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks' }
 
   match 'main' => 'posts#index'

@@ -98,53 +98,5 @@
 <% end %>
 
 <% content_for :scripts do %>
-    <script id="postTemplate" type="text/x-jsrender">
-      <div class="feed-item">
-        <a class="feed-top">
-          <img src="{{>creator_pic}}" class="feed-user-image">
-
-          <div class="feed-heading">
-            <h2 class="feed-name">
-              {{>creator_name}}
-            </h2>
-
-            <p class="feed-time">
-              {{if city || zipcode}}
-              <abbr class="timeago" title="{{>updated_at}}">{{>updated_at}}</abbr> near {{>city}} {{>zipcode}}
-              {{else}}
-              <abbr class="timeago" title="{{>updated_at}}">{{>updated_at}}</abbr>
-              {{/if}}
-            </p>
-          </div>
-        </a>
-
-        <div>
-          {{if !status}}
-          <p class="feed-text">
-            {{>text}}
-          </p>
-          {{else text == "Good"}}
-          <div class="status-green">
-            <img alt="{{>text}}" class="status-img" src="/assets/status-check.png"/>
-            <h4 class="status-text">Quick Status - {{>text}}</h4>
-          </div>
-          {{else text == "Help"}}
-          <div class="status-yellow">
-            <img alt="{{>text}}" class="status-img" src="/assets/help.png"/>
-            <h4 class="status-text">Quick Status - {{>text}}</h4>
-          </div>
-          {{else text == "Need Immediate Help"}}
-          <div class="status-red">
-            <img alt="{{>text}}" class="status-img" src="/assets/help.png"/>
-            <h4 class="status-text">Quick Status - {{>text}}</h4>
-          </div>
-          {{/if}}
-        </div>
-      </div>
-    </script>
-
-    <script type="text/javascript">
-
-    </script>
     <%= javascript_include_tag 'post/post' %>
 <% end %>
