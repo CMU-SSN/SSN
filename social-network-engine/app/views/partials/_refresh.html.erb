@@ -1,0 +1,8 @@
+<div>
+  <span id="token" style="display: none"><%= @token %></span>
+  <% if !@posts.nil? && @posts.length > 0 %>
+      <% @posts.each do |post| %>
+          <%= render "partials/feed_item", :post => post %>
+      <% end %>
+  <% end %>
+</div>

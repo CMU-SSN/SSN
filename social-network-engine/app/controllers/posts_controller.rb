@@ -5,17 +5,6 @@ class PostsController < ApplicationController
   def index
     # Filter all posts for the current user that happened after the specified token
     @posts = Post::Filter(current_user, 100, params['token'])
-
-    posts = @posts.collect do |post|
-      {:text => post.text,
-       :creator_name => post.user.name,
-       :creator_pic => post.user.profile_pic,
-       :updated_at => post.updated_at,
-       :city => post.city,
-       :zipcode => post.zipcode,
-       :status => post.status}
-    end
-
     @token = @posts.first.id if !@posts.nil? && !@posts.first.nil?
     
     if session[:post_as].nil?
@@ -28,9 +17,14 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json do
-        render :json => {:code => 200, :data => posts, :token => @token}
-      end
+    end
+  end
+
+  def refresh
+    @posts = Post::Filter(current_user, 100, params['token'])
+    @token = @posts.first.id if !@posts.nil? && !@posts.first.nil?
+    respond_to do |format|
+      format.html {render :partial=>"partials/refresh"}
     end
   end
 
