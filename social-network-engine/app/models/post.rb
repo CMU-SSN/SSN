@@ -1,5 +1,6 @@
 class Post < ActiveRecord::Base
-  attr_accessible :text, :address, :latitude, :longitude, :status
+  # TODO(vmarmol): Remove user_id, created_at when User search result hack is done.
+  attr_accessible :text, :address, :latitude, :longitude, :status, :user_id, :created_at
   belongs_to :user
   belongs_to :organization
   validates :text, :length => {
