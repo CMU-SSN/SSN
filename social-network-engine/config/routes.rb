@@ -1,5 +1,6 @@
 Sne::Application.routes.draw do
   resources :posts, :only => [:index, :create]
+  get 'context' => 'posts#post_context'
 
   # All facebook_tab_app actions just get forwarded
   match ':controller/:action', :controller => /facebook_tab_app/

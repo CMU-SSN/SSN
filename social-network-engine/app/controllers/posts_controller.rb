@@ -16,7 +16,12 @@ class PostsController < ApplicationController
     end
 
     @token = @posts.first.id if !@posts.nil? && !@posts.first.nil?
-
+    
+    if session[:post_as].nil?
+      session[:post_as] = 'self'
+    end
+    
+    @post_as = session[:post_as]
 
     @post = Post.new
 
@@ -54,11 +59,27 @@ class PostsController < ApplicationController
   def edit
     @post = Post.find(params[:id])
   end
+  
+  # GET /post_contect?id=
+  def post_context
+    session[:post_as] = params[:id]
+    
+    respond_to do |format|
+       format.json { render :json => { :status => 200 } }
+     end
+  end
 
   # POST /posts
   # POST /posts.json
   def create
-    current_user.posts.create! params[:post]
+    if session[:post_as] == 'self'
+      current_user.posts.create!(params[:post])
+    else
+      print session[:post_as]
+      post = current_user.posts.build(params[:post])
+      post.organization = current_user.organizations.where("organization_id = ?", session[:post_as]).first
+      post.save
+    end
 
     respond_to do |format|
       flash[:notice] = "Post created successfully!"
