@@ -12,7 +12,8 @@ class PostsController < ApplicationController
        :creator_pic => post.user.profile_pic,
        :updated_at => post.updated_at,
        :city => post.city,
-       :zipcode => post.zipcode}
+       :zipcode => post.zipcode,
+       :status => post.status}
     end
 
     @token = @posts.first.id if !@posts.nil? && !@posts.first.nil?

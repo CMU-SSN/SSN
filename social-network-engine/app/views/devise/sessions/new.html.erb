@@ -3,8 +3,9 @@
 		<%= image_tag("sample_neighborhood_logo.png", :class => "logo") %>
 		<h3>City of Palo Alto SSN :: Cool City Neighborhood</h3>
 	</div>
+	<br />
 	<div class="center white no-shadow">
-		<%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook), :rel => 'external', :class => 'facebook-link', :data => { :role => 'button', :theme => 'b', :icon => 'facebook', :iconpos => 'left' }%>
+		<%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook, :redirect_uri => "#{request.protocol}#{request.host_with_port}#{root_path}"), :rel => 'external',  :data => { :role => 'button', :theme => 'b', :icon => 'arrow-r', :iconpos => 'right' }%>
 		<h4>
 			Or Using Your Local SSN Account
 		</h4>

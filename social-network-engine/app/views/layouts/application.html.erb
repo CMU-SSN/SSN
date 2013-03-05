@@ -10,6 +10,7 @@
 <body>
 <div data-role="page" data-theme="a">
   <div data-role="header">
+    <a href="#" data-rel="back" data-icon="arrow-l">back</a>
     <% if user_signed_in? %>
       <%= link_to image_tag("glyphicons/glyphicons_203_lock.png", :class => "header-icon"), destroy_user_session_path, :method => "delete", :target => '_self' %>
     <% end %>
