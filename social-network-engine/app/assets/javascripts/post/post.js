@@ -42,11 +42,13 @@ $(document).ready(function () {
     }, 10000);
 
     // intercept post button clicking event
-    $("body").delegate("#submit-post", "click", submitPost );
+    $("body").delegate("#submitNewPost", "click", submitPost );
 	
 	function submitPost(e){
         e.preventDefault();
         e.stopPropagation();
+
+        $("#post_text").val($("#new_post_text").val());
 
         if (navigator.geolocation) {
             var watchID = navigator.geolocation.watchPosition(function (position) {
@@ -125,11 +127,6 @@ function createBindings() {
 		});
 		
 		//$("input[name='post[organization_id]']").val($(this).attr('id'));
-	});
-	
-	$("#submitNewPost").click(function() {
-		$("#post_text").val($("#new_post_text").val());
-		$("#new_post").submit();
 	});
 
 	// Handlers for the check-in dialog
