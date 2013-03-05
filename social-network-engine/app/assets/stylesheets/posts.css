@@ -39,32 +39,44 @@
 	border-radius: 0px;
 }
 
+.ui-icon-good {
+	background: url("glyphicons/glyphicons_193_circle_ok.png");
+	background-size: 20px 20px;
+	border-radius: 0px;
+}
+
+.ui-icon-emergency {
+	background: url("glyphicons/glyphicons_298_hospital.png");
+	background-size: 20px 20px;
+	border-radius: 0px;
+}
+
+.ui-icon-assistance-needed {
+	background: url("glyphicons/glyphicons_196_circle_exclamation_mark.png");
+	background-size: 20px 20px;
+	border-radius: 0px;
+}
+
 .status-bar {
 	font-size: 1em;
 	color: white;
 	text-shadow: none;
-}
-
-.blue {
-	background-color: #221C8C;
+	padding-bottom: 5px;
 }
 
 .orange {
-	background-color: #D97236;
-}
-
-.brown {
-	background-color: #73644B;
+	background-color: #3D3536;
 }
 
 .gray {
-	background-color: #333333;
+	background-color: #D97236;
 }
 
 .status-bar p {
 	float: left;
 	margin: 0;
-	padding-top: 8px;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 .status-bar a {
@@ -84,41 +96,91 @@
 	background-repeat: repeat;
 	border-radius: .3em;
 	margin-bottom: 15px;
-	padding-left: 10px;
-	padding-right: 10px;
 	box-shadow: 1px 1px 3px #555;
 }
 
-.feed-header img {
+.feed-header .author-img {
 	height: 60px;
 	width: 60px;
 	float: left;
 	margin-top: -5px;
-	margin-left: -15px;
+	margin-left: -5px;
 	border: 2px solid #EEE;
 	border-radius: 0.3em;
 	box-shadow: 1px 1px 3px #555;
 }
 
-.feed-header h2 {
+.feed-header .author-name {
 	font-size: 1em;
-	margin-left: 58px;
+	margin-left: 68px;
 	padding-top: 10px;
+	color: #333;
+	text-shadow: none;
 }
 
-.feed-header p {
+.feed-header .post-time {
 	font-size: 0.8em;
-	margin-left: 58px;
+	margin-left: 68px;
 	margin-top: -7px;
 	color: #999;
+	text-shadow: none;
 }
 
 .feed-content {
-	padding-top: 3px;
+	padding-top: 1px;
 	padding-bottom: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 .feed-content p {
 	font-size: 0.9em;
+	text-shadow: none;
+	color: #333;
 }
 
+.feed-header .status {
+	float: right;
+	margin-top: -52px;
+	padding-left: 15px;
+	padding-right: 10px;
+	margin-bottom: 5px;
+}
+
+.feed-header .status img {
+	height: 30px;
+	width: 30px;
+	float: right;
+	margin-top: 8px;
+	padding-left: 5px;
+}
+
+.feed-header .status p {
+	margin-right: 40px;
+	text-align: right;
+	font-size: 0.8em;
+	color: #333;
+	text-shadow: none;
+	padding-top: 4px;
+}
+
+.feed-header hr {
+	height: 15px;
+	width: 100%;
+	border: 0px;
+	margin-top: 5px;
+	border-bottom-left-radius: 0.3em;
+	border-bottom-right-radius: 0.3em;
+}
+
+.feed-header .green {
+	background-color: #006837;
+}
+
+.feed-header .red {
+	background-color: #c1272d;
+}
+
+.feed-header .yellow {
+	background-color: #ffcc33;
+}
