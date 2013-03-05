@@ -1,109 +1,126 @@
 <% content_for :header do %>
     <h3>All Posts</h3>
+		<% if current_user.organizations.length != 0 %>
+			<div id="postAsBar" class="ui-bar status-bar">
+				<p id="postAsName"></p>
+				<%= link_to "Switch", "#", :id => "postAsSwitch", :class => "ui-btn-right ui-icon-alt", :data => { :role => "button", :mini => "true", :icon => "arrow-d", :iconpos => "right" } %>
+				<fieldset data-role="controlgroup" id="organizationPicker">
+					<% if @post_as == 'self' %>
+						<input type="radio" name="post_as" id="self" value="self" checked="checked">
+					<% else %>
+						<input type="radio" name="post_as" id="self" value="self">
+					<% end %>
+					<label for="self"><%= current_user.name %></label>
+					<% current_user.organizations.each do |org| %>
+						<% if @post_as == org.id.to_s %>
+							<input type="radio" name="post_as" id="<%= org.id %>" value="<%= org.id %>" checked="checked">
+						<% else %>
+							<input type="radio" name="post_as" id="<%= org.id %>" value="<%= org.id %>">
+						<% end %>
+						<label for="<%= org.id %>" id="<%= org.id %>_label"><%= org.name %></label>
+					<% end %>
+				<fieldset>
+			</div>
+		<% end %>
 <% end %>
 
 <% content_for :content do %>
-    <div id="posts" data-token="<%= @token %>">
+    <div id="posts" data-token="<%= @token %>" data-theme="a">
       <% if !@posts.nil? && @posts.length > 0 %>
           <% @posts.each do |post| %>
-              <div class="feed-item">
+							<div class="feed-item">
 								<div class="feed-header">
-									<img src="<%= post.user.profile_pic %>" />
-									<h2>
-										<% if post.user.name %>
-	                      <%= post.user.name %>
-	                  <% else %>
-	                      Anonymous
-	                  <% end %>
-								  </h2>
-								  <% if !post.city.nil? || !post.zipcode.nil? %>
-                      <p><%= time_ago_in_words(post.created_at) %> ago
-                        near <%= post.city %> <%= post.zipcode %></p>
-                  <% else %>
-                      <p><%= time_ago_in_words(post.created_at) %> ago</p>
-                  <% end %>
-								</div>
-                <div class="feed-content">
-									<% if !post.status? %>
-										<p class="feed-text">
-											<%= post.text %>
-										</p>
+									<% if post.organization.nil? %>
+										<img src="<%= post.user.profile_pic %>" class="author-img" />
+										<h2 class="author-name"><%= post.user.name %></h2>
 									<% else %>
-										<% if post.text == Post::GOOD_STATUS  %>
-											<div class="status-green">
-												<%= image_tag("status-check.png", :class => "status-img") %>
-												<h4 class="status-text">Quick Status - <%= post.text %></h4>
-											</div>					
-										<% elsif post.text == Post::HELP_STATUS %>
-											<div class="status-yellow">
-												<%= image_tag("help.png", :class => "status-img") %>
-												<h4 class="status-text">Quick Status - <%= post.text %></h4>
-											</div>				
-										<% elsif post.text == Post::IMMEDIATE_HELP_STATUS %>
-											<div class="status-red">
-												<%= image_tag("help.png", :class => "status-img") %>
-												<h4 class="status-text">Quick Status - <%= post.text %></h4>
-											</div>	
-										<% end %>			
+										<%= image_tag "sample_neighborhood_logo.png", :class => "author-img" %>
+										<h2 class="author-name"><%= post.organization.name %></h2>
 									<% end %>
-                </div>
-              </div>
+								  <% if !post.city.nil? || !post.zipcode.nil? %>
+	                     <p class="post-time"><%= time_ago_in_words(post.created_at) %> ago
+	                       near <%= post.city %> <%= post.zipcode %></p>
+	                 <% else %>
+	                     <p class="post-time"><%= time_ago_in_words(post.created_at) %> ago</p>
+	                 <% end %>
+									<% if post.status %>
+										<div class="status">
+											<% if post.text == Post::ALL_CLEAR_STATUS %>
+												<%= image_tag "glyphicons/glyphicons_193_circle_ok.png" %>
+												<p>Everything is OK</p>
+												</div>
+												<hr class="green"/>
+											<% elsif post.text == Post::NEEDS_ASSISTANCE_STATUS %>
+												<%= image_tag "glyphicons/glyphicons_196_circle_exclamation_mark.png" %>
+												<p>Help needed as soon as possible</p>
+												</div>
+												<hr class="yellow"/>
+											<% elsif post.text == Post::NEEDS_HELP_STATUS %>
+												<%= image_tag "glyphicons/glyphicons_298_hospital.png" %>
+												<p>Require immediate assistance</p>
+												</div>
+												<hr class="red"/>
+											<% end %>
+									<% end%>
+								</div>
+								<% if !post.status %>
+		              <div class="feed-content ">
+											<p class="feed-text">
+												<%= post.text %>
+											</p>
+		              </div>
+								<% end %>
+             </div>
           <% end %>
 			<% end %>
     </div>
 <% end %>
 
 <% content_for :dialogs do %>
+	<!-- Common form used by all dialogs -->
+  <%= form_for @post, :url => {:action => "create"}, :html => {:method => :post} do |f| %>
+    <%= f.hidden_field :latitude %>
+    <%= f.hidden_field :longitude %>
+    <%= f.hidden_field :text %>
+		<%= f.hidden_field :status %>
+	<% end %>
+
 	<!-- Check-In Dialog Page Starts Here -->
-	<div data-role="page" id="checkInDialog">
-		<div data-role="header" class="ui-icon-alt">
+	<div data-role="page" id="checkInDialog" data-theme="e">
+		<div data-role="header">
 			<h2>Check-In</2>
 		</div>
 		<div data-role="content">
-			Filler for now
+			<div data-role="navbar">
+				<ul>
+					<li><%= link_to "I'm OK", "#", :id => "submitAllClear", :data => { :role => "button", :icon =>"good", :iconpos => "top", :theme => "b" } %></li>
+					<li><%= link_to "Emergency", "#", :id => "submitNeedHelp", :data => { :role => "button", :icon => "emergency", :theme => "c" }%>
+					<li><%= link_to "Need Assistance", "#", :id => "submitNeedAssistance", :data => { :role => "button", :icon =>"assistance-needed", :iconpos => "top", :theme => "d" } %></li>
+				</ul>
+			</div>
 	  </div>
 	</div>
 
 	<!-- Post Dialog Page Starts Here -->
-	<div data-role="page" id="newPostDialog">
+	<div data-role="page" id="newPostDialog" data-theme="e">
 		<div data-role="header" class="ui-icon-alt">
 			<h2>Add Post</h2>
 		</div>
-		<% if current_user.organizations.length != 0 %>
-			<div id="postAsBar" class="ui-bar status-bar gray">
-				<p id="postAsName">Posting as Brian Bailey</p>
-				<%= link_to "Switch", "#", :id => "postAsSwitch", :class => "ui-btn-right ui-icon-alt", :data => { :role => "button", :mini => "true", :icon => "arrow-d", :iconpos => "right" } %>
-				<fieldset data-role="controlgroup" id="organizationPicker">
-					<input type="radio" name="post_as" id="self" value="self" checked="checked">
-					<label for="self"><%= current_user.name %></label>
-					<% current_user.organizations.each do |org| %>
-						<input type="radio" name="post_as" id="<%= org.id %>" value="<%= org.id %>">
-						<label for="<%= org.id %>" id="<%= org.id %>_label"><%= org.name %></label>
-					<% end %>
-				<fieldset>
-			</div>
-		<% end %>
 		<div data-role="content">
-		  <%= form_for @post, :url => {:action => "create"}, :html => {:method => :post} do |f| %>
-	        <%= f.hidden_field :latitude %>
-	        <%= f.hidden_field :longitude %>
-					<%= hidden_field_tag "post[organization_id]" %>
-	        <%= f.text_area :text, :placeholder => "What's happening?" %>
-					<div data-role="navbar">
-						<ul>
-							<li><%= link_to "Attach Picture", "#", :data => { :role => "button", :icon =>"picture", :iconpos => "top" } %></li>
-							<li><%= link_to "Attach Link", "#", :data => { :role => "button", :icon =>"link", :iconpos => "top", :rel => "dialog", :transition => "pop" } %></li>
-						</ul>
-					</div>
-	        <%= f.submit "Post", :id => "submit-post", :data => {:role => 'button', :theme => 'b'} %>
-	    <% end %>
-
+      <%= text_area_tag "new_post_text", "", :placeholder => "What's happening?" %>
+			<div data-role="navbar">
+				<ul>
+					<li><%= link_to "Attach Picture", "#", :data => { :role => "button", :icon =>"picture", :iconpos => "top" } %></li>
+					<li><%= link_to "Attach Link", "#", :data => { :role => "button", :icon =>"link", :iconpos => "top" } %></li>
+				</ul>
+			</div>
+		  <%= link_to "Post", "#", :id => "submitNewPost", :data => { :role => "button", :theme => "b" } %></li>
 	  </div>
 	</div>
 	
 	<!-- Profile Dialog Page Starts Here -->
-	<div data-role="page" id="profileDialog">
-		<div data-role="header" class="ui-icon-alt">
+	<div data-role="page" id="profileDialog" data-theme="e">
+		<div data-role="header">
 			<h2>My Profile</2>
 		</div>
 		<div data-role="content">
@@ -112,8 +129,8 @@
 	</div>
 	
 	<!-- Settings Dialog Page Starts Here -->
-	<div data-role="page" id="settingsDialog">
-		<div data-role="header" class="ui-icon-alt">
+	<div data-role="page" id="settingsDialog" data-theme="e">
+		<div data-role="header">
 			<h2>Settings</2>
 		</div>
 		<div data-role="content">
@@ -152,39 +169,7 @@
     </script>
 
 		<script type="text/javascript">
-			$("#organizationPicker").hide();
-			$("#postAsSwitch").click(function() {
-				if ($("#organizationPicker").is(":visible")) {
-					$("#organizationPicker").hide();
-					$("#postAsSwitch").find(".ui-icon").removeClass("ui-icon-arrow-u");
-					$("#postAsSwitch").find(".ui-icon").addClass("ui-icon-arrow-d");
-				}
-				else {
-					$("#organizationPicker").show();
-					$("#postAsSwitch").find(".ui-icon").removeClass("ui-icon-arrow-d");
-					$("#postAsSwitch").find(".ui-icon").addClass("ui-icon-arrow-u");					
-				}
-			});
-			$("#organizationPicker").find("input[name='post_as']").click(function() {
-				if (this.value == "self") {
-					$("#postAsBar").removeClass("orange");
-					$("#postAsBar").addClass("gray");
-				}
-				else {
-					$("#postAsBar").removeClass("gray");
-					$("#postAsBar").addClass("orange");
-				}
-				
-				var organization = $("label[for='"+$(this).attr('id')+"']");
-				
-				$("#postAsName").text("Posting as " + organization.text());
-				$("input[name='post[post_as]']").val($(this).attr('id'));
-			});
+
 		</script>
     <%= javascript_include_tag 'post/post' %>
 <% end %>
-
-
-
-
-
