@@ -8,16 +8,25 @@
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
 </head>
 <body>
-<div data-theme="c" data-role="page">
+<div data-theme="c" data-role="page" data-add-back-btn="true">
   <div data-role="header">
+    <a href="#" data-rel="back" data-icon="arrow-l">back</a>
     <% if user_signed_in? %>
-      <%= link_to "Sign Out", destroy_user_session_path, :method => "delete", :target => '_self', :class => "ui-btn-left" %>
+      <%= link_to "Sign Out", destroy_user_session_path, :method => "delete", :target => '_self', :class => "ui-btn-right" %>
     <% end %>
     <%= yield :header %>
-    <%= link_to "Search", search_path, :target => '_self', :class => "ui-btn-right", :data => { :role => "button", :icon =>"search", :iconpos => "left" }%>
+
   </div>
   <div data-role="content">
     <%= yield :content %>
+  </div>
+  <div data-role="footer" data-position="fixed">
+    <div data-role="navbar">
+      <ul>
+        <li><%= link_to "Home", posts_path, :target => '_self', :data => { :role => "button", :icon =>"home"}%></li>
+        <li><%= link_to "Search", search_path, :target => '_self', :data => { :role => "button", :icon =>"search"}%></li>
+      </ul>
+    </div>
   </div>
 </div>
 <%= yield :scripts %>
