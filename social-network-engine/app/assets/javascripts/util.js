@@ -1,7 +1,4 @@
-function ssn_hide_header() {
+function ssn_hide_header_footer() {
     $("div[data-role='header']").hide();
-}
-
-function ssn_hide_footer() {
 	$("div[data-role='footer']").hide();
 }
