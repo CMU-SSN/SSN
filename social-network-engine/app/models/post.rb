@@ -18,10 +18,10 @@ class Post < ActiveRecord::Base
   end
   after_validation :reverse_geocode
 
-  GOOD_STATUS = "Good"
-  HELP_STATUS = "Help"
-  IMMEDIATE_HELP_STATUS = "Need Immediate Help"
-  ALL_STATUSES = [GOOD_STATUS, HELP_STATUS, IMMEDIATE_HELP_STATUS] 
+  ALL_CLEAR_STATUS = "STATUS_OK"
+  NEEDS_ASSISTANCE_STATUS = "STATUS_NEEDS_ASSISTANCE"
+  NEEDS_HELP_STATUS = "STATUS_NEEDS_HELP"
+  ALL_STATUSES = [ALL_CLEAR_STATUS, NEEDS_ASSISTANCE_STATUS, NEEDS_HELP_STATUS] 
 
   validates_inclusion_of :text, :in => ALL_STATUSES, :if => :status?
 
