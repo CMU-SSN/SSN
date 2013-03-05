@@ -1,43 +1,46 @@
 <div class="feed-item">
-	<div class="feed-header">
-		<% if post.organization.nil? %>
-			<img src="<%= post.user.profile_pic %>" class="author-img" />
-			<h2 class="author-name"><%= post.user.name %></h2>
-		<% else %>
-			<%= image_tag "sample_neighborhood_logo.png", :class => "author-img" %>
-			<h2 class="author-name"><%= post.organization.name %></h2>
-		<% end %>
-	  <% if !post.city.nil? || !post.zipcode.nil? %>
-         <p class="post-time"><%= time_ago_in_words(post.created_at) %> ago
-           near <%= post.city %> <%= post.zipcode %></p>
-     <% else %>
-         <p class="post-time"><%= time_ago_in_words(post.created_at) %> ago</p>
-     <% end %>
-		<% if post.status %>
-			<div class="status">
-				<% if post.text == Post::ALL_CLEAR_STATUS %>
-					<%= image_tag "glyphicons/glyphicons_193_circle_ok.png" %>
-					<p>Everything is OK</p>
-					</div>
-					<hr class="green"/>
-				<% elsif post.text == Post::NEEDS_ASSISTANCE_STATUS %>
-					<%= image_tag "glyphicons/glyphicons_196_circle_exclamation_mark.png" %>
-					<p>Help needed as soon as possible</p>
-					</div>
-					<hr class="yellow"/>
-				<% elsif post.text == Post::NEEDS_HELP_STATUS %>
-					<%= image_tag "glyphicons/glyphicons_298_hospital.png" %>
-					<p>Require immediate assistance</p>
-					</div>
-					<hr class="red"/>
-				<% end %>
-		<% end%>
-	</div>
-	<% if !post.status %>
-    <div class="feed-content ">
-				<p class="feed-text">
-					<%= post.text %>
-				</p>
-    </div>
-	<% end %>
+  <div class="feed-header">
+    <% if post.organization.nil? %>
+        <img src="<%= post.user.profile_pic %>" class="author-img"/>
+
+        <h2 class="author-name"><%= post.user.name %></h2>
+    <% else %>
+        <%= image_tag "sample_neighborhood_logo.png", :class => "author-img" %>
+        <h2 class="author-name"><%= post.organization.name %></h2>
+    <% end %>
+    <% if !post.city.nil? || !post.zipcode.nil? %>
+        <p class="post-time"><%= time_ago_in_words(post.created_at) %> ago
+          near <%= post.city %> <%= post.zipcode %></p>
+    <% else %>
+        <p class="post-time"><%= time_ago_in_words(post.created_at) %> ago</p>
+    <% end %>
+    <% if post.status %>
+        <% if post.text == Post::ALL_CLEAR_STATUS %>
+            <div class="status">
+              <%= image_tag "glyphicons/glyphicons_193_circle_ok.png" %>
+              <p>Everything is OK</p>
+            </div>
+            <hr class="green"/>
+        <% elsif post.text == Post::NEEDS_ASSISTANCE_STATUS %>
+            <div class="status">
+              <%= image_tag "glyphicons/glyphicons_196_circle_exclamation_mark.png" %>
+              <p>Help needed as soon as possible</p>
+            </div>
+            <hr class="yellow"/>
+        <% elsif post.text == Post::NEEDS_HELP_STATUS %>
+            <div class="status">
+              <%= image_tag "glyphicons/glyphicons_298_hospital.png" %>
+              <p>Require immediate assistance</p>
+            </div>
+            <hr class="red"/>
+        <% end %>
+    <% end %>
+  </div>
+  <% if !post.status %>
+      <div class="feed-content ">
+        <p class="feed-text">
+          <%= post.text %>
+        </p>
+      </div>
+  <% end %>
 </div>

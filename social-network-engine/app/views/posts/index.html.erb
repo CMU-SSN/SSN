@@ -1,27 +1,27 @@
 <% content_for :header do %>
     <h3>All Posts</h3>
-		<% if current_user.organizations.length != 0 %>
-			<div id="postAsBar" class="ui-bar status-bar">
-				<p id="postAsName"></p>
-				<%= link_to "Switch", "#", :id => "postAsSwitch", :class => "ui-btn-right ui-icon-alt", :data => { :role => "button", :mini => "true", :icon => "arrow-d", :iconpos => "right" } %>
-				<fieldset data-role="controlgroup" id="organizationPicker">
-					<% if @post_as == 'self' %>
-						<input type="radio" name="post_as" id="self" value="self" checked="checked">
-					<% else %>
-						<input type="radio" name="post_as" id="self" value="self">
-					<% end %>
-					<label for="self"><%= current_user.name %></label>
-					<% current_user.organizations.each do |org| %>
-						<% if @post_as == org.id.to_s %>
-							<input type="radio" name="post_as" id="<%= org.id %>" value="<%= org.id %>" checked="checked">
-						<% else %>
-							<input type="radio" name="post_as" id="<%= org.id %>" value="<%= org.id %>">
-						<% end %>
-						<label for="<%= org.id %>" id="<%= org.id %>_label"><%= org.name %></label>
-					<% end %>
-				<fieldset>
-			</div>
-		<% end %>
+    <% if current_user.organizations.length != 0 %>
+        <div id="postAsBar" class="ui-bar status-bar">
+          <p id="postAsName"></p>
+          <%= link_to "Switch", "#", :id => "postAsSwitch", :class => "ui-btn-right ui-icon-alt", :data => {:role => "button", :mini => "true", :icon => "arrow-d", :iconpos => "right"} %>
+          <fieldset data-role="controlgroup" id="organizationPicker">
+            <% if @post_as == 'self' %>
+                <input type="radio" name="post_as" id="self" value="self" checked="checked">
+            <% else %>
+                <input type="radio" name="post_as" id="self" value="self">
+            <% end %>
+            <label for="self"><%= current_user.name %></label>
+            <% current_user.organizations.each do |org| %>
+                <% if @post_as == org.id.to_s %>
+                    <input type="radio" name="post_as" id="<%= org.id %>" value="<%= org.id %>" checked="checked">
+                <% else %>
+                    <input type="radio" name="post_as" id="<%= org.id %>" value="<%= org.id %>">
+                <% end %>
+                <label for="<%= org.id %>" id="<%= org.id %>_label"><%= org.name %></label>
+            <% end %>
+          </fieldset>
+        </div>
+    <% end %>
 <% end %>
 
 <% content_for :content do %>
@@ -30,71 +30,71 @@
           <% @posts.each do |post| %>
               <%= render "partials/feed_item", :post => post %>
           <% end %>
-			<% end %>
+      <% end %>
     </div>
 <% end %>
 
 <% content_for :dialogs do %>
-	<!-- Common form used by all dialogs -->
-  <%= form_for @post, :url => {:action => "create"}, :html => {:method => :post} do |f| %>
-    <%= f.hidden_field :latitude %>
-    <%= f.hidden_field :longitude %>
-    <%= f.hidden_field :text %>
-		<%= f.hidden_field :status %>
-	<% end %>
+    <!-- Common form used by all dialogs -->
+    <%= form_for @post, :url => {:action => "create"}, :html => {:method => :post} do |f| %>
+        <%= f.hidden_field :latitude %>
+        <%= f.hidden_field :longitude %>
+        <%= f.hidden_field :text %>
+        <%= f.hidden_field :status %>
+    <% end %>
 
-	<!-- Check-In Dialog Page Starts Here -->
-	<div data-role="page" id="checkInDialog" data-theme="e">
-		<div data-role="header" class="ui-icon-alt">
-			<h2>Check-In</2>
-		</div>
-		<div data-role="content">
-			<div data-role="navbar">
-				<ul>
-					<li><%= link_to "I'm OK", "#", :id => "submitAllClear", :data => { :role => "button", :icon =>"good", :iconpos => "top", :theme => "b" } %></li>
-					<li><%= link_to "Emergency", "#", :id => "submitNeedHelp", :data => { :role => "button", :icon => "emergency", :theme => "c" }%>
-					<li><%= link_to "Need Assistance", "#", :id => "submitNeedAssistance", :data => { :role => "button", :icon =>"assistance-needed", :iconpos => "top", :theme => "d" } %></li>
-				</ul>
-			</div>
-	  </div>
-	</div>
+    <!-- Check-In Dialog Page Starts Here -->
+    <div data-role="page" id="checkInDialog" data-theme="e">
+      <div data-role="header" class="ui-icon-alt">
+        <h2>Check-In</h2>
+      </div>
+      <div data-role="content">
+        <div data-role="navbar">
+          <ul>
+            <li><%= link_to "I'm OK", "#", :id => "submitAllClear", :data => {:role => "button", :icon => "good", :iconpos => "top", :theme => "b"} %></li>
+            <li><%= link_to "Emergency", "#", :id => "submitNeedHelp", :data => {:role => "button", :icon => "emergency", :theme => "c"} %>
+            <li><%= link_to "Need Assistance", "#", :id => "submitNeedAssistance", :data => {:role => "button", :icon => "assistance-needed", :iconpos => "top", :theme => "d"} %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
-	<!-- Post Dialog Page Starts Here -->
-	<div data-role="page" id="newPostDialog" data-theme="e">
-		<div data-role="header" class="ui-icon-alt">
-			<h2>Add Post</h2>
-		</div>
-		<div data-role="content">
-      <%= text_area_tag "new_post_text", "", :placeholder => "What's happening?" %>
-			<div data-role="navbar">
-				<ul>
-					<li><%= link_to "Attach Picture", "#", :data => { :role => "button", :icon =>"picture", :iconpos => "top" } %></li>
-					<li><%= link_to "Attach Link", "#", :data => { :role => "button", :icon =>"link", :iconpos => "top" } %></li>
-				</ul>
-			</div>
-		  <%= link_to "Post", "#", :id => "submitNewPost", :data => { :role => "button", :theme => "b" } %></li>
-	  </div>
-	</div>
-	
-	<!-- Profile Dialog Page Starts Here -->
-	<div data-role="page" id="profileDialog" data-theme="e">
-		<div data-role="header" class="ui-icon-alt">
-			<h2>My Profile</2>
-		</div>
-		<div data-role="content">
-			Filler for now
-	  </div>
-	</div>
-	
-	<!-- Settings Dialog Page Starts Here -->
-	<div data-role="page" id="settingsDialog" data-theme="e">
-		<div data-role="header" class="ui-icon-alt">
-			<h2>Settings</2>
-		</div>
-		<div data-role="content">
-			Filler for now
-	  </div>
-	</div>
+    <!-- Post Dialog Page Starts Here -->
+    <div data-role="page" id="newPostDialog" data-theme="e">
+      <div data-role="header" class="ui-icon-alt">
+        <h2>Add Post</h2>
+      </div>
+      <div data-role="content">
+        <%= text_area_tag "new_post_text", "", :placeholder => "What's happening?" %>
+        <div data-role="navbar">
+          <ul>
+            <li><%= link_to "Attach Picture", "#", :data => {:role => "button", :icon => "picture", :iconpos => "top"} %></li>
+            <li><%= link_to "Attach Link", "#", :data => {:role => "button", :icon => "link", :iconpos => "top"} %></li>
+          </ul>
+        </div>
+        <%= link_to "Post", "#", :id => "submitNewPost", :data => {:role => "button", :theme => "b"} %></li>
+      </div>
+    </div>
+
+    <!-- Profile Dialog Page Starts Here -->
+    <div data-role="page" id="profileDialog" data-theme="e">
+      <div data-role="header" class="ui-icon-alt">
+        <h2>My Profile</h2>
+      </div>
+      <div data-role="content">
+        Filler for now
+      </div>
+    </div>
+
+    <!-- Settings Dialog Page Starts Here -->
+    <div data-role="page" id="settingsDialog" data-theme="e">
+      <div data-role="header" class="ui-icon-alt">
+        <h2>Settings</h2>
+      </div>
+      <div data-role="content">
+        Filler for now
+      </div>
+    </div>
 <% end %>
 
 <% content_for :scripts do %>
@@ -110,9 +110,9 @@
 
             <p class="feed-time">
               {{if city || zipcode}}
-                <abbr class="timeago" title="{{>updated_at}}">{{>updated_at}}</abbr> near {{>city}} {{>zipcode}}
+              <abbr class="timeago" title="{{>updated_at}}">{{>updated_at}}</abbr> near {{>city}} {{>zipcode}}
               {{else}}
-                <abbr class="timeago" title="{{>updated_at}}">{{>updated_at}}</abbr>
+              <abbr class="timeago" title="{{>updated_at}}">{{>updated_at}}</abbr>
               {{/if}}
             </p>
           </div>
@@ -120,31 +120,31 @@
 
         <div>
           {{if !status}}
-              <p class="feed-text">
-                {{>text}}
-              </p>
+          <p class="feed-text">
+            {{>text}}
+          </p>
           {{else text == "Good"}}
-              <div class="status-green">
-                <img alt="{{>text}}" class="status-img" src="/assets/status-check.png"/>
-                <h4 class="status-text">Quick Status - {{>text}}</h4>
-              </div>
+          <div class="status-green">
+            <img alt="{{>text}}" class="status-img" src="/assets/status-check.png"/>
+            <h4 class="status-text">Quick Status - {{>text}}</h4>
+          </div>
           {{else text == "Help"}}
-              <div class="status-yellow">
-                <img alt="{{>text}}" class="status-img" src="/assets/help.png"/>
-                <h4 class="status-text">Quick Status - {{>text}}</h4>
-              </div>
+          <div class="status-yellow">
+            <img alt="{{>text}}" class="status-img" src="/assets/help.png"/>
+            <h4 class="status-text">Quick Status - {{>text}}</h4>
+          </div>
           {{else text == "Need Immediate Help"}}
-              <div class="status-red">
-                <img alt="{{>text}}" class="status-img" src="/assets/help.png"/>
-                <h4 class="status-text">Quick Status - {{>text}}</h4>
-              </div>
+          <div class="status-red">
+            <img alt="{{>text}}" class="status-img" src="/assets/help.png"/>
+            <h4 class="status-text">Quick Status - {{>text}}</h4>
+          </div>
           {{/if}}
         </div>
       </div>
     </script>
 
-		<script type="text/javascript">
+    <script type="text/javascript">
 
-		</script>
+    </script>
     <%= javascript_include_tag 'post/post' %>
 <% end %>
