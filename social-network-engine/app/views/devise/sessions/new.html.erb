@@ -5,7 +5,7 @@
 	</div>
 	<br />
 	<div class="center">
-		<%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook, :redirect_uri => root_path), :rel => 'external',  :data => { :role => 'button', :theme => 'b', :icon => 'arrow-r', :iconpos => 'right' }%>
+		<%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook, :redirect_uri => "#{request.protocol}#{request.host_with_port}#{root_path}"), :rel => 'external',  :data => { :role => 'button', :theme => 'b', :icon => 'arrow-r', :iconpos => 'right' }%>
 		<h4>
 			Or Using Your Local SSN Account
 		</h4>
