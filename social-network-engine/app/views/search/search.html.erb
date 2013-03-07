@@ -23,22 +23,13 @@
         <% if @results.length > 0 %>
             <% # Only show PAGE_SIZE results (there might be more for paging)  %>
             <% @results.slice(0, SearchResult::PAGE_SIZE).each do |result| %>
-                <% # TODO(vmarmol): Refactor some of the common templates  %>
                 <% # Find out what type of result this is and display that template  %>
                 <% if result[:type].to_i == SearchResult::Type::USER.to_i %>
-                    <% # User template shows the user's name and his photo with a link to the user's profile %>
-                    <% # TODO(vmarmol): Fix this for after demo %>
-                    <%
-                       # Create a fake empty post to display what we need
-                       fake_post = Post.new(
-                           :text => "",
-                           :user_id => result[:user].id,
-                           :created_at => Time.now().to_datetime)
-                     %>
-                    <%= render "partials/feed_item", :post => fake_post %>
+                    <%= render "partials/user_item", :user => result[:user] %>
                 <% elsif result[:type].to_i == SearchResult::Type::POST.to_i %>
-                    <% # TODO(vmarmol): Change this link when we have profile links  %>
                     <%= render "partials/feed_item", :post => result[:post] %>
+                <% elsif result[:type].to_i == SearchResult::Type::ORGANIZATION.to_i %>
+                    <%= render "partials/organization_item", :organization => result[:organization] %>
                 <% end %>
             <% end %>
             <% # Pagination controls %>
