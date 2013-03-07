@@ -41,6 +41,15 @@ module SearchResult
     result
   end
 
+  def self.CreateOrganizationResult(organization)
+    result = {
+      :type => Type::ORGANIZATION,
+      :organization => organization,
+    }
+
+    result
+  end
+
   # Outputs a link tag which is active if the current_type is the active_type
   def self.GetTypeLink(view, active_type, current_type, query)
     active_class = ''
