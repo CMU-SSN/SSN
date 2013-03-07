@@ -42,7 +42,9 @@ class SearchController < ApplicationController
 
       # Search organizations
       if @type.to_i == SearchResult::Type::ORGANIZATION.to_i
-        # TODO: Search when they exist
+        org_query = "%#{@query}%"
+        @results = Organization.find(:all, :limit => limit, :conditions => ["name LIKE ?", org_query], :offset => offset)
+        @results.map!{|o| SearchResult::CreateOrganizationResult(o)}
       end
     end
   end
