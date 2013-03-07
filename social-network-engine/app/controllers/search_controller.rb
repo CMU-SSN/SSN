@@ -29,7 +29,7 @@ class SearchController < ApplicationController
       # Search posts
       if @type.to_i == SearchResult::Type::POST.to_i
         post_query = "%#{@query}%"
-        @results = Post.include(:user).find(:all, :limit => limit, :conditions => ["text LIKE ?", post_query], :order => "created_at DESC", :offset => offset)
+        @results = Post.includes([:user, :organization]).find(:all, :limit => limit, :conditions => ["text LIKE ?", post_query], :order => "created_at DESC", :offset => offset)
         @results.map!{|p| SearchResult::CreatePostResult(p)}
       end
 
