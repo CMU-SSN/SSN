@@ -3,9 +3,40 @@ require 'spec_helper'
 describe FacebookTabAppController do
   render_views
 
+  describe "signup" do
+    describe "if not signed in" do
+      it "should be successful" do
+        get :signup
+        response.should be_success
+      end
+
+      it "should display the signup page" do
+        get :signup
+        response.should render_template('signup')
+      end
+    end
+
+    describe "if signed in" do
+      before(:each) do
+        @user = FactoryGirl.create(:victor)
+        sign_in @user
+      end
+
+      it "should be successful" do
+        get :signup
+        response.should be_success
+      end
+
+      it "should display the signup page" do
+        get :signup
+        response.should render_template('signup')
+      end
+    end
+  end
+
   describe "done" do
     describe "if not signed in" do
-      it "should be not successful" do
+      it "should not be successful" do
         get :done
         response.should_not be_success
       end
