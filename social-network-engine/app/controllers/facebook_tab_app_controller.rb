@@ -64,6 +64,8 @@ class FacebookTabAppController < ApplicationController
   end
 
   def load_organizations
+    # TODO: Look into the weird thing happening with authentication
+
     # We already have set the user as an admin on all Organizations so only
     # delete them from Organizations they do not want to be associated with.
     if not params[:orgs_num].nil?
