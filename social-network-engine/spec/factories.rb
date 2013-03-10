@@ -1,4 +1,5 @@
 FactoryGirl.define do
+  # Users
   factory :brian, class: User do
     name "Brian Bailey"
     email "brian.bailey@sv.cmu.edu"
@@ -25,5 +26,43 @@ FactoryGirl.define do
     email "victor.marmol@sv.cmu.edu"
     uid "4"
     password "password"
+  end
+
+  # Organizations
+  factory :org1, class: Organization do
+    name "Organization 1"
+    facebook_id "o1"
+    is_city false
+  end
+
+  factory :org2, class: Organization do
+    name "Organization 2"
+    facebook_id "o2"
+    is_city false
+  end
+
+  factory :org3, class: Organization do
+    name "Organization 3"
+    facebook_id "o3"
+    is_city false
+  end
+
+  # Cities
+  factory :city1, class: Organization do
+    name "City 1"
+    facebook_id "c1"
+    is_city true
+  end
+
+  factory :city2, class: Organization do
+    name "City 2"
+    facebook_id "c2"
+    is_city true
+  end
+
+  factory :city3, class: Organization do
+    name "City 3"
+    facebook_id "c3"
+    is_city true
   end
 end
