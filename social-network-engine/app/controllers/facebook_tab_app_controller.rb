@@ -1,4 +1,7 @@
 class FacebookTabAppController < ApplicationController
+  # Allows us to stub the API for tests
+  @@koala_api = Koala::Facebook::API
+
   def signup
   end
 
@@ -18,7 +21,7 @@ class FacebookTabAppController < ApplicationController
         # Get friends from Facebook
         # NOTE: friend object returned from Facebook has the form:
         #   { "name" : "<friend name>", "id" : "<friend Facebook id>"}
-        @graph = Koala::Facebook::API.new(@user.token)
+        @graph = @@koala_api.new(@user.token)
         @user.ImportFriends(@graph.get_connections("me", "friends").map{
             |i| i["id"]})
 
@@ -40,7 +43,7 @@ class FacebookTabAppController < ApplicationController
               org_object = Organization.create!(
                   :name => org["name"],
                   :facebook_id => org["id"],
-                 :is_city => (org["category"] == "Government organization"))
+                  :is_city => (org["category"] == "Government organization"))
             end
 
             # Make this user an admin and interested in the organization
