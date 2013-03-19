@@ -73,6 +73,10 @@ For more vagrant commands, see http://www.vagrantup.com
 
 1. Change your directory to social-network-engine
 
+	```
+	cd social-network-engine
+	```
+
 2. Use Capistrano to deploy to the server
 
 	```
