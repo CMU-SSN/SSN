@@ -6,14 +6,6 @@ class PostsController < ApplicationController
     # Filter all posts for the current user that happened after the specified token
     @posts = Post::Filter(current_user, 100, params['token'])
     @token = @posts.first.id if !@posts.nil? && !@posts.first.nil?
-    
-    if session[:post_as].nil?
-      session[:post_as] = 'self'
-    end
-    
-    @post_as = session[:post_as]
-
-    @post = Post.new
 
     respond_to do |format|
       format.html # index.html.erb
@@ -32,12 +24,38 @@ class PostsController < ApplicationController
   # GET /posts/new.json
   def new
     @post = Post.new
+    
+    # Get the post as variable from the sesssion.  If it doesn't exist,
+    # set it to Post::POST_AS_SELF
+    if session[:post_as].nil?
+      session[:post_as] = Post::POST_AS_SELF
+    end
+    
+    @post_as = session[:post_as]
 
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @post }
     end
   end
+  
+  # GET /posts/checkin
+  def checkin
+    @post = Post.new
+
+    # Get the post as variable from the sesssion.  If it doesn't exist,
+    # set it to Post::POST_AS_SELF
+    if session[:post_as].nil?
+      session[:post_as] = Post::POST_AS_SELF
+    end
+
+    @post_as = session[:post_as]
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @post }
+    end
+  end    
   
   # GET /post_contect?id=
   def post_context
