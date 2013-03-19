@@ -68,3 +68,15 @@ For more vagrant commands, see http://www.vagrantup.com
 	```
 	vagrant halt
 	```
+	
+### Deploying to the Production Server
+
+1. Change your directory to social-network-engine
+
+2. Use Capistrano to deploy to the server
+
+	```
+	cap deploy:update
+	cap deploy:migrate
+	cap deploy:restart
+	```
