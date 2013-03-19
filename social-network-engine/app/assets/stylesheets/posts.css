@@ -10,12 +10,6 @@
 	height: 30px;
 }
 
-.header-icon-back {
-	background: url("glyphicons/glyphicons_210_left_arrow.png") center no-repeat;
-	background-size: 20px 20px;
-	height: 30px;
-}
-
 .header-icon-close {
 	background: url("glyphicons/glyphicons_207_remove_2.png") center no-repeat;
 	background-size: 15px 15px;
