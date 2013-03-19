@@ -65,4 +65,8 @@ FactoryGirl.define do
     facebook_id "c3"
     is_city true
   end
+	
+	factory :post1, class: Post do
+		text "Test Post"		
+	end	
 end
