@@ -6,14 +6,42 @@
 	text-shadow: none;
 }
 
-.ui-icon-facebook {
-	background: url("glyphicons/glyphicons_410_facebook.png");
-	background-size: 20px 20px;
-	border-radius: 0px;
+.facebook-btn .facebook-icon {
+	background: url("simpleicons/facebook/facebook-64.png") no-repeat center;
+	background-size: 32px 32px;
+	float: left;
+	height: 40px;
+	width: 40px;
+	border-right: 1px solid #314A7E;
 }
 
-.facebook-link {
-	width: 65%;
-	margin-left: auto;
-	margin-right: auto;
+.facebook-btn p {
+	margin: 0px;
+	padding-top: 10px;
 }
+
+.facebook-btn .ui-btn-inner {
+	padding: 0px;
+}
+
+.facebook-btn .ui-btn-text {
+	padding: 0px;
+}
+
+h3 {
+	text-align: center;
+}
+
+.login {
+	background: url("backgrounds/paper_fibers.png");
+	background-repeat: repeat;
+	border-radius: .3em;
+	margin-bottom: 15px;
+	box-shadow: 1px 1px 3px #555;	
+	padding: 10px;
+	text-align: center;
+	color: #333;
+	text-shadow: none;
+}
+
+ 
