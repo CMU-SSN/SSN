@@ -19,6 +19,7 @@ FactoryGirl.define do
     email "jason.leng@sv.cmu.edu"
     uid "3"
     password "password"
+    organizations {[FactoryGirl.create(:org3)]}
   end
 
   factory :victor, class: User do
@@ -45,6 +46,7 @@ FactoryGirl.define do
     name "Organization 3"
     facebook_id "o3"
     is_city false
+    posts {[FactoryGirl.create(:post3)]}
   end
 
   # Cities
@@ -68,5 +70,9 @@ FactoryGirl.define do
 	
 	factory :post1, class: Post do
 		text "Test Post"		
-	end	
+  end
+
+  factory :post3, :class => Post do
+    text "Post3"
+  end
 end
