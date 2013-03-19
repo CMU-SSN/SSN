@@ -1,3 +1,27 @@
+.header-icon-logout {
+	background: url("glyphicons/glyphicons_203_lock.png") center no-repeat;
+	background-size: 20px 20px;
+	height: 30px;
+}
+
+.header-icon-search {
+	background: url("glyphicons/glyphicons_027_search.png") center no-repeat;
+	background-size: 20px 20px;
+	height: 30px;
+}
+
+.header-icon-back {
+	background: url("glyphicons/glyphicons_210_left_arrow.png") center no-repeat;
+	background-size: 20px 20px;
+	height: 30px;
+}
+
+.header-icon-close {
+	background: url("glyphicons/glyphicons_207_remove_2.png") center no-repeat;
+	background-size: 15px 15px;
+	height: 30px;
+}
+
 .ui-icon {
 	width: 20px;
 	height: 20px;
@@ -65,11 +89,11 @@
 }
 
 .orange {
-	background-color: #3D3536;
+	background-color: #D97236;
 }
 
 .gray {
-	background-color: #D97236;
+	background-color: #3D3536
 }
 
 .status-bar p {
@@ -97,6 +121,10 @@
 	border-radius: .3em;
 	margin-bottom: 15px;
 	box-shadow: 1px 1px 3px #555;
+}
+
+.feed-header {
+	padding-bottom: 3px;
 }
 
 .feed-header .author-img {
@@ -131,6 +159,51 @@
 	padding-bottom: 5px;
 	padding-left: 10px;
 	padding-right: 10px;
+	line-height: 0.5em;
+}
+
+.feed-content-red {
+	padding-top: 1px;
+	padding-bottom: 2px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-bottom-left-radius: 0.3em;
+	border-bottom-right-radius: 0.3em;
+	text-align: center;
+	text-shadow: none;
+	background-color: #c1272d;
+	font-size: 0.9em;
+	line-height: 0.5em;
+}
+
+.feed-content-green {
+	padding-top: 1px;
+	padding-bottom: 2px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-bottom-left-radius: 0.3em;
+	border-bottom-right-radius: 0.3em;
+	text-align: center;
+	text-shadow: none;
+	background-color: #006837;
+	font-size: 0.9em;
+	line-height: 0.5em;
+}
+
+.feed-content-yellow {
+	padding-top: 1px;
+	padding-bottom: 2px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-bottom-left-radius: 0.3em;
+	border-bottom-right-radius: 0.3em;
+	text-align: center;
+	text-shadow: none;
+	color: #222;
+	background-color: #ffcc33;
+	font-size: 0.9em;
+	font-weight: bold;
+	line-height: 0.5em;
 }
 
 .feed-content p {
@@ -164,23 +237,11 @@
 	padding-top: 4px;
 }
 
-.feed-header hr {
-	height: 15px;
-	width: 100%;
-	border: 0px;
-	margin-top: 5px;
-	border-bottom-left-radius: 0.3em;
-	border-bottom-right-radius: 0.3em;
-}
-
-.feed-header .green {
-	background-color: #006837;
-}
-
-.feed-header .red {
-	background-color: #c1272d;
-}
-
-.feed-header .yellow {
-	background-color: #ffcc33;
+.post-form {
+    background: url("paper_fibers.png");
+	background-repeat: repeat;
+	border-radius: .3em;
+	margin-bottom: 15px;
+	box-shadow: 1px 1px 3px #555;
+	padding: 10px;
 }
