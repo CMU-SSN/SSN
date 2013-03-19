@@ -1,3 +1,5 @@
+
+
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.11'
@@ -47,3 +49,6 @@ gem 'capistrano'
 
 # To use debugger
 # gem 'debugger'
+
+# Use thin instead of WEBrick
+gem 'thin'
