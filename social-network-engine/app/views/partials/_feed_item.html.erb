@@ -2,7 +2,6 @@
   <div class="feed-header">
     <% if post.organization.nil? %>
         <img src="<%= post.user.profile_pic %>" class="author-img"/>
-
         <h2 class="author-name"><%= post.user.name %></h2>
     <% else %>
         <%= image_tag "sample_neighborhood_logo.png", :class => "author-img" %>
@@ -18,29 +17,33 @@
         <% if post.text == Post::ALL_CLEAR_STATUS %>
             <div class="status">
               <%= image_tag "glyphicons/glyphicons_193_circle_ok.png" %>
-              <p>Everything is OK</p>
             </div>
-            <hr class="green"/>
         <% elsif post.text == Post::NEEDS_ASSISTANCE_STATUS %>
             <div class="status">
               <%= image_tag "glyphicons/glyphicons_196_circle_exclamation_mark.png" %>
-              <p>Help needed as soon as possible</p>
             </div>
-            <hr class="yellow"/>
         <% elsif post.text == Post::NEEDS_HELP_STATUS %>
             <div class="status">
               <%= image_tag "glyphicons/glyphicons_298_hospital.png" %>
-              <p>Require immediate assistance</p>
             </div>
-            <hr class="red"/>
         <% end %>
     <% end %>
   </div>
-  <% if !post.status %>
-      <div class="feed-content ">
-        <p class="feed-text">
-          <%= post.text %>
-        </p>
-      </div>
-  <% end %>
+	<% if post.text == Post::ALL_CLEAR_STATUS %>
+		<div class="feed-content-green">
+			<p class="feed-text">Everything is OK</p>
+		</div>
+	<% elsif post.text == Post::NEEDS_ASSISTANCE_STATUS %>
+		<div class="feed-content-yellow">
+			<p class="feed-text">Need Help ASAP</p>
+		</div>
+	<% elsif post.text == Post::NEEDS_HELP_STATUS %>
+		<div class="feed-content-red">
+			<p class="feed-text">Immediate Help Required</p>
+		</div>
+	<% else %>
+		<div class="feed-content">
+			<p class="feed-text"><%= post.text %></p>
+		</div>
+	<% end %>
 </div>
