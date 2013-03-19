@@ -20,14 +20,16 @@ describe Post do
   end
 
   context "can filter posts" do
-    it "by organizations that current user is interested in" do
+    it "created by organizations that current user is interested in" do
       current_user = FactoryGirl.create(:jason)
-      posts = Post.Filter(current_user, 5, "0")
-      posts.first.text.should == "Post3"
+      posts = Post.Filter(current_user, 2, "0")
+      posts.last.text.should == "Post by org3"
     end
 
-    it "by friends that current user is interested in" do
-
+    it "created by friends that current user is interested in" do
+      current_user = FactoryGirl.create(:jason)
+      posts = Post.Filter(current_user, 2, "0")
+      posts.first.text.should == "Post by brian"
     end
 
   end
