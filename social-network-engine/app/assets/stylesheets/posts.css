@@ -116,7 +116,7 @@
 }
 
 .feed-item {
-    background: url("paper_fibers.png");
+    background: url("backgrounds/paper_fibers.png");
 	background-repeat: repeat;
 	border-radius: .3em;
 	margin-bottom: 15px;
@@ -238,7 +238,7 @@
 }
 
 .post-form {
-    background: url("paper_fibers.png");
+    background: url("backgrounds/paper_fibers.png");
 	background-repeat: repeat;
 	border-radius: .3em;
 	margin-bottom: 15px;
