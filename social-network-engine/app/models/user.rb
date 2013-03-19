@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+		 
+  validates_presence_of :email
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :profile_pic, :email, :password, :password_confirmation, :remember_me, :token_expiration, :provider, :uid, :token
