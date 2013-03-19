@@ -5,6 +5,7 @@ FactoryGirl.define do
     email "brian.bailey@sv.cmu.edu"
     uid "1"
     password "password"
+    posts {[FactoryGirl.create(:post_by_brian)]}
   end
 
   factory :james, class: User do
@@ -20,6 +21,7 @@ FactoryGirl.define do
     uid "3"
     password "password"
     organizations {[FactoryGirl.create(:org3)]}
+    friends {[FactoryGirl.create(:brian)]}
   end
 
   factory :victor, class: User do
@@ -46,7 +48,7 @@ FactoryGirl.define do
     name "Organization 3"
     facebook_id "o3"
     is_city false
-    posts {[FactoryGirl.create(:post3)]}
+    posts {[FactoryGirl.create(:post_by_org3)]}
   end
 
   # Cities
@@ -72,7 +74,13 @@ FactoryGirl.define do
 		text "Test Post"		
   end
 
-  factory :post3, :class => Post do
-    text "Post3"
+  factory :post_by_org3, :class => Post do
+    text "Post by org3"
+    updated_at "2013-03-25 07:22:48.056538"
+  end
+
+  factory :post_by_brian, :class => Post do
+    text "Post by brian"
+    updated_at "2013-03-26 07:22:48.056538"
   end
 end
