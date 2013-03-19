@@ -8,29 +8,17 @@
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
 </head>
 <body>
-<div data-role="page" data-theme="a">
-  <div data-role="header">
-    <% if user_signed_in? %>
-      <%= link_to image_tag("glyphicons/glyphicons_203_lock.png", :class => "header-icon"), destroy_user_session_path, :method => "delete", :target => '_self' %>
-    <% end %>
-    <%= yield :header %>
-    <%= link_to image_tag("glyphicons/glyphicons_027_search.png", :class => "header-icon"), search_path, :target => '_self', :class => "ui-btn-right" %>
-  </div>
-  <div data-role="content">
-    <%= yield :content %>
-  </div>
-	<div data-role="footer" data-id="footer" data-position="fixed">
-		<div data-role="navbar">
-			<ul>
-				<li><%= link_to "Check-In", "#checkInDialog", :data => { :role => "button", :icon =>"check-in", :iconpos => "top", :rel => "dialog", :transition => "pop" } %></li>
-				<li><%= link_to "Post", "#newPostDialog", :data => { :role => "button", :icon =>"post", :iconpos => "top", :rel => "dialog", :transition => "pop" } %></li>
-				<li><%= link_to "Profile", "#profileDialog", :data => { :role => "button", :icon =>"profile", :iconpos => "top", :rel => "dialog", :transition => "pop" } %></li>
-				<li><%= link_to "Settings", "#settingsDialog", :data => { :role => "button", :icon =>"settings", :iconpos => "top", :rel => "dialog", :transition => "pop" } %></li>
-			</ul>
+	<div data-role="page" data-theme="a">
+	  <div data-role="header">
+			<%= yield :header %>
+	  </div>
+	  <div data-role="content">
+	    <%= yield :content %>
+	  </div>
+		<div data-role="footer" data-id="footer" data-position="fixed">
+			<%= yield :footer %>
 		</div>
 	</div>
-</div>
-<%= yield :dialogs %>
-<%= yield :scripts %>
+	<%= yield :scripts %>
 </body>
 </html>
