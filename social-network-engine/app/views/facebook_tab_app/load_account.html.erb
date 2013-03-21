@@ -33,6 +33,8 @@
 
 <%= content_for :scripts do %>
 	<script type="text/javascript">
-		ssn_hide_header_footer();
+		$(document).on('pageshow', function() {
+			ssn_hide_header_footer();
+		});	
 	</script>
 <% end %>
