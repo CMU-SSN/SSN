@@ -7,7 +7,10 @@
     <p>On the next page, we will ask for your permission to access some of your profile information. We ask for your basic data to customize your experience, your e-mail so we can create an SSN account, and what pages you manage so we can create organizations for you.
 	</div>
 	<div class="signup">
-		<%= link_to "Create an Account", user_omniauth_authorize_path(:facebook, :state => "signup"), :rel => "external", :data => { :role => 'button', :icon => 'arrow-r', :iconpos => 'right', :theme => 'b' } %>
+		<%= link_to user_omniauth_authorize_path(:facebook, :state => "signup"), :class => 'facebook-btn', :rel => 'external', :data => { :role => 'button', :theme => 'f' } do %>
+			<span class="facebook-icon"></span>		
+			<p>Sign up with Facebook</p>
+		<% end %>
 	</div>
 <% end %>
 
