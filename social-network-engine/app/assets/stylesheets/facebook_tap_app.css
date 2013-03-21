@@ -1,4 +1,16 @@
-/*
-  Place all the styles related to the matching controller here.
-  They will automatically be included in application.css.
-*/
+.signup {
+	background: url("backgrounds/paper_fibers.png");
+	background-repeat: repeat;
+	border-radius: .3em;
+	margin-bottom: 15px;
+	box-shadow: 1px 1px 3px #555;	
+	padding: 10px;
+	color: #333;
+	text-align: left;
+	text-shadow: none;
+}
+
+h4 {
+	color: rgba(255, 255, 255, 0.9);
+	text-align: center;
+}
