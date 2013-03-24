@@ -80,6 +80,141 @@ describe NodeController do
     end
 
     describe "existing node" do
+      before(:each) do
+        @node = FactoryGirl.create(:node1)
+      end
+
+      it "must point to an existing node" do
+        get 'register', :uid => "NonExistent"
+        response.should be_success
+
+        json_response = JSON.parse(response.body)
+        json_response["success"].should eq(false)
+        json_response["errors"].length.should_not eq(0)
+      end
+
+      it "should update name" do
+        get 'register', :uid => @node.uid, :name => "New Name"
+        response.should be_success
+
+        json_response = JSON.parse(response.body)
+        json_response["success"].should eq(true)
+
+        node = Node.find_by_uid(@node.uid)
+        node.should_not be_nil
+        node.name.should eq("New Name")
+      end
+
+      it "should update latitude" do
+        get 'register', :uid => @node.uid, :latitude => 10
+        response.should be_success
+
+        json_response = JSON.parse(response.body)
+        json_response["success"].should eq(true)
+
+        node = Node.find_by_uid(@node.uid)
+        node.should_not be_nil
+        node.latitude.should eq(10)
+      end
+
+      it "should update longitude" do
+        get 'register', :uid => @node.uid, :longitude => 10
+        response.should be_success
+
+        json_response = JSON.parse(response.body)
+        json_response["success"].should eq(true)
+
+        node = Node.find_by_uid(@node.uid)
+        node.should_not be_nil
+        node.longitude.should eq(10)
+      end
+
+      it "should update hostname" do
+        get 'register', :uid => @node.uid, :hostname => "ssn-new.com"
+        response.should be_success
+
+        json_response = JSON.parse(response.body)
+        json_response["success"].should eq(true)
+
+        node = Node.find_by_uid(@node.uid)
+        node.should_not be_nil
+        node.link.should eq("ssn-new.com/signup")
+      end
+
+      it "should update the checkin" do
+        node = Node.find_by_uid(@node.uid)
+        node.should_not be_nil
+        original_checkin = node.checkin
+
+        get 'register', :uid => @node.uid
+        response.should be_success
+
+        json_response = JSON.parse(response.body)
+        json_response["success"].should eq(true)
+
+        node.reload
+        node.checkin.should_not eq(original_checkin)
+      end
+
+      it "should not update address" do
+        node = Node.find_by_uid(@node.uid)
+        node.should_not be_nil
+        original = node.address
+
+        get 'register', :uid => @node.uid, :address => "New Address"
+        response.should be_success
+
+        json_response = JSON.parse(response.body)
+        json_response["success"].should eq(true)
+
+        node.reload
+        node.address.should eq(original)
+      end
+
+      it "should not update state" do
+        node = Node.find_by_uid(@node.uid)
+        node.should_not be_nil
+        original = node.state
+
+        get 'register', :uid => @node.uid, :state => "New"
+        response.should be_success
+
+        json_response = JSON.parse(response.body)
+        json_response["success"].should eq(true)
+
+        node.reload
+        node.state.should eq(original)
+      end
+
+      it "should not update city" do
+        node = Node.find_by_uid(@node.uid)
+        node.should_not be_nil
+        original = node.city
+
+        get 'register', :uid => @node.uid, :city => "New"
+        response.should be_success
+
+        json_response = JSON.parse(response.body)
+        json_response["success"].should eq(true)
+
+        node.reload
+        node.city.should eq(original)
+      end
+
+      it "should not update zipcode" do
+        node = Node.find_by_uid(@node.uid)
+        node.should_not be_nil
+        original = node.zipcode
+
+        get 'register', :uid => @node.uid, :zipcode => "New"
+        response.should be_success
+
+        json_response = JSON.parse(response.body)
+        json_response["success"].should eq(true)
+
+        node.reload
+        node.zipcode.should eq(original)
+      end
     end
   end
 
