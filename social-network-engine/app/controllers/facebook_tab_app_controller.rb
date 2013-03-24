@@ -37,13 +37,17 @@ class FacebookTabAppController < ApplicationController
           if my_orgs.index{|o| o.facebook_id == org["id"]}.nil?
             org_object = Organization.find_by_facebook_id(org["id"])
 
+            # Get org picture
+            profile_pic_name = Util::save_picture(@graph.get_picture(orgs.first["id"]))
+
             # Create the organization if it does not already exist.
             # Mark "Government organization"s as cities
             if org_object.nil?
               org_object = Organization.create!(
                   :name => org["name"],
                   :facebook_id => org["id"],
-                  :is_city => (org["category"] == "Government organization"))
+                  :is_city => (org["category"] == "Government organization"),
+                  :profile_pic => profile_pic_name)
             end
 
             # Make this user an admin and interested in the organization

@@ -4,7 +4,7 @@
         <img src="<%= post.user.profile_pic %>" class="author-img"/>
         <h2 class="author-name"><%= post.user.name %></h2>
     <% else %>
-        <%= image_tag "sample_neighborhood_logo.png", :class => "author-img" %>
+        <img src="<%= post.organization.profile_pic %>" class="author-img"/>
         <h2 class="author-name"><%= post.organization.name %></h2>
     <% end %>
     <% if !post.city.nil? || !post.zipcode.nil? %>
