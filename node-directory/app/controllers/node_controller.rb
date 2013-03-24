@@ -1,5 +1,21 @@
 class NodeController < ApplicationController
   def register
+    link =  params[:hostname]
+    if not link.nil?
+      link += "/signup"
+    end
+
+    node = Node.new(
+        :name =>  params[:name],
+        :latitude => params[:latitude],
+        :longitude => params[:longitude],
+        :link => link)
+
+    if node.save
+      render :json => { :success => true }
+    else
+      render :json => { :success => false, :errors => node.errors }
+    end
   end
 
   def search
