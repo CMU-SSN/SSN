@@ -13,7 +13,7 @@ class NodeController < ApplicationController
   #   /register?uid=<UID>&<any params that you want to update>
   def register
     link =  params[:hostname]
-    if not link.nil?
+    if not link.nil? and not link.empty?
       link += "/signup"
     end
 
