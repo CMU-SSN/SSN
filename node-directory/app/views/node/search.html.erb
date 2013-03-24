@@ -1,2 +1,29 @@
-<h1>Node#search</h1>
-<p>Find me in app/views/node/search.html.erb</p>
+<h1>SSN Node Search</h1>
+<%= form_tag node_search_path do %>
+  <%= text_field_tag 'q', @query, :placeholder => "Enter search here", :type => "search" %>
+  <%= submit_tag 'Search' %>
+<% end %>
+<% # Display results if a search has been made  %>
+<% if not @results.nil? %>
+  <% # A search was done. Display results or sorry if none  %>
+  <% if @results.length > 0 %>
+    <% # Only show PAGE_SIZE results (there might be more for paging)  %>
+    <% @results.slice(0, NodeHelper::PAGE_SIZE).each do |result| %>
+      <b><%= result.name %></b>&nbsp;<%= result.address %><br />
+    <% end %>
+    <% # Pagination controls %>
+    <% # If we are not at the first page, show "Previous"   %>
+    <div class="center">
+      <% if not @page_num.nil? and @page_num.to_i > 0 %>
+        <%= link_to "Previous", node_search_path(:q => @query, :page => (@page_num.to_i - 1).to_s), :data => {:role => 'button', :icon => 'arrow-l', :iconpos => 'left', :theme => 'b', :inline => true} %>
+      <% end %>
+      <% if @results.length > NodeHelper::PAGE_SIZE %>
+        <%= link_to "Next", node_search_path(:q => @query, :page => (@page_num.to_i + 1).to_s), :data => {:role => 'button', :icon => 'arrow-r', :iconpos => 'right', :theme => 'b', :inline => true} %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="center">
+      <h3>Sorry, no results were found...</h3>
+    </div>
+  <% end %>
+<% end %>
