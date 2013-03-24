@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130324191002) do
+ActiveRecord::Schema.define(:version => 20130324203452) do
 
   create_table "nodes", :force => true do |t|
     t.string   "name"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(:version => 20130324191002) do
     t.datetime "updated_at", :null => false
     t.string   "state"
     t.string   "link"
+    t.datetime "checkin"
+    t.string   "uid"
   end
 
 end
