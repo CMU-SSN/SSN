@@ -6,7 +6,8 @@ class Node < ActiveRecord::Base
     geo = results.first
     unless geo.nil?
       obj.city = geo.city
-      obj.state = geo.state
+      obj.address = geo.address
+      obj.state = geo.state_code
       obj.zipcode = geo.postal_code
     end
   end
