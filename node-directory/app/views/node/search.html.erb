@@ -9,7 +9,13 @@
   <% if @results.length > 0 %>
     <% # Only show PAGE_SIZE results (there might be more for paging)  %>
     <% @results.slice(0, NodeHelper::PAGE_SIZE).each do |result| %>
-      <b><%= result.name %></b>&nbsp;<%= result.address %><br />
+      <%= link_to(result.link) do%>
+      <div>
+        <b><%= result.name %></b><br />
+        <%= result.address %>
+        <i>(<%= result.distance%> miles away)</i>
+      </div>
+      <% end %>
     <% end %>
     <% # Pagination controls %>
     <% # If we are not at the first page, show "Previous"   %>
