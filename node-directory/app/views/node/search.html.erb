@@ -5,6 +5,7 @@
 <% end %>
 <% # Display results if a search has been made  %>
 <% if not @results.nil? %>
+  <br />
   <% # A search was done. Display results or sorry if none  %>
   <% if @results.length > 0 %>
     <% # Only show PAGE_SIZE results (there might be more for paging)  %>
@@ -12,9 +13,9 @@
       <%= link_to(result.link) do%>
       <div>
         <b><%= result.name %></b><br />
-        <%= result.address %>
-        <i>(<%= result.distance%> miles away)</i>
-      </div>
+        <%= result.address %><br />
+        (<%= result.distance%> miles away)
+      </div><br />
       <% end %>
     <% end %>
     <% # Pagination controls %>
