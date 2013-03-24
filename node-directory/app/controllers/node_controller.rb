@@ -32,18 +32,25 @@ class NodeController < ApplicationController
       node = Node.find_by_uid(uid)
       if node.nil?
         render :json => { :success => false, :errors => ["Unknown UID"]}
+        return
       end
 
       # Update name, lat, long, and link only
-      attrs = {}
-      attrs[:name] = params[:name]
-      attrs[:latitude] = params[:latitude]
-      attrs[:longitude] = params[:longitude]
-      attrs[:link] = params[:hostname] + "/signup" unless  params[:hostname].nil?
+      if not params[:name].nil?
+        node.name = params[:name]
+      end
+      if not params[:latitude].nil?
+        node.latitude = params[:latitude]
+      end
+      if not params[:longitude].nil?
+        node.longitude = params[:longitude]
+      end
+      if not params[:hostname].nil?
+        node.link = params[:hostname] + "/signup"
+      end
 
       # Register the checkin
-      attrs[:checkin] = DateTime.now
-      node.update_attributes(attrs)
+      node.checkin = DateTime.now
     end
 
     if node.save
