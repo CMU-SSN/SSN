@@ -1,6 +1,3 @@
-require 'open-uri'
-require 'digest/md5'
-
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
     auth = request.env["omniauth.auth"]
@@ -13,14 +10,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         # User is new, continue flow
 
         # Get user profile picture
-        profile_pics_path = "#{Rails.root}/public/profile-pics"
-        FileUtils.mkdir_p(profile_pics_path) unless File.exists?(profile_pics_path)
-
-        profile_pic_name =  "profile-pics/#{Digest::MD5.hexdigest(auth['info']['image'])}.jpg"
-
-        open("#{Rails.root}/public/#{profile_pic_name}", 'wb') do |f|
-          f << open(auth['info']['image']).read unless auth['info'].nil?
-        end
+        profile_pic_name = Util::save_picture(auth['info']['image'])
 
         # Check if the token expires
         if not auth.credentials.expires.nil? and not auth.credentials.expires
