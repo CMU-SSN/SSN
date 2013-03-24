@@ -1,7 +1,6 @@
 NodeDirectory::Application.routes.draw do
-  get "node/register"
-
-  match "node/search" => "node#search"
+  match '/register' => 'node#register'
+  root :to => 'node#search'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
