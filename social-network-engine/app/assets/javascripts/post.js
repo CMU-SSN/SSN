@@ -42,12 +42,15 @@ function setupBindings(prefix) {
 	});
 };
 
-function geotagPost() {
+function geotagPost(onSuccess) {
 	if (navigator.geolocation) {
 		var watchID = navigator.geolocation.watchPosition(function (position) {
 			if (position && position.coords && position.coords.latitude && position.coords.longitude) {
 				$("#post_latitude").val(position.coords.latitude);
 				$("#post_longitude").val(position.coords.longitude);
+
+                if (onSuccess)
+                    onSuccess();
 			}	
 			navigator.geolocation.clearWatch(watchID);
 		}, function (error) {
@@ -72,6 +75,12 @@ function geotagPost() {
 	}
 }
 
+function submitPost(){
+    geotagPost(function(){
+        $("#new_post").submit();
+    });
+}
+
 function onPageShow(prefix) {
 	if ($("#" + prefix + "_navbar").length > 0) {
 		// Setup the event handlers
@@ -91,8 +100,7 @@ $(document).on('pageshow', function() {
 		$("#submit_AllClear").click(function() {
 			$("#post_text").val("STATUS_OK");
 			$("#post_status").val("true");
-			geotagPost();
-			$("#new_post").submit();
+            submitPost();
 		});
 	}
 	
@@ -100,8 +108,7 @@ $(document).on('pageshow', function() {
 		$("#submit_NeedHelp").click(function() {
 			$("#post_text").val("STATUS_NEEDS_HELP");
 			$("#post_status").val("true");
-			geotagPost();
-			$("#new_post").submit();
+            submitPost();
 		});
 	}
 	
@@ -109,16 +116,14 @@ $(document).on('pageshow', function() {
 		$("#submit_NeedAssistance").click(function() {
 			$("#post_text").val("STATUS_NEEDS_ASSISTANCE");
 			$("#post_status").val("true");
-			geotagPost();
-			$("#new_post").submit();
+            submitPost();
 		});
 	}
 	
 	if ($("#submit_NewPost").length > 0) {
 		$("#submit_NewPost").click(function() {
 			$("#post_text").val($("#new_post_text").val());
-			geotagPost();
-			$("#new_post").submit();
+            submitPost();
 		});
 	}
 });
