@@ -81,7 +81,7 @@ describe NodeController do
 
     describe "existing node" do
       before(:each) do
-        @node = FactoryGirl.create(:node1)
+        @node = FactoryGirl.create(:cmu_sv)
       end
 
       it "must point to an existing node" do
@@ -168,7 +168,7 @@ describe NodeController do
         json_response["success"].should eq(true)
 
         node.reload
-        node.address.should eq(original)
+        node.address.should_not eq("New Address")
       end
 
       it "should not update state" do
@@ -219,9 +219,41 @@ describe NodeController do
   end
 
   describe "search" do
-    it "returns http success" do
+    before(:each) do
+      @cmu_sv = FactoryGirl.create(:cmu_sv)
+      @nasa_ames = FactoryGirl.create(:nasa_ames)
+      @sfo = FactoryGirl.create(:sfo)
+    end
+
+    it "returns success" do
       get 'search'
       response.should be_success
+    end
+
+    it "should not have any results if no query was specified" do
+      get 'search'
+      response.should be_success
+      assigns(:results).should be_nil
+    end
+
+    it "should not have any results if an empty query was specified" do
+      get 'search', :q => "   "
+      response.should be_success
+      assigns(:results).should be_nil
+    end
+
+    it "should return results within 5 miles" do
+      get 'search', :q => "Moffett Field, CA"
+      response.should be_success
+      assigns(:results).length.should eq(2)
+    end
+
+    it "should return results sorted by distance" do
+      get 'search', :q => "Moffett Field, CA"
+      response.should be_success
+      assigns(:results).length.should eq(2)
+      assigns(:results)[0].id.should eq(@cmu_sv.id)
+      assigns(:results)[1].id.should eq(@nasa_ames.id)
     end
   end
 end
