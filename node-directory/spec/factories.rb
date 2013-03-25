@@ -1,27 +1,27 @@
 
 FactoryGirl.define do
-  factory :node1, class: Node do
-    name "Node #1"
-    latitude 0
-    longitude 0
+  factory :cmu_sv, class: Node do
+    name "CMU SV"
+    latitude 37.410537
+    longitude -122.05988
     link "ssn1.com/signup"
     uid "n1"
     checkin DateTime.now
   end
 
-  factory :node2, class: Node do
-    name "Node #2"
-    latitude 0
-    longitude 0
+  factory :nasa_ames, class: Node do
+    name "NASA AMES"
+    latitude 37.408994
+    longitude -122.064471
     link "ssn2.com/signup"
     uid "n2"
     checkin DateTime.now
   end
 
-  factory :node3, class: Node do
-    name "Node #3"
-    latitude 0
-    longitude 0
+  factory :sfo, class: Node do
+    name "SFO"
+    latitude 37.616502
+    longitude -122.386031
     link "ssn3.com/signup"
     uid "n3"
     checkin DateTime.now
