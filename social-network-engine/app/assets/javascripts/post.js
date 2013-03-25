@@ -88,7 +88,7 @@ function onPageShow(prefix) {
 		
 		// Fire the click event on the initial selection
 		var selected = $("#" + prefix + "_navbar").data("selected");
-        alert(selected+" haha");
+        selected = selected.toString().toUpperCase();
 		$("input[value='" + selected + "']").trigger('click');
 	}
 }
