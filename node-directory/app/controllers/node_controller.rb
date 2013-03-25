@@ -39,21 +39,32 @@ class NodeController < ApplicationController
       if not params[:name].nil?
         node.name = params[:name]
       end
-      if not params[:latitude].nil?
-        node.latitude = params[:latitude]
-      end
-      if not params[:longitude].nil?
-        node.longitude = params[:longitude]
+      if not params[:latitude].nil? or not  params[:longitude].nil?
+        old_node = node
+        node = node.clone
+        node.latitude =  params[:latitude] unless  params[:latitude].nil?
+        node.longitude =  params[:longitude] unless  params[:longitude].nil?
+        old_node.destroy
       end
       if not params[:hostname].nil?
         node.link = params[:hostname] + "/signup"
       end
 
       # Register the checkin
+      print "\nParams " + params.to_s
       node.checkin = DateTime.now
+      params.except! :controller
+      params.except! :action
+        print "\n0.1:Update Long to " + node.longitude.to_s
+      #node.update_attributes(params)
+        print "\n0.2:Update Long to " + node.longitude.to_s
     end
 
+        print "\n0:Update Long to " + node.longitude.to_s
+        #print "\nValid " + node.valid?.to_s
     if node.save
+        print "\nUpdate Long to " + node.longitude.to_s
+        print "\nerrors " + node.errors.to_s
       render :json => { :success => true, :uid => node.uid }
     else
       render :json => { :success => false, :errors => node.errors }

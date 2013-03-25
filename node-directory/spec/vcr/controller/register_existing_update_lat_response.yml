@@ -1,0 +1,323 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://maps.googleapis.com/maps/api/geocode/json?language=en&latlng=37.410537,-122.05988&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Mon, 25 Mar 2013 02:18:20 GMT
+      Expires:
+      - Tue, 26 Mar 2013 02:18:20 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: ! "{\n   \"results\" : [\n      {\n         \"address_components\" :
+        [\n            {\n               \"long_name\" : \"South Akron Road\",\n               \"short_name\"
+        : \"S Akron Rd\",\n               \"types\" : [ \"route\" ]\n            },\n
+        \           {\n               \"long_name\" : \"Mountain View\",\n               \"short_name\"
+        : \"Mountain View\",\n               \"types\" : [ \"locality\", \"political\"
+        ]\n            },\n            {\n               \"long_name\" : \"Santa Clara\",\n
+        \              \"short_name\" : \"Santa Clara\",\n               \"types\"
+        : [ \"administrative_area_level_2\", \"political\" ]\n            },\n            {\n
+        \              \"long_name\" : \"California\",\n               \"short_name\"
+        : \"CA\",\n               \"types\" : [ \"administrative_area_level_1\", \"political\"
+        ]\n            },\n            {\n               \"long_name\" : \"United
+        States\",\n               \"short_name\" : \"US\",\n               \"types\"
+        : [ \"country\", \"political\" ]\n            },\n            {\n               \"long_name\"
+        : \"94043\",\n               \"short_name\" : \"94043\",\n               \"types\"
+        : [ \"postal_code\" ]\n            }\n         ],\n         \"formatted_address\"
+        : \"South Akron Road, Mountain View, CA 94043, USA\",\n         \"geometry\"
+        : {\n            \"bounds\" : {\n               \"northeast\" : {\n                  \"lat\"
+        : 37.41096270,\n                  \"lng\" : -122.0590210\n               },\n
+        \              \"southwest\" : {\n                  \"lat\" : 37.41051290,\n
+        \                 \"lng\" : -122.0603950\n               }\n            },\n
+        \           \"location\" : {\n               \"lat\" : 37.41073780,\n               \"lng\"
+        : -122.0597080\n            },\n            \"location_type\" : \"APPROXIMATE\",\n
+        \           \"viewport\" : {\n               \"northeast\" : {\n                  \"lat\"
+        : 37.41208678029150,\n                  \"lng\" : -122.0583590197085\n               },\n
+        \              \"southwest\" : {\n                  \"lat\" : 37.40938881970850,\n
+        \                 \"lng\" : -122.0610569802915\n               }\n            }\n
+        \        },\n         \"types\" : [ \"route\" ]\n      },\n      {\n         \"address_components\"
+        : [\n            {\n               \"long_name\" : \"94043\",\n               \"short_name\"
+        : \"94043\",\n               \"types\" : [ \"postal_code\" ]\n            },\n
+        \           {\n               \"long_name\" : \"Mountain View\",\n               \"short_name\"
+        : \"Mountain View\",\n               \"types\" : [ \"locality\", \"political\"
+        ]\n            },\n            {\n               \"long_name\" : \"California\",\n
+        \              \"short_name\" : \"CA\",\n               \"types\" : [ \"administrative_area_level_1\",
+        \"political\" ]\n            },\n            {\n               \"long_name\"
+        : \"United States\",\n               \"short_name\" : \"US\",\n               \"types\"
+        : [ \"country\", \"political\" ]\n            }\n         ],\n         \"formatted_address\"
+        : \"Mountain View, CA 94043, USA\",\n         \"geometry\" : {\n            \"bounds\"
+        : {\n               \"northeast\" : {\n                  \"lat\" : 37.46408690,\n
+        \                 \"lng\" : -122.03598990\n               },\n               \"southwest\"
+        : {\n                  \"lat\" : 37.38574390,\n                  \"lng\" :
+        -122.108420\n               }\n            },\n            \"location\" :
+        {\n               \"lat\" : 37.4284340,\n               \"lng\" : -122.07238160\n
+        \           },\n            \"location_type\" : \"APPROXIMATE\",\n            \"viewport\"
+        : {\n               \"northeast\" : {\n                  \"lat\" : 37.46408690,\n
+        \                 \"lng\" : -122.03598990\n               },\n               \"southwest\"
+        : {\n                  \"lat\" : 37.38574390,\n                  \"lng\" :
+        -122.108420\n               }\n            }\n         },\n         \"types\"
+        : [ \"postal_code\" ]\n      },\n      {\n         \"address_components\"
+        : [\n            {\n               \"long_name\" : \"Santa Clara\",\n               \"short_name\"
+        : \"Santa Clara\",\n               \"types\" : [ \"administrative_area_level_2\",
+        \"political\" ]\n            },\n            {\n               \"long_name\"
+        : \"California\",\n               \"short_name\" : \"CA\",\n               \"types\"
+        : [ \"administrative_area_level_1\", \"political\" ]\n            },\n            {\n
+        \              \"long_name\" : \"United States\",\n               \"short_name\"
+        : \"US\",\n               \"types\" : [ \"country\", \"political\" ]\n            }\n
+        \        ],\n         \"formatted_address\" : \"Santa Clara, CA, USA\",\n
+        \        \"geometry\" : {\n            \"bounds\" : {\n               \"northeast\"
+        : {\n                  \"lat\" : 37.4846370,\n                  \"lng\" :
+        -121.2081780\n               },\n               \"southwest\" : {\n                  \"lat\"
+        : 36.89415490,\n                  \"lng\" : -122.2024760\n               }\n
+        \           },\n            \"location\" : {\n               \"lat\" : 37.29389070,\n
+        \              \"lng\" : -121.71954590\n            },\n            \"location_type\"
+        : \"APPROXIMATE\",\n            \"viewport\" : {\n               \"northeast\"
+        : {\n                  \"lat\" : 37.4846370,\n                  \"lng\" :
+        -121.2081780\n               },\n               \"southwest\" : {\n                  \"lat\"
+        : 36.89415490,\n                  \"lng\" : -122.2024760\n               }\n
+        \           }\n         },\n         \"types\" : [ \"administrative_area_level_2\",
+        \"political\" ]\n      },\n      {\n         \"address_components\" : [\n
+        \           {\n               \"long_name\" : \"California\",\n               \"short_name\"
+        : \"CA\",\n               \"types\" : [ \"administrative_area_level_1\", \"political\"
+        ]\n            },\n            {\n               \"long_name\" : \"United
+        States\",\n               \"short_name\" : \"US\",\n               \"types\"
+        : [ \"country\", \"political\" ]\n            }\n         ],\n         \"formatted_address\"
+        : \"California, USA\",\n         \"geometry\" : {\n            \"bounds\"
+        : {\n               \"northeast\" : {\n                  \"lat\" : 42.00951690,\n
+        \                 \"lng\" : -114.1312110\n               },\n               \"southwest\"
+        : {\n                  \"lat\" : 32.53423210,\n                  \"lng\" :
+        -124.40961960\n               }\n            },\n            \"location\"
+        : {\n               \"lat\" : 36.7782610,\n               \"lng\" : -119.41793240\n
+        \           },\n            \"location_type\" : \"APPROXIMATE\",\n            \"viewport\"
+        : {\n               \"northeast\" : {\n                  \"lat\" : 42.00951690,\n
+        \                 \"lng\" : -114.1312110\n               },\n               \"southwest\"
+        : {\n                  \"lat\" : 32.53423210,\n                  \"lng\" :
+        -124.40961960\n               }\n            }\n         },\n         \"types\"
+        : [ \"administrative_area_level_1\", \"political\" ]\n      }\n   ],\n   \"status\"
+        : \"OK\"\n}\n"
+    http_version: 
+  recorded_at: Mon, 25 Mar 2013 02:18:20 GMT
+- request:
+    method: get
+    uri: http://maps.googleapis.com/maps/api/geocode/json?address=South%20Akron%20Road,%20Mountain%20View,%20CA%2094043,%20USA&language=en&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Mon, 25 Mar 2013 02:18:20 GMT
+      Expires:
+      - Tue, 26 Mar 2013 02:18:20 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: ! "{\n   \"results\" : [\n      {\n         \"address_components\" :
+        [\n            {\n               \"long_name\" : \"South Akron Road\",\n               \"short_name\"
+        : \"S Akron Rd\",\n               \"types\" : [ \"route\" ]\n            },\n
+        \           {\n               \"long_name\" : \"Mountain View\",\n               \"short_name\"
+        : \"Mountain View\",\n               \"types\" : [ \"locality\", \"political\"
+        ]\n            },\n            {\n               \"long_name\" : \"Santa Clara\",\n
+        \              \"short_name\" : \"Santa Clara\",\n               \"types\"
+        : [ \"administrative_area_level_2\", \"political\" ]\n            },\n            {\n
+        \              \"long_name\" : \"California\",\n               \"short_name\"
+        : \"CA\",\n               \"types\" : [ \"administrative_area_level_1\", \"political\"
+        ]\n            },\n            {\n               \"long_name\" : \"United
+        States\",\n               \"short_name\" : \"US\",\n               \"types\"
+        : [ \"country\", \"political\" ]\n            },\n            {\n               \"long_name\"
+        : \"94043\",\n               \"short_name\" : \"94043\",\n               \"types\"
+        : [ \"postal_code\" ]\n            }\n         ],\n         \"formatted_address\"
+        : \"South Akron Road, Mountain View, CA 94043, USA\",\n         \"geometry\"
+        : {\n            \"bounds\" : {\n               \"northeast\" : {\n                  \"lat\"
+        : 37.41245320,\n                  \"lng\" : -122.05447430\n               },\n
+        \              \"southwest\" : {\n                  \"lat\" : 37.41051290,\n
+        \                 \"lng\" : -122.0603950\n               }\n            },\n
+        \           \"location\" : {\n               \"lat\" : 37.41157360,\n               \"lng\"
+        : -122.0571610\n            },\n            \"location_type\" : \"GEOMETRIC_CENTER\",\n
+        \           \"viewport\" : {\n               \"northeast\" : {\n                  \"lat\"
+        : 37.41283203029150,\n                  \"lng\" : -122.05447430\n               },\n
+        \              \"southwest\" : {\n                  \"lat\" : 37.41013406970850,\n
+        \                 \"lng\" : -122.0603950\n               }\n            }\n
+        \        },\n         \"types\" : [ \"route\" ]\n      }\n   ],\n   \"status\"
+        : \"OK\"\n}\n"
+    http_version: 
+  recorded_at: Mon, 25 Mar 2013 02:18:20 GMT
+- request:
+    method: get
+    uri: http://maps.googleapis.com/maps/api/geocode/json?language=en&latlng=37.4115736,-122.057161&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Mon, 25 Mar 2013 02:18:20 GMT
+      Expires:
+      - Tue, 26 Mar 2013 02:18:20 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: ! "{\n   \"results\" : [\n      {\n         \"address_components\" :
+        [\n            {\n               \"long_name\" : \"Mc Cord Avenue\",\n               \"short_name\"
+        : \"Mc Cord Ave\",\n               \"types\" : [ \"route\" ]\n            },\n
+        \           {\n               \"long_name\" : \"Mountain View\",\n               \"short_name\"
+        : \"Mountain View\",\n               \"types\" : [ \"locality\", \"political\"
+        ]\n            },\n            {\n               \"long_name\" : \"Santa Clara\",\n
+        \              \"short_name\" : \"Santa Clara\",\n               \"types\"
+        : [ \"administrative_area_level_2\", \"political\" ]\n            },\n            {\n
+        \              \"long_name\" : \"California\",\n               \"short_name\"
+        : \"CA\",\n               \"types\" : [ \"administrative_area_level_1\", \"political\"
+        ]\n            },\n            {\n               \"long_name\" : \"United
+        States\",\n               \"short_name\" : \"US\",\n               \"types\"
+        : [ \"country\", \"political\" ]\n            },\n            {\n               \"long_name\"
+        : \"94043\",\n               \"short_name\" : \"94043\",\n               \"types\"
+        : [ \"postal_code\" ]\n            }\n         ],\n         \"formatted_address\"
+        : \"Mc Cord Avenue, Mountain View, CA 94043, USA\",\n         \"geometry\"
+        : {\n            \"bounds\" : {\n               \"northeast\" : {\n                  \"lat\"
+        : 37.41212710,\n                  \"lng\" : -122.0571610\n               },\n
+        \              \"southwest\" : {\n                  \"lat\" : 37.41157360,\n
+        \                 \"lng\" : -122.05744390\n               }\n            },\n
+        \           \"location\" : {\n               \"lat\" : 37.41185040,\n               \"lng\"
+        : -122.05730240\n            },\n            \"location_type\" : \"APPROXIMATE\",\n
+        \           \"viewport\" : {\n               \"northeast\" : {\n                  \"lat\"
+        : 37.41319933029150,\n                  \"lng\" : -122.0559534697085\n               },\n
+        \              \"southwest\" : {\n                  \"lat\" : 37.41050136970850,\n
+        \                 \"lng\" : -122.0586514302915\n               }\n            }\n
+        \        },\n         \"types\" : [ \"route\" ]\n      },\n      {\n         \"address_components\"
+        : [\n            {\n               \"long_name\" : \"94043\",\n               \"short_name\"
+        : \"94043\",\n               \"types\" : [ \"postal_code\" ]\n            },\n
+        \           {\n               \"long_name\" : \"Mountain View\",\n               \"short_name\"
+        : \"Mountain View\",\n               \"types\" : [ \"locality\", \"political\"
+        ]\n            },\n            {\n               \"long_name\" : \"California\",\n
+        \              \"short_name\" : \"CA\",\n               \"types\" : [ \"administrative_area_level_1\",
+        \"political\" ]\n            },\n            {\n               \"long_name\"
+        : \"United States\",\n               \"short_name\" : \"US\",\n               \"types\"
+        : [ \"country\", \"political\" ]\n            }\n         ],\n         \"formatted_address\"
+        : \"Mountain View, CA 94043, USA\",\n         \"geometry\" : {\n            \"bounds\"
+        : {\n               \"northeast\" : {\n                  \"lat\" : 37.46408690,\n
+        \                 \"lng\" : -122.03598990\n               },\n               \"southwest\"
+        : {\n                  \"lat\" : 37.38574390,\n                  \"lng\" :
+        -122.108420\n               }\n            },\n            \"location\" :
+        {\n               \"lat\" : 37.4284340,\n               \"lng\" : -122.07238160\n
+        \           },\n            \"location_type\" : \"APPROXIMATE\",\n            \"viewport\"
+        : {\n               \"northeast\" : {\n                  \"lat\" : 37.46408690,\n
+        \                 \"lng\" : -122.03598990\n               },\n               \"southwest\"
+        : {\n                  \"lat\" : 37.38574390,\n                  \"lng\" :
+        -122.108420\n               }\n            }\n         },\n         \"types\"
+        : [ \"postal_code\" ]\n      },\n      {\n         \"address_components\"
+        : [\n            {\n               \"long_name\" : \"Santa Clara\",\n               \"short_name\"
+        : \"Santa Clara\",\n               \"types\" : [ \"administrative_area_level_2\",
+        \"political\" ]\n            },\n            {\n               \"long_name\"
+        : \"California\",\n               \"short_name\" : \"CA\",\n               \"types\"
+        : [ \"administrative_area_level_1\", \"political\" ]\n            },\n            {\n
+        \              \"long_name\" : \"United States\",\n               \"short_name\"
+        : \"US\",\n               \"types\" : [ \"country\", \"political\" ]\n            }\n
+        \        ],\n         \"formatted_address\" : \"Santa Clara, CA, USA\",\n
+        \        \"geometry\" : {\n            \"bounds\" : {\n               \"northeast\"
+        : {\n                  \"lat\" : 37.4846370,\n                  \"lng\" :
+        -121.2081780\n               },\n               \"southwest\" : {\n                  \"lat\"
+        : 36.89415490,\n                  \"lng\" : -122.2024760\n               }\n
+        \           },\n            \"location\" : {\n               \"lat\" : 37.29389070,\n
+        \              \"lng\" : -121.71954590\n            },\n            \"location_type\"
+        : \"APPROXIMATE\",\n            \"viewport\" : {\n               \"northeast\"
+        : {\n                  \"lat\" : 37.4846370,\n                  \"lng\" :
+        -121.2081780\n               },\n               \"southwest\" : {\n                  \"lat\"
+        : 36.89415490,\n                  \"lng\" : -122.2024760\n               }\n
+        \           }\n         },\n         \"types\" : [ \"administrative_area_level_2\",
+        \"political\" ]\n      },\n      {\n         \"address_components\" : [\n
+        \           {\n               \"long_name\" : \"California\",\n               \"short_name\"
+        : \"CA\",\n               \"types\" : [ \"administrative_area_level_1\", \"political\"
+        ]\n            },\n            {\n               \"long_name\" : \"United
+        States\",\n               \"short_name\" : \"US\",\n               \"types\"
+        : [ \"country\", \"political\" ]\n            }\n         ],\n         \"formatted_address\"
+        : \"California, USA\",\n         \"geometry\" : {\n            \"bounds\"
+        : {\n               \"northeast\" : {\n                  \"lat\" : 42.00951690,\n
+        \                 \"lng\" : -114.1312110\n               },\n               \"southwest\"
+        : {\n                  \"lat\" : 32.53423210,\n                  \"lng\" :
+        -124.40961960\n               }\n            },\n            \"location\"
+        : {\n               \"lat\" : 36.7782610,\n               \"lng\" : -119.41793240\n
+        \           },\n            \"location_type\" : \"APPROXIMATE\",\n            \"viewport\"
+        : {\n               \"northeast\" : {\n                  \"lat\" : 42.00951690,\n
+        \                 \"lng\" : -114.1312110\n               },\n               \"southwest\"
+        : {\n                  \"lat\" : 32.53423210,\n                  \"lng\" :
+        -124.40961960\n               }\n            }\n         },\n         \"types\"
+        : [ \"administrative_area_level_1\", \"political\" ]\n      }\n   ],\n   \"status\"
+        : \"OK\"\n}\n"
+    http_version: 
+  recorded_at: Mon, 25 Mar 2013 02:18:20 GMT
+recorded_with: VCR 2.2.5

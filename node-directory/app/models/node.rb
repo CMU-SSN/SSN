@@ -9,7 +9,6 @@ class Node < ActiveRecord::Base
   validates :checkin, :presence => true
 
   geocoded_by :address
-  after_validation :geocode
   reverse_geocoded_by :latitude, :longitude do |obj,results|
     geo = results.first
     unless geo.nil?
@@ -19,5 +18,5 @@ class Node < ActiveRecord::Base
       obj.zipcode = geo.postal_code
     end
   end
-  after_validation :reverse_geocode
+  after_validation :geocode, :reverse_geocode
 end
