@@ -21,9 +21,11 @@ end
 gem 'jquery-rails'
 
 group :test, :development do
-  gem "rspec-rails", "~> 2.0"
-  gem "factory_girl_rails", "~> 4.0"
-  gem "shoulda"
+  gem 'rspec-rails', '~> 2.0'
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'shoulda'
+  gem 'typhoeus', '0.4.2'
+  gem 'vcr', '2.2.5'
 end
 
 gem 'geocoder'
