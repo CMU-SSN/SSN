@@ -16,54 +16,39 @@ class PostsController < ApplicationController
     @posts = Post::Filter(current_user, 100, params['token'])
     @token = @posts.first.id if !@posts.nil? && !@posts.first.nil?
     respond_to do |format|
-      format.html {render :partial=>"partials/refresh"}
+      format.html { render :partial => "partials/refresh" }
     end
   end
-  
+
   # GET /posts/new
   # GET /posts/new.json
   def new
-    @post = Post.new
-    
-    # Get the post as variable from the sesssion.  If it doesn't exist,
-    # set it to Post::POST_AS_SELF
-    if session[:post_as].nil?
-      session[:post_as] = Post::POST_AS_SELF
-    end
-    
-    @post_as = session[:post_as]
+    setupForNewPost
 
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @post }
     end
   end
-  
+
   # GET /posts/checkin
   def checkin
-    @post = Post.new
 
-    # Get the post as variable from the sesssion.  If it doesn't exist,
-    # set it to Post::POST_AS_SELF
-    if session[:post_as].nil?
-      session[:post_as] = Post::POST_AS_SELF
-    end
-
-    @post_as = session[:post_as]
+    setupForNewPost
 
     respond_to do |format|
       format.html
       format.json { render json: @post }
     end
-  end    
-  
+  end
+
   # GET /post_contect?id=
   def post_context
     session[:post_as] = params[:id]
-    
+
     respond_to do |format|
-       format.json { render :json => { :status => 200 } }
-     end
+      format.json { render :json => {:status => 200} }
+    end
   end
 
   # POST /posts
@@ -83,5 +68,20 @@ class PostsController < ApplicationController
       format.html { redirect_to '/posts#index', notice: 'Post was successfully created.' }
       format.json { render json: @post, status: :created, location: @post }
     end
+  end
+
+  private
+
+  def setupForNewPost
+    @post = Post.new
+
+    # Get the post as variable from the sesssion.  If it doesn't exist,
+    # set it to Post::POST_AS_SELF
+    if session[:post_as].nil?
+      session[:post_as] = Post::POST_AS_SELF
+    end
+
+    @post_as = session[:post_as]
+
   end
 end
