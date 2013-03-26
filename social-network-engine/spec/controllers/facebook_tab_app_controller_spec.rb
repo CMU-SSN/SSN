@@ -76,7 +76,7 @@ describe FacebookTabAppController do
 
       before(:each) do
         @user = FactoryGirl.create(:victor)
-        @friend1 = FactoryGirl.create(:brian)
+        @friend1 = FactoryGirl.create(:user5)
         @friend2 = FactoryGirl.create(:james)
         @org1 = FactoryGirl.build(:org1)
         @org2 = FactoryGirl.build(:org2)
