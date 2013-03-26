@@ -21,9 +21,9 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Tue, 26 Mar 2013 03:21:38 GMT
+      - Tue, 26 Mar 2013 03:21:37 GMT
       Expires:
-      - Wed, 27 Mar 2013 03:21:38 GMT
+      - Wed, 27 Mar 2013 03:21:37 GMT
       Cache-Control:
       - public, max-age=86400
       Access-Control-Allow-Origin:
@@ -125,7 +125,7 @@ http_interactions:
         : [ \"administrative_area_level_1\", \"political\" ]\n      }\n   ],\n   \"status\"
         : \"OK\"\n}\n"
     http_version: 
-  recorded_at: Tue, 26 Mar 2013 03:21:37 GMT
+  recorded_at: Tue, 26 Mar 2013 03:21:36 GMT
 - request:
     method: get
     uri: http://maps.googleapis.com/maps/api/geocode/json?address=South%20Akron%20Road,%20Mountain%20View,%20CA%2094043,%20USA&language=en&sensor=false
@@ -147,9 +147,9 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Tue, 26 Mar 2013 03:21:38 GMT
+      - Tue, 26 Mar 2013 03:21:37 GMT
       Expires:
-      - Wed, 27 Mar 2013 03:21:38 GMT
+      - Wed, 27 Mar 2013 03:21:37 GMT
       Cache-Control:
       - public, max-age=86400
       Access-Control-Allow-Origin:

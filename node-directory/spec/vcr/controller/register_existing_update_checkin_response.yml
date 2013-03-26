@@ -147,9 +147,9 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Tue, 26 Mar 2013 03:21:38 GMT
+      - Tue, 26 Mar 2013 03:21:39 GMT
       Expires:
-      - Wed, 27 Mar 2013 03:21:38 GMT
+      - Wed, 27 Mar 2013 03:21:39 GMT
       Cache-Control:
       - public, max-age=86400
       Access-Control-Allow-Origin:
@@ -193,7 +193,7 @@ http_interactions:
         \        },\n         \"types\" : [ \"route\" ]\n      }\n   ],\n   \"status\"
         : \"OK\"\n}\n"
     http_version: 
-  recorded_at: Tue, 26 Mar 2013 03:21:37 GMT
+  recorded_at: Tue, 26 Mar 2013 03:21:38 GMT
 - request:
     method: get
     uri: http://maps.googleapis.com/maps/api/geocode/json?language=en&latlng=37.4115736,-122.057161&sensor=false
@@ -215,9 +215,9 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Tue, 26 Mar 2013 03:21:38 GMT
+      - Tue, 26 Mar 2013 03:21:39 GMT
       Expires:
-      - Wed, 27 Mar 2013 03:21:38 GMT
+      - Wed, 27 Mar 2013 03:21:39 GMT
       Cache-Control:
       - public, max-age=86400
       Access-Control-Allow-Origin:
@@ -319,5 +319,5 @@ http_interactions:
         : [ \"administrative_area_level_1\", \"political\" ]\n      }\n   ],\n   \"status\"
         : \"OK\"\n}\n"
     http_version: 
-  recorded_at: Tue, 26 Mar 2013 03:21:37 GMT
+  recorded_at: Tue, 26 Mar 2013 03:21:38 GMT
 recorded_with: VCR 2.2.5
