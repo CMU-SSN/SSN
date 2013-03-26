@@ -31,6 +31,13 @@ FactoryGirl.define do
     password "password"
   end
 
+  factory :user5, class: User do
+    name "User #5"
+    email "user5@sv.cmu.edu"
+    uid "5"
+    password "password"
+  end
+
   # Organizations
   factory :org1, class: Organization do
     name "Organization 1"

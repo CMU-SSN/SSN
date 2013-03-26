@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe User do
 
+  describe "model" do
   def valid_user_attributes
   { :email => 'TestUser@test.com'}
   end
@@ -39,10 +40,11 @@ describe User do
 	it "should have and belong to many organizations" do 
 		should have_and_belong_to_many(:organizations)
 	end
+  end
 	
   describe "ImportFriends" do
     before(:each) do
-      @brian = FactoryGirl.create(:brian)
+      @brian = FactoryGirl.create(:user5)
       @james = FactoryGirl.create(:james)
       @jason = FactoryGirl.create(:jason)
       @victor = FactoryGirl.create(:victor)
