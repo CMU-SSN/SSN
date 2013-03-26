@@ -68,6 +68,10 @@ describe FacebookTabAppController do
             raise "Unexpected type '" + type.to_s + "' in get_connections"
           end
         end
+
+        def get_picture(pic)
+
+        end
       end
 
       before(:each) do
