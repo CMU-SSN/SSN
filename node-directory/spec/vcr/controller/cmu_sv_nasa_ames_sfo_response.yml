@@ -21,9 +21,9 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Tue, 26 Mar 2013 03:21:38 GMT
+      - Tue, 26 Mar 2013 03:24:46 GMT
       Expires:
-      - Wed, 27 Mar 2013 03:21:38 GMT
+      - Wed, 27 Mar 2013 03:24:46 GMT
       Cache-Control:
       - public, max-age=86400
       Access-Control-Allow-Origin:
@@ -125,10 +125,10 @@ http_interactions:
         : [ \"administrative_area_level_1\", \"political\" ]\n      }\n   ],\n   \"status\"
         : \"OK\"\n}\n"
     http_version: 
-  recorded_at: Tue, 26 Mar 2013 03:21:37 GMT
+  recorded_at: Tue, 26 Mar 2013 03:24:45 GMT
 - request:
     method: get
-    uri: http://maps.googleapis.com/maps/api/geocode/json?address=South%20Akron%20Road,%20Mountain%20View,%20CA%2094043,%20USA&language=en&sensor=false
+    uri: http://maps.googleapis.com/maps/api/geocode/json?language=en&latlng=37.408994,-122.064471&sensor=false
     body:
       encoding: US-ASCII
       string: ''
@@ -147,9 +147,9 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Date:
-      - Tue, 26 Mar 2013 03:21:38 GMT
+      - Tue, 26 Mar 2013 03:24:46 GMT
       Expires:
-      - Wed, 27 Mar 2013 03:21:38 GMT
+      - Wed, 27 Mar 2013 03:24:46 GMT
       Cache-Control:
       - public, max-age=86400
       Access-Control-Allow-Origin:
@@ -165,8 +165,10 @@ http_interactions:
     body:
       encoding: US-ASCII
       string: ! "{\n   \"results\" : [\n      {\n         \"address_components\" :
-        [\n            {\n               \"long_name\" : \"South Akron Road\",\n               \"short_name\"
-        : \"S Akron Rd\",\n               \"types\" : [ \"route\" ]\n            },\n
+        [\n            {\n               \"long_name\" : \"1101-1199\",\n               \"short_name\"
+        : \"1101-1199\",\n               \"types\" : [ \"street_number\" ]\n            },\n
+        \           {\n               \"long_name\" : \"Moffett Boulevard\",\n               \"short_name\"
+        : \"Moffett Blvd\",\n               \"types\" : [ \"route\" ]\n            },\n
         \           {\n               \"long_name\" : \"Mountain View\",\n               \"short_name\"
         : \"Mountain View\",\n               \"types\" : [ \"locality\", \"political\"
         ]\n            },\n            {\n               \"long_name\" : \"Santa Clara\",\n
@@ -179,94 +181,27 @@ http_interactions:
         : [ \"country\", \"political\" ]\n            },\n            {\n               \"long_name\"
         : \"94043\",\n               \"short_name\" : \"94043\",\n               \"types\"
         : [ \"postal_code\" ]\n            }\n         ],\n         \"formatted_address\"
-        : \"South Akron Road, Mountain View, CA 94043, USA\",\n         \"geometry\"
+        : \"1101-1199 Moffett Boulevard, Mountain View, CA 94043, USA\",\n         \"geometry\"
         : {\n            \"bounds\" : {\n               \"northeast\" : {\n                  \"lat\"
-        : 37.41245320,\n                  \"lng\" : -122.05447430\n               },\n
-        \              \"southwest\" : {\n                  \"lat\" : 37.41051290,\n
-        \                 \"lng\" : -122.0603950\n               }\n            },\n
-        \           \"location\" : {\n               \"lat\" : 37.41157360,\n               \"lng\"
-        : -122.0571610\n            },\n            \"location_type\" : \"GEOMETRIC_CENTER\",\n
+        : 37.40957450,\n                  \"lng\" : -122.0642240\n               },\n
+        \              \"southwest\" : {\n                  \"lat\" : 37.40886160,\n
+        \                 \"lng\" : -122.06563230\n               }\n            },\n
+        \           \"location\" : {\n               \"lat\" : 37.40940190,\n               \"lng\"
+        : -122.06468890\n            },\n            \"location_type\" : \"RANGE_INTERPOLATED\",\n
         \           \"viewport\" : {\n               \"northeast\" : {\n                  \"lat\"
-        : 37.41283203029150,\n                  \"lng\" : -122.05447430\n               },\n
-        \              \"southwest\" : {\n                  \"lat\" : 37.41013406970850,\n
-        \                 \"lng\" : -122.0603950\n               }\n            }\n
-        \        },\n         \"types\" : [ \"route\" ]\n      }\n   ],\n   \"status\"
-        : \"OK\"\n}\n"
-    http_version: 
-  recorded_at: Tue, 26 Mar 2013 03:21:37 GMT
-- request:
-    method: get
-    uri: http://maps.googleapis.com/maps/api/geocode/json?language=en&latlng=37.4115736,-122.057161&sensor=false
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - ! '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Content-Type:
-      - application/json; charset=UTF-8
-      Date:
-      - Tue, 26 Mar 2013 03:21:38 GMT
-      Expires:
-      - Wed, 27 Mar 2013 03:21:38 GMT
-      Cache-Control:
-      - public, max-age=86400
-      Access-Control-Allow-Origin:
-      - ! '*'
-      Server:
-      - mafe
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Frame-Options:
-      - SAMEORIGIN
-      Transfer-Encoding:
-      - chunked
-    body:
-      encoding: US-ASCII
-      string: ! "{\n   \"results\" : [\n      {\n         \"address_components\" :
-        [\n            {\n               \"long_name\" : \"Mc Cord Avenue\",\n               \"short_name\"
-        : \"Mc Cord Ave\",\n               \"types\" : [ \"route\" ]\n            },\n
-        \           {\n               \"long_name\" : \"Mountain View\",\n               \"short_name\"
-        : \"Mountain View\",\n               \"types\" : [ \"locality\", \"political\"
-        ]\n            },\n            {\n               \"long_name\" : \"Santa Clara\",\n
-        \              \"short_name\" : \"Santa Clara\",\n               \"types\"
-        : [ \"administrative_area_level_2\", \"political\" ]\n            },\n            {\n
-        \              \"long_name\" : \"California\",\n               \"short_name\"
+        : 37.41056703029150,\n                  \"lng\" : -122.0635791697085\n               },\n
+        \              \"southwest\" : {\n                  \"lat\" : 37.40786906970850,\n
+        \                 \"lng\" : -122.0662771302915\n               }\n            }\n
+        \        },\n         \"types\" : [ \"street_address\" ]\n      },\n      {\n
+        \        \"address_components\" : [\n            {\n               \"long_name\"
+        : \"94043\",\n               \"short_name\" : \"94043\",\n               \"types\"
+        : [ \"postal_code\" ]\n            },\n            {\n               \"long_name\"
+        : \"Mountain View\",\n               \"short_name\" : \"Mountain View\",\n
+        \              \"types\" : [ \"locality\", \"political\" ]\n            },\n
+        \           {\n               \"long_name\" : \"California\",\n               \"short_name\"
         : \"CA\",\n               \"types\" : [ \"administrative_area_level_1\", \"political\"
         ]\n            },\n            {\n               \"long_name\" : \"United
         States\",\n               \"short_name\" : \"US\",\n               \"types\"
-        : [ \"country\", \"political\" ]\n            },\n            {\n               \"long_name\"
-        : \"94043\",\n               \"short_name\" : \"94043\",\n               \"types\"
-        : [ \"postal_code\" ]\n            }\n         ],\n         \"formatted_address\"
-        : \"Mc Cord Avenue, Mountain View, CA 94043, USA\",\n         \"geometry\"
-        : {\n            \"bounds\" : {\n               \"northeast\" : {\n                  \"lat\"
-        : 37.41212710,\n                  \"lng\" : -122.0571610\n               },\n
-        \              \"southwest\" : {\n                  \"lat\" : 37.41157360,\n
-        \                 \"lng\" : -122.05744390\n               }\n            },\n
-        \           \"location\" : {\n               \"lat\" : 37.41185040,\n               \"lng\"
-        : -122.05730240\n            },\n            \"location_type\" : \"APPROXIMATE\",\n
-        \           \"viewport\" : {\n               \"northeast\" : {\n                  \"lat\"
-        : 37.41319933029150,\n                  \"lng\" : -122.0559534697085\n               },\n
-        \              \"southwest\" : {\n                  \"lat\" : 37.41050136970850,\n
-        \                 \"lng\" : -122.0586514302915\n               }\n            }\n
-        \        },\n         \"types\" : [ \"route\" ]\n      },\n      {\n         \"address_components\"
-        : [\n            {\n               \"long_name\" : \"94043\",\n               \"short_name\"
-        : \"94043\",\n               \"types\" : [ \"postal_code\" ]\n            },\n
-        \           {\n               \"long_name\" : \"Mountain View\",\n               \"short_name\"
-        : \"Mountain View\",\n               \"types\" : [ \"locality\", \"political\"
-        ]\n            },\n            {\n               \"long_name\" : \"California\",\n
-        \              \"short_name\" : \"CA\",\n               \"types\" : [ \"administrative_area_level_1\",
-        \"political\" ]\n            },\n            {\n               \"long_name\"
-        : \"United States\",\n               \"short_name\" : \"US\",\n               \"types\"
         : [ \"country\", \"political\" ]\n            }\n         ],\n         \"formatted_address\"
         : \"Mountain View, CA 94043, USA\",\n         \"geometry\" : {\n            \"bounds\"
         : {\n               \"northeast\" : {\n                  \"lat\" : 37.46408690,\n
@@ -280,6 +215,28 @@ http_interactions:
         : {\n                  \"lat\" : 37.38574390,\n                  \"lng\" :
         -122.108420\n               }\n            }\n         },\n         \"types\"
         : [ \"postal_code\" ]\n      },\n      {\n         \"address_components\"
+        : [\n            {\n               \"long_name\" : \"Mountain View\",\n               \"short_name\"
+        : \"Mountain View\",\n               \"types\" : [ \"locality\", \"political\"
+        ]\n            },\n            {\n               \"long_name\" : \"Santa Clara\",\n
+        \              \"short_name\" : \"Santa Clara\",\n               \"types\"
+        : [ \"administrative_area_level_2\", \"political\" ]\n            },\n            {\n
+        \              \"long_name\" : \"California\",\n               \"short_name\"
+        : \"CA\",\n               \"types\" : [ \"administrative_area_level_1\", \"political\"
+        ]\n            },\n            {\n               \"long_name\" : \"United
+        States\",\n               \"short_name\" : \"US\",\n               \"types\"
+        : [ \"country\", \"political\" ]\n            }\n         ],\n         \"formatted_address\"
+        : \"Mountain View, CA, USA\",\n         \"geometry\" : {\n            \"bounds\"
+        : {\n               \"northeast\" : {\n                  \"lat\" : 37.45087890,\n
+        \                 \"lng\" : -122.04467210\n               },\n               \"southwest\"
+        : {\n                  \"lat\" : 37.35654110,\n                  \"lng\" :
+        -122.11786190\n               }\n            },\n            \"location\"
+        : {\n               \"lat\" : 37.38605170,\n               \"lng\" : -122.08385110\n
+        \           },\n            \"location_type\" : \"APPROXIMATE\",\n            \"viewport\"
+        : {\n               \"northeast\" : {\n                  \"lat\" : 37.45087890,\n
+        \                 \"lng\" : -122.04467210\n               },\n               \"southwest\"
+        : {\n                  \"lat\" : 37.35654110,\n                  \"lng\" :
+        -122.11786190\n               }\n            }\n         },\n         \"types\"
+        : [ \"locality\", \"political\" ]\n      },\n      {\n         \"address_components\"
         : [\n            {\n               \"long_name\" : \"Santa Clara\",\n               \"short_name\"
         : \"Santa Clara\",\n               \"types\" : [ \"administrative_area_level_2\",
         \"political\" ]\n            },\n            {\n               \"long_name\"
@@ -316,8 +273,123 @@ http_interactions:
         \                 \"lng\" : -114.1312110\n               },\n               \"southwest\"
         : {\n                  \"lat\" : 32.53423210,\n                  \"lng\" :
         -124.40961960\n               }\n            }\n         },\n         \"types\"
-        : [ \"administrative_area_level_1\", \"political\" ]\n      }\n   ],\n   \"status\"
-        : \"OK\"\n}\n"
+        : [ \"administrative_area_level_1\", \"political\" ]\n      },\n      {\n
+        \        \"address_components\" : [\n            {\n               \"long_name\"
+        : \"United States\",\n               \"short_name\" : \"US\",\n               \"types\"
+        : [ \"country\", \"political\" ]\n            }\n         ],\n         \"formatted_address\"
+        : \"United States\",\n         \"geometry\" : {\n            \"bounds\" :
+        {\n               \"northeast\" : {\n                  \"lat\" : 71.3898880,\n
+        \                 \"lng\" : -66.94976079999999\n               },\n               \"southwest\"
+        : {\n                  \"lat\" : 18.91106420,\n                  \"lng\" :
+        172.45469660\n               }\n            },\n            \"location\" :
+        {\n               \"lat\" : 37.090240,\n               \"lng\" : -95.7128910\n
+        \           },\n            \"location_type\" : \"APPROXIMATE\",\n            \"viewport\"
+        : {\n               \"northeast\" : {\n                  \"lat\" : 49.380,\n
+        \                 \"lng\" : -66.940\n               },\n               \"southwest\"
+        : {\n                  \"lat\" : 25.820,\n                  \"lng\" : -124.390\n
+        \              }\n            }\n         },\n         \"types\" : [ \"country\",
+        \"political\" ]\n      }\n   ],\n   \"status\" : \"OK\"\n}\n"
     http_version: 
-  recorded_at: Tue, 26 Mar 2013 03:21:37 GMT
+  recorded_at: Tue, 26 Mar 2013 03:24:45 GMT
+- request:
+    method: get
+    uri: http://maps.googleapis.com/maps/api/geocode/json?language=en&latlng=37.616502,-122.386031&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Tue, 26 Mar 2013 03:24:46 GMT
+      Expires:
+      - Wed, 27 Mar 2013 03:24:46 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: ! "{\n   \"results\" : [\n      {\n         \"address_components\" :
+        [\n            {\n               \"long_name\" : \"International Terminal
+        Departures\",\n               \"short_name\" : \"International Terminal Departures\",\n
+        \              \"types\" : [ \"route\" ]\n            },\n            {\n
+        \              \"long_name\" : \"San Francisco Airport\",\n               \"short_name\"
+        : \"San Francisco Airport\",\n               \"types\" : [ \"establishment\"
+        ]\n            },\n            {\n               \"long_name\" : \"Millbrae\",\n
+        \              \"short_name\" : \"Millbrae\",\n               \"types\" :
+        [ \"locality\", \"political\" ]\n            },\n            {\n               \"long_name\"
+        : \"San Mateo\",\n               \"short_name\" : \"San Mateo\",\n               \"types\"
+        : [ \"administrative_area_level_2\", \"political\" ]\n            },\n            {\n
+        \              \"long_name\" : \"California\",\n               \"short_name\"
+        : \"CA\",\n               \"types\" : [ \"administrative_area_level_1\", \"political\"
+        ]\n            },\n            {\n               \"long_name\" : \"United
+        States\",\n               \"short_name\" : \"US\",\n               \"types\"
+        : [ \"country\", \"political\" ]\n            },\n            {\n               \"long_name\"
+        : \"94030\",\n               \"short_name\" : \"94030\",\n               \"types\"
+        : [ \"postal_code\" ]\n            }\n         ],\n         \"formatted_address\"
+        : \"International Terminal Departures, San Francisco Airport (SFO), Millbrae,
+        CA 94030, USA\",\n         \"geometry\" : {\n            \"bounds\" : {\n
+        \              \"northeast\" : {\n                  \"lat\" : 37.61554350,\n
+        \                 \"lng\" : -122.38979030\n               },\n               \"southwest\"
+        : {\n                  \"lat\" : 37.61496050,\n                  \"lng\" :
+        -122.39002740\n               }\n            },\n            \"location\"
+        : {\n               \"lat\" : 37.61525180,\n               \"lng\" : -122.38990950\n
+        \           },\n            \"location_type\" : \"APPROXIMATE\",\n            \"viewport\"
+        : {\n               \"northeast\" : {\n                  \"lat\" : 37.61660098029150,\n
+        \                 \"lng\" : -122.3885598697085\n               },\n               \"southwest\"
+        : {\n                  \"lat\" : 37.61390301970850,\n                  \"lng\"
+        : -122.3912578302915\n               }\n            }\n         },\n         \"types\"
+        : [ \"route\" ]\n      },\n      {\n         \"address_components\" : [\n
+        \           {\n               \"long_name\" : \"San Francisco Airport\",\n
+        \              \"short_name\" : \"San Francisco Airport\",\n               \"types\"
+        : [ \"establishment\" ]\n            },\n            {\n               \"long_name\"
+        : \"South Airport Boulevard\",\n               \"short_name\" : \"South Airport
+        Boulevard\",\n               \"types\" : [ \"route\" ]\n            },\n            {\n
+        \              \"long_name\" : \"San Francisco\",\n               \"short_name\"
+        : \"San Francisco\",\n               \"types\" : [ \"locality\", \"political\"
+        ]\n            },\n            {\n               \"long_name\" : \"San Mateo\",\n
+        \              \"short_name\" : \"San Mateo\",\n               \"types\" :
+        [ \"administrative_area_level_2\", \"political\" ]\n            },\n            {\n
+        \              \"long_name\" : \"California\",\n               \"short_name\"
+        : \"CA\",\n               \"types\" : [ \"administrative_area_level_1\", \"political\"
+        ]\n            },\n            {\n               \"long_name\" : \"United
+        States\",\n               \"short_name\" : \"US\",\n               \"types\"
+        : [ \"country\", \"political\" ]\n            },\n            {\n               \"long_name\"
+        : \"94128\",\n               \"short_name\" : \"94128\",\n               \"types\"
+        : [ \"postal_code\" ]\n            }\n         ],\n         \"formatted_address\"
+        : \"San Francisco Airport (SFO), South Airport Boulevard, San Francisco, CA
+        94128, USA\",\n         \"geometry\" : {\n            \"bounds\" : {\n               \"northeast\"
+        : {\n                  \"lat\" : 37.63970170,\n                  \"lng\" :
+        -122.35491970\n               },\n               \"southwest\" : {\n                  \"lat\"
+        : 37.6042910,\n                  \"lng\" : -122.40154280\n               }\n
+        \           },\n            \"location\" : {\n               \"lat\" : 37.6152230,\n
+        \              \"lng\" : -122.3899790\n            },\n            \"location_type\"
+        : \"APPROXIMATE\",\n            \"viewport\" : {\n               \"northeast\"
+        : {\n                  \"lat\" : 37.63970170,\n                  \"lng\" :
+        -122.35491970\n               },\n               \"southwest\" : {\n                  \"lat\"
+        : 37.6042910,\n                  \"lng\" : -122.40154280\n               }\n
+        \           }\n         },\n         \"types\" : [ \"airport\", \"transit_station\",
+        \"establishment\" ]\n      }\n   ],\n   \"status\" : \"OK\"\n}\n"
+    http_version: 
+  recorded_at: Tue, 26 Mar 2013 03:24:45 GMT
 recorded_with: VCR 2.2.5

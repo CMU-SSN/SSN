@@ -40,8 +40,16 @@ class NodeController < ApplicationController
         node.name = params[:name]
       end
       if not params[:latitude].nil? or not  params[:longitude].nil?
+        # Geocode makes it hard to change lat, long pairs so lets re-create the
+        # object if we have to change lat long
         old_node = node
-        node = node.clone
+        node = Node.new(
+            :name => old_node.name,
+            :latitude => old_node.latitude,
+            :longitude => old_node.longitude,
+            :link => old_node.link,
+            :uid => old_node.uid,
+            :checkin => DateTime.now)
         node.latitude =  params[:latitude] unless  params[:latitude].nil?
         node.longitude =  params[:longitude] unless  params[:longitude].nil?
         old_node.destroy
@@ -51,20 +59,10 @@ class NodeController < ApplicationController
       end
 
       # Register the checkin
-      print "\nParams " + params.to_s
       node.checkin = DateTime.now
-      params.except! :controller
-      params.except! :action
-        print "\n0.1:Update Long to " + node.longitude.to_s
-      #node.update_attributes(params)
-        print "\n0.2:Update Long to " + node.longitude.to_s
     end
 
-        print "\n0:Update Long to " + node.longitude.to_s
-        #print "\nValid " + node.valid?.to_s
     if node.save
-        print "\nUpdate Long to " + node.longitude.to_s
-        print "\nerrors " + node.errors.to_s
       render :json => { :success => true, :uid => node.uid }
     else
       render :json => { :success => false, :errors => node.errors }

@@ -129,7 +129,7 @@ describe NodeController do
         end
       end
 
-      it "should update longitude", :run_me => true do
+      it "should update longitude" do
         VCR.use_cassette 'controller/register_existing_update_long_response' do
           @node = FactoryGirl.create(:cmu_sv)
           get 'register', :uid => @node.uid, :longitude => -122.0
@@ -166,6 +166,9 @@ describe NodeController do
           node.should_not be_nil
           original_checkin = node.checkin
 
+          # May the Gods forgive me for sleeping in a unit test...but rails...oh rails...sigh...
+          sleep(1)
+
           get 'register', :uid => @node.uid
           response.should be_success
 
@@ -173,7 +176,7 @@ describe NodeController do
           json_response["success"].should eq(true)
 
           node.reload
-          node.checkin.should_not eq(original_checkin)
+          node.checkin.should > original_checkin
         end
       end
 
@@ -261,8 +264,10 @@ describe NodeController do
     end
 
     it "returns success" do
+      VCR.use_cassette 'controller/search_0_response' do
       get 'search'
       response.should be_success
+      end
     end
 
     it "should not have any results if no query was specified" do
@@ -278,17 +283,21 @@ describe NodeController do
     end
 
     it "should return results within 5 miles" do
-      get 'search', :q => "Moffett Field, CA"
-      response.should be_success
-      assigns(:results).length.should eq(2)
+      VCR.use_cassette 'controller/search_within_range_response' do
+        get 'search', :q => "Moffett Field, CA"
+        response.should be_success
+        assigns(:results).length.should eq(2)
+      end
     end
 
     it "should return results sorted by distance" do
-      get 'search', :q => "Moffett Field, CA"
-      response.should be_success
-      assigns(:results).length.should eq(2)
-      assigns(:results)[0].id.should eq(@cmu_sv.id)
-      assigns(:results)[1].id.should eq(@nasa_ames.id)
+      VCR.use_cassette 'controller/search_sorted_by_distance_response' do
+        get 'search', :q => "Moffett Field, CA"
+        response.should be_success
+        assigns(:results).length.should eq(2)
+        assigns(:results)[0].id.should eq(@cmu_sv.id)
+        assigns(:results)[1].id.should eq(@nasa_ames.id)
+      end
     end
   end
 end
