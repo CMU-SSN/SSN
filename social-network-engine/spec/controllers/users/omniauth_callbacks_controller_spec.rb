@@ -8,10 +8,9 @@ describe Users::OmniauthCallbacksController do
   end
 
   class MockAuth < Hash
-    def initialize(provider, uid, credentials)
+    def initialize(provider, uid)
       @provider == provider
       @uid = uid
-      @credentials = credentials
     end
 
     def provider
@@ -21,30 +20,6 @@ describe Users::OmniauthCallbacksController do
     def uid
       @uid
     end
-
-    def credentials
-      @credentials
-    end
-  end
-
-  class MockCredentials
-    def initialize(expires, expires_at, token)
-      @expires = expires
-      @expires_at = expires_at
-      @token = token
-    end
-
-    def expires
-      @expires
-    end
-
-    def expires_at
-      @expires_at
-    end
-
-    def token
-      @token
-    end
   end
 
   class MockMethod
@@ -53,21 +28,28 @@ describe Users::OmniauthCallbacksController do
     end
   end
 
+  def set_credentials(mock_auth, expires, expires_at, token)
+    mock_auth["credentials"] = {}
+    mock_auth["credentials"]["expires"] = expires
+    mock_auth["credentials"]["expires_at"] = expires_at
+    mock_auth["credentials"]["token"] = token
+  end
+
+  def set_info(mock_auth)
+    mock_auth["info"] = {}
+    mock_auth["info"]["name"] = "Name"
+    mock_auth["info"]["image"] = "my_image"
+    mock_auth["info"]["email"] = "email@test.com"
+  end
+
   describe "new user" do
     before(:each) do
       Users::OmniauthCallbacksController.class_variable_set :@@util_save_picture, MockMethod.new().method(:get_image)
     end
 
-    def set_info(mock_auth)
-      mock_auth["info"] = {}
-      mock_auth["info"]["name"] = "Name"
-      mock_auth["info"]["image"] = "my_image"
-      mock_auth["info"]["email"] = "email@test.com"
-    end
-
     it "should create a user" do
-      @mock_auth = MockAuth.new("facebook", "UserUID",
-          MockCredentials.new(false, nil, "TOKEN"))
+      @mock_auth = MockAuth.new("facebook", "UserUID")
+      set_credentials @mock_auth, false, nil, "TOKEN"
       set_info @mock_auth
       @request.env["omniauth.auth"] = @mock_auth
 
@@ -84,8 +66,8 @@ describe Users::OmniauthCallbacksController do
     end
 
     it "without expiration date should have it set in 100 years" do
-      @mock_auth = MockAuth.new("facebook", "UserUID",
-          MockCredentials.new(false, nil, "TOKEN"))
+      @mock_auth = MockAuth.new("facebook", "UserUID")
+      set_credentials @mock_auth, false, nil, "TOKEN"
       set_info @mock_auth
       @request.env["omniauth.auth"] = @mock_auth
 
@@ -98,8 +80,8 @@ describe Users::OmniauthCallbacksController do
 
     it "with nul expires and an expiration date should have that reflected" do
       time_now = Time.now().advance(:months => 3)
-      @mock_auth = MockAuth.new("facebook", "UserUID",
-          MockCredentials.new(nil, time_now.to_i, "TOKEN"))
+      @mock_auth = MockAuth.new("facebook", "UserUID")
+      set_credentials @mock_auth, nil, time_now.to_i, "TOKEN"
       set_info @mock_auth
       @request.env["omniauth.auth"] = @mock_auth
 
@@ -112,8 +94,8 @@ describe Users::OmniauthCallbacksController do
 
     it "with expiration date should have that reflected" do
       time_now = Time.now().advance(:months => 3)
-      @mock_auth = MockAuth.new("facebook", "UserUID",
-          MockCredentials.new(true, time_now.to_i, "TOKEN"))
+      @mock_auth = MockAuth.new("facebook", "UserUID")
+      set_credentials @mock_auth, true, time_now.to_i, "TOKEN"
       set_info @mock_auth
       @request.env["omniauth.auth"] = @mock_auth
 
@@ -125,8 +107,8 @@ describe Users::OmniauthCallbacksController do
     end
 
     it "comming from the signup flow should redirect to load_account" do
-      @mock_auth = MockAuth.new("facebook", "UserUID",
-          MockCredentials.new(false, nil, "TOKEN"))
+      @mock_auth = MockAuth.new("facebook", "UserUID")
+      set_credentials @mock_auth, false, nil, "TOKEN"
       set_info @mock_auth
       @request.env["omniauth.auth"] = @mock_auth
 
@@ -135,8 +117,8 @@ describe Users::OmniauthCallbacksController do
     end
 
     it "not comming from the signup flow should redirect to root" do
-      @mock_auth = MockAuth.new("facebook", "UserUID",
-          MockCredentials.new(false, nil, "TOKEN"))
+      @mock_auth = MockAuth.new("facebook", "UserUID")
+      set_credentials @mock_auth, false, nil, "TOKEN"
       set_info @mock_auth
       @request.env["omniauth.auth"] = @mock_auth
 
@@ -151,8 +133,9 @@ describe Users::OmniauthCallbacksController do
     end
 
     it "with an unlimited token should have it expire in 100 years" do
-      @request.env["omniauth.auth"] = MockAuth.new("facebook", @user.uid,
-          MockCredentials.new(false, nil, "TOKEN"))
+      @mock_auth = MockAuth.new("facebook", @user.uid)
+      set_credentials @mock_auth, false, nil, "TOKEN"
+      @request.env["omniauth.auth"] = @mock_auth
 
       post 'facebook'
 
@@ -163,8 +146,9 @@ describe Users::OmniauthCallbacksController do
 
     it "with a limited token should have it expire when specified" do
       time_now = Time.now().advance(:months => 3)
-      @request.env["omniauth.auth"] = MockAuth.new("facebook", @user.uid,
-          MockCredentials.new(true, time_now.to_i, "TOKEN"))
+      @mock_auth = MockAuth.new("facebook", @user.uid)
+      set_credentials @mock_auth, true, time_now.to_i, "TOKEN"
+      @request.env["omniauth.auth"] = @mock_auth
 
       post 'facebook'
 
@@ -175,8 +159,9 @@ describe Users::OmniauthCallbacksController do
 
     it "with nil expires and a limited token should have it expire when specified" do
       time_now = Time.now().advance(:months => 3)
-      @request.env["omniauth.auth"] = MockAuth.new("facebook", @user.uid,
-          MockCredentials.new(nil, time_now.to_i, "TOKEN"))
+      @mock_auth = MockAuth.new("facebook", @user.uid)
+      set_credentials @mock_auth, nil, time_now.to_i, "TOKEN"
+      @request.env["omniauth.auth"] = @mock_auth
 
       post 'facebook'
 
@@ -186,16 +171,18 @@ describe Users::OmniauthCallbacksController do
     end
 
     it "comming from the signup flow should redirect to done" do
-      @request.env["omniauth.auth"] = MockAuth.new("facebook", @user.uid,
-          MockCredentials.new(false, nil, "TOKEN"))
+      @mock_auth = MockAuth.new("facebook", @user.uid)
+      set_credentials @mock_auth, false, nil, "TOKEN"
+      @request.env["omniauth.auth"] = @mock_auth
 
       post 'facebook', :state => "signup"
       response.should redirect_to("/facebook_tab_app/done")
     end
 
     it "not comming from the signup flow should redirect to root" do
-      @request.env["omniauth.auth"] = MockAuth.new("facebook", @user.uid,
-          MockCredentials.new(false, nil, "TOKEN"))
+      @mock_auth = MockAuth.new("facebook", @user.uid)
+      set_credentials @mock_auth, false, nil, "TOKEN"
+      @request.env["omniauth.auth"] = @mock_auth
 
       post 'facebook'
       response.should redirect_to(:root)

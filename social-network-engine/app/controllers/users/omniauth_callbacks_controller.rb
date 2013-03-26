@@ -3,10 +3,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   @@util_save_picture = Util.method(:save_picture)
 
   def get_expiration(auth)
-    if not auth.credentials.expires.nil? and not auth.credentials.expires
+    if not auth['credentials']['expires'].nil? and not auth['credentials']['expires']
       expiration_date = Time.now().advance(:years => 100).to_datetime
     else
-      expiration_date = Time.at(auth.credentials.expires_at).to_datetime
+      expiration_date = Time.at(auth['credentials']['expires_at']).to_datetime
     end
 
     expiration_date
@@ -33,7 +33,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
             uid:auth.uid,
             email:auth['info']['email'],
             password:Devise.friendly_token[0,20],
-            token:auth.credentials.token,
+            token:auth['credentials']['token'],
             token_expiration:get_expiration(auth))
 
         sign_in @user
@@ -46,7 +46,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in @user
 
       @user.update_attributes!(
-          :token => auth.credentials.token,
+          :token => auth['credentials']['token'],
           :token_expiration => get_expiration(auth))
 
       # Redirect to done if the user is in the signup flow
