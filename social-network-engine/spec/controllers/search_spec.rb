@@ -12,7 +12,6 @@ describe SearchController , :type => :controller do
 		@city2 = FactoryGirl.create(:city2)
 		@city3 = FactoryGirl.create(:city3)
     @brian = FactoryGirl.create(:brian)
-    @jason = FactoryGirl.create(:jason)
 		@post1 = FactoryGirl.create(:post1)
   end
 		
@@ -29,8 +28,8 @@ describe SearchController , :type => :controller do
 	end
 	
 	it "should find a user" do 
-	  get :search, :q => 'Leng', :type => SearchResult::Type::USER
-		assigns(:results).should == "???"
+	  get :search, :q => 'Brian', :type => SearchResult::Type::USER
+		assigns(:results).size.should == 1
 	end
 	
 
