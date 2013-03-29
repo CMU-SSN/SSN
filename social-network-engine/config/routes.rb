@@ -1,5 +1,8 @@
 Sne::Application.routes.draw do
   resources :posts, :only => [:index, :new, :create]
+	
+	resources :users, :only=>[:show]
+	
   get 'context' => 'posts#post_context'
   get 'checkin' => 'posts#checkin'
   get 'signup' => 'facebook_tab_app#signup'

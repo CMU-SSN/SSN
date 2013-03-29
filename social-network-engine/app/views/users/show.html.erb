@@ -1,0 +1,35 @@
+<% content_for :header do %>
+	<%= link_to "", posts_path, :class => "header-icon-close", :data => { :role => "button", :transition => "slidedown" } %>	
+  <h3>Profile</h3>	
+<% end %>
+
+<% content_for :content do %>
+
+	<div class="feed-item">
+		<div class="feed-header">
+					<img src="<%= @path %><%= @user.profile_pic %>" class="author-img"/>
+					<h2 class="profile-name"><%= @user.name %></h2>
+					
+				<div class="profile-container" data-role="navbar">
+					<ul>
+						<li><%= link_to "Friends", "#", :data => {:role => "button", :icon => "friends", :iconpos => "top"} %></li>
+						<li><%= link_to "Organizations", "#", :data => {:role => "button", :icon => "organizations", :iconpos => "top"} %></li>
+					</ul>
+			</div>
+			
+		</div>
+	</div>
+
+
+
+
+
+    <div id="posts" data-token="<%= @token %>" data-theme="a">
+      <% if !@posts.nil? && @posts.length > 0 %>
+          <% @posts.each do |post| %>
+						<%= render "partials/feed_item", :post => post, :path => @path %>
+          <% end %>
+      <% end %>
+    </div>
+<% end %>
+

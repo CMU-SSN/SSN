@@ -1,10 +1,10 @@
 <div class="feed-item">
-  <div class="feed-header">
+  <a href="<%= user_path(post.user) %>" class="feed-header">
     <% if post.organization.nil? %>
-        <img src="<%= post.user.profile_pic %>" class="author-img"/>
+        <img src="<%= path %><%= post.user.profile_pic %>" class="author-img"/>
         <h2 class="author-name"><%= post.user.name %></h2>
     <% else %>
-        <img src="<%= post.organization.profile_pic %>" class="author-img"/>
+        <img src="<%= path %><%= post.organization.profile_pic %>" class="author-img"/>
         <h2 class="author-name"><%= post.organization.name %></h2>
     <% end %>
     <% if !post.city.nil? || !post.zipcode.nil? %>
@@ -28,7 +28,7 @@
             </div>
         <% end %>
     <% end %>
-  </div>
+  </a>
 	<% if post.text == Post::ALL_CLEAR_STATUS %>
 		<div class="feed-content-green">
 			<p class="feed-text">Everything is OK</p>
