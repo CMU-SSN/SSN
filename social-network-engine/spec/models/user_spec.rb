@@ -4,7 +4,7 @@ describe User do
 
   describe "model" do
   def valid_user_attributes
-  { :email => 'TestUser@test.com'}
+  { :email => 'TestUser@test.com', :password => 'testPassword'}
   end
   
   before(:each) do
@@ -15,6 +15,13 @@ describe User do
     @user.assign_attributes valid_user_attributes.except(:email)
     @user.should_not be_valid
     @user.email = valid_user_attributes[:email]
+    @user.should be_valid
+  end
+	
+	  it "should have a password" do
+    @user.assign_attributes valid_user_attributes.except(:password)
+    @user.should_not be_valid
+    @user.password = valid_user_attributes[:password]
     @user.should be_valid
   end
 	
