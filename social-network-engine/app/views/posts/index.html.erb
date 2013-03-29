@@ -13,7 +13,7 @@
     <div id="posts" data-token="<%= @token %>" data-theme="a">
       <% if !@posts.nil? && @posts.length > 0 %>
           <% @posts.each do |post| %>
-              <%= render "partials/feed_item", :post => post %>
+              <%= render "partials/feed_item", :post => post, :path => @path %>
           <% end %>
       <% end %>
     </div>
@@ -24,7 +24,7 @@
 		<ul>
 			<li><%= link_to "Check-In", checkin_path, :data => { :role => "button", :icon =>"check-in", :iconpos => "top", :transition => "slideup" } %></li>
 			<li><%= link_to "Post", new_post_path, :data => { :role => "button", :icon =>"post", :iconpos => "top", :transition => "slideup" } %></li>
-			<li><%= link_to "Profile", "#profileDialog", :data => { :role => "button", :icon =>"profile", :iconpos => "top", :transition => "slideup" } %></li>
+			<li><%= link_to "Profile", current_user, :data => { :role => "button", :icon =>"profile", :iconpos => "top", :transition => "slideup" } %></li>
 			<li><%= link_to "Settings", "#settingsDialog", :data => { :role => "button", :icon =>"settings", :iconpos => "top", :transition => "slideup" } %></li>
 		</ul>
 	</div>

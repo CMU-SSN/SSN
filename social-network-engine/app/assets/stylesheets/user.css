@@ -1,0 +1,24 @@
+
+.profile-name {
+	font-size: 1.75em;
+	margin-left: 68px;
+	padding-top: 10px;
+	color: #333;
+	text-shadow: none;
+}
+
+.profile-container {
+	padding:10px;
+}
+
+.ui-icon-friends{
+	background: url("glyphicons/glyphicons_043_group.png");
+	background-size: 20px 20px;
+	border-radius: 0px;
+}
+
+.ui-icon-organizations{
+	background: url("glyphicons/glyphicons_340_globe.png");
+	background-size: 20px 20px;
+	border-radius: 0px;
+}

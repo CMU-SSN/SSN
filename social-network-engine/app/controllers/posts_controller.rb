@@ -6,6 +6,7 @@ class PostsController < ApplicationController
     # Filter all posts for the current user that happened after the specified token
     @posts = Post::Filter(current_user, 100, params['token'])
     @token = @posts.first.id if !@posts.nil? && !@posts.first.nil?
+		@path = ""
 
     respond_to do |format|
       format.html # index.html.erb
