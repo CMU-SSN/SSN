@@ -1,8 +1,8 @@
 <div class="feed-item">
-  <div class="feed-header">
-    <img src="<%= organization.profile_pic %>" class="author-img"/>
+  <a href="<%= organization_path(organization) %>"class="feed-header">
+    <img src="<%= path %><%= organization.profile_pic %>" class="author-img"/>
     <h2 class="author-name"><%= organization.name %></h2>
-  </div>
+  </a>
   <div class="feed-content ">
     <p class="feed-text">
       &nbsp;
