@@ -1,9 +1,9 @@
 <div class="feed-item">
-  <div class="feed-header">
-    <img src="<%= user.profile_pic %>" class="author-img"/>
+  <a href="<%= user_path(user) %>" class="feed-header">
+    <img src="<%= path %><%= user.profile_pic %>" class="author-img"/>
 
     <h2 class="author-name"><%= user.name %></h2>
-  </div>
+  </a>
   <div class="feed-content ">
     <p class="feed-text">
       &nbsp;
