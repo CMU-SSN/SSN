@@ -1,5 +1,5 @@
 <h1>SSN Node Search</h1>
-<%= form_tag node_search_path do %>
+<%= form_tag root_path do %>
   <%= text_field_tag 'q', @query, :placeholder => "Enter search here", :type => "search" %>
   <%= submit_tag 'Search' %>
 <% end %>
