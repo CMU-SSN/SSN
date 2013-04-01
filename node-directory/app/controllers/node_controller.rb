@@ -14,7 +14,7 @@ class NodeController < ApplicationController
   def register
     link =  params[:hostname]
     if not link.nil? and not link.empty?
-      link += "/signup"
+      link = "http://" + link + "/signup"
     end
 
     uid = params[:uid]
@@ -27,6 +27,10 @@ class NodeController < ApplicationController
           :link => link,
           :uid => SecureRandom.urlsafe_base64(20),
           :checkin => DateTime.now)
+      if params[:hostname].nil?
+        render :json => { :success => false, :errors => ["Missing hostname"]}
+        return
+      end
     else
       # Old node, get and update
       node = Node.find_by_uid(uid)
@@ -55,7 +59,7 @@ class NodeController < ApplicationController
         old_node.destroy
       end
       if not params[:hostname].nil?
-        node.link = params[:hostname] + "/signup"
+        node.link = "http://" + params[:hostname] + "/signup"
       end
 
       # Register the checkin

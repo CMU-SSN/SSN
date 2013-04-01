@@ -81,7 +81,7 @@ describe NodeController do
 
           node = Node.find_by_uid(json_response["uid"])
           node.should_not be_nil
-          node.link.should eq("ssn.com/signup")
+          node.link.should eq("http://ssn.com/signup")
         end
       end
     end
@@ -155,7 +155,7 @@ describe NodeController do
 
           node = Node.find_by_uid(@node.uid)
           node.should_not be_nil
-          node.link.should eq("ssn-new.com/signup")
+          node.link.should eq("http://ssn-new.com/signup")
         end
       end
 
