@@ -26,11 +26,11 @@
             <% @results.slice(0, SearchResult::PAGE_SIZE).each do |result| %>
                 <% # Find out what type of result this is and display that template  %>
                 <% if result[:type].to_i == SearchResult::Type::USER.to_i %>
-                    <%= render "partials/user_item", :user => result[:user] %>
+                    <%= render "partials/user_item", :user => result[:user], :path => "" %>
                 <% elsif result[:type].to_i == SearchResult::Type::POST.to_i %>
-                    <%= render "partials/feed_item", :post => result[:post] %>
+                    <%= render "partials/feed_item", :post => result[:post], :path => "" %>
                 <% elsif result[:type].to_i == SearchResult::Type::ORGANIZATION.to_i %>
-                    <%= render "partials/organization_item", :organization => result[:organization] %>
+                    <%= render "partials/organization_item", :organization => result[:organization], :path => "" %>
                 <% end %>
             <% end %>
             <% # Pagination controls %>

@@ -22,3 +22,21 @@
 	background-size: 20px 20px;
 	border-radius: 0px;
 }
+
+.ui-icon-posts{
+	background: url("glyphicons/glyphicons_158_show_lines.png");
+	background-size: 20px 20px;
+	border-radius: 0px;
+}
+
+.posts {
+	display:block;
+}
+
+.friends {
+	display:none;
+}
+
+.organizations {
+	display:none;
+}
