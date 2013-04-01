@@ -1,20 +1,19 @@
 <% content_for :header do %>
 	<%= link_to "", posts_path, :class => "header-icon-close", :data => { :role => "button", :transition => "slidedown" } %>	
-  <h3>Profile</h3>	
+  <h3>Organization Profile</h3>	
 <% end %>
 
 <% content_for :content do %>
 
 	<div class="feed-item">
 		<div class="feed-header">
-					<img src="<%= @path %><%= @user.profile_pic %>" class="author-img"/>
-					<h2 class="profile-name"><%= @user.name %></h2>
+					<img src="<%= @path %><%= @organization.profile_pic %>" class="author-img"/>
+					<h2 class="profile-name"><%= @organization.name %></h2>
 					
 				<div class="profile-container" data-role="navbar">
 					<ul>
 						<li><%= link_to_function "Posts", 'postsOnly()',  :data => {:role => "button", :icon => "posts", :iconpos => "top"}, :class => 'postsButton ui-btn-active'  %></li>
 						<li><%= link_to_function "Friends", 'friendsOnly()', :data => {:role => "button", :icon => "friends", :iconpos => "top"}, :class => 'friendsButton' %></li>
-						<li><%= link_to_function "Organizations", 'organizationsOnly()', :data => {:role => "button", :icon => "organizations", :iconpos => "top"}, :class => 'organizationsButton'  %></li>
 					</ul>
 			</div>
 			
@@ -32,18 +31,9 @@
 		
 	<!-- Friends -->	
 	<div class="friends" data-token="<%= @token %>" data-theme="a">
-		<% if !@user.friends.nil? && @user.friends.length > 0 %>
-				<% @user.friends.each do |friend| %>
-					<%= render "partials/user_item", :user => friend, :path => @path %>
-				<% end %>
-		<% end %>
-	</div>
-	
-	<!-- Organizations -->	
-	<div class="organizations" data-token="<%= @token %>" data-theme="a">
-		<% if !@user.organizations.nil? && @user.organizations.length > 0 %>
-				<% @user.organizations.each do |organization| %>
-					<%= render "partials/organization_item", :organization => organization, :path => @path %>
+		<% if !@organization.users.nil? && @organization.users.length > 0 %>
+				<% @organization.users.each do |user| %>
+					<%= render "partials/user_item", :user => user, :path => @path %>
 				<% end %>
 		<% end %>
 	</div>
