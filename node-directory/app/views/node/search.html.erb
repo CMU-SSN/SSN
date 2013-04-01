@@ -25,7 +25,7 @@
         <%= link_to "Previous", node_search_path(:q => @query, :page => (@page_num.to_i - 1).to_s), :data => {:role => 'button', :icon => 'arrow-l', :iconpos => 'left', :theme => 'b', :inline => true} %>
       <% end %>
       <% if @results.length > NodeHelper::PAGE_SIZE %>
-        <%= link_to "Next", node_search_path(:q => @query, :page => (@page_num.to_i + 1).to_s), :data => {:role => 'button', :icon => 'arrow-r', :iconpos => 'right', :theme => 'b', :inline => true} %>
+        <%= link_to "Next", node_search_path(:q => @query, :page => (@page_num.to_i + 1).to_s), :target => "_blank", :data => {:role => 'button', :icon => 'arrow-r', :iconpos => 'right', :theme => 'b', :inline => true} %>
       <% end %>
     </div>
   <% else %>
