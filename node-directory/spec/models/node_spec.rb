@@ -13,36 +13,50 @@ describe Node do
   end
 
   it "should be successful with all the attributes" do
-    Node.create!(@attr)
+    VCR.use_cassette 'model/node_success_response' do
+      Node.create!(@attr)
+    end
   end
 
   it "should need a name" do
-    new_node = Node.new(@attr.merge(:name => ""))
-    new_node.should_not be_valid
+    VCR.use_cassette 'model/node_no_name_response' do
+      new_node = Node.new(@attr.merge(:name => ""))
+      new_node.should_not be_valid
+    end
   end
 
   it "should need a latitude" do
-    new_node = Node.new(@attr.merge(:latitude => nil))
-    new_node.should_not be_valid
+    VCR.use_cassette 'model/node_no_lat_response' do
+      new_node = Node.new(@attr.merge(:latitude => nil))
+      new_node.should_not be_valid
+    end
   end
 
   it "should need a longitude" do
-    new_node = Node.new(@attr.merge(:longitude => nil))
-    new_node.should_not be_valid
+    VCR.use_cassette 'model/node_no_long_response' do
+      new_node = Node.new(@attr.merge(:longitude => nil))
+      new_node.should_not be_valid
+    end
   end
 
   it "should need a link" do
-    new_node = Node.new(@attr.merge(:link => ""))
-    new_node.should_not be_valid
+    VCR.use_cassette 'model/node_no_link_response' do
+      new_node = Node.new(@attr.merge(:link => ""))
+      new_node.should_not be_valid
+    end
   end
 
   it "should need a uid" do
-    new_node = Node.new(@attr.merge(:uid => ""))
-    new_node.should_not be_valid
+    VCR.use_cassette 'model/node_no_uid_response' do
+      new_node = Node.new(@attr.merge(:uid => ""))
+      new_node.should_not be_valid
+    end
   end
 
   it "should need a checkin" do
-    new_node = Node.new(@attr.merge(:checkin => nil))
-    new_node.should_not be_valid
+    VCR.use_cassette 'model/node_no_checkin_response' do
+      new_node = Node.new(@attr.merge(:checkin => nil))
+      new_node.should_not be_valid
+    end
   end
 end
