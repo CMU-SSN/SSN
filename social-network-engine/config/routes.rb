@@ -4,6 +4,7 @@ Sne::Application.routes.draw do
 	get 'context' => 'posts#post_context'
   get 'checkin' => 'posts#checkin'
   get 'signup' => 'facebook_tab_app#signup'
+  get 'refresh' => 'facebook_tab_app#refresh'
 
   # All facebook_tab_app actions just get forwarded
   match ':controller/:action', :controller => /facebook_tab_app/
