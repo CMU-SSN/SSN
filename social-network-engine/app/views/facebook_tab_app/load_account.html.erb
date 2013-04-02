@@ -6,8 +6,7 @@
 		<p>Welcome to the Cool City Neighborhood SSN node.  Please choose a password for your account.  Note that this password should <b>NOT</b> be the same as your Facebook password.</p><br/>
     <%= form_for @user, :url => { :action => "load_account" } do |f| %>
       <% if @user.errors.any? %>
-        <div id="error_explanation">
-        <h2>Please fix the following issues to create your account:</h2>
+        <div id="error-explanation">
           <ul>
             <% @user.errors.full_messages.each do |msg| %>
               <li><%= msg %></li>
@@ -34,7 +33,7 @@
 <%= content_for :scripts do %>
 	<script type="text/javascript">
 		$(document).on('pageshow', function() {
-			ssn_hide_header_footer();
+			hide_header_footer();
 		});	
 	</script>
 <% end %>
