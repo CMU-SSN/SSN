@@ -16,5 +16,11 @@
 		<%= link_to "Emergency", "#", :id => "submit_NeedHelp", :data => {:role => "button", :icon => "emergency", :iconpos => "top", :theme => "c" } %>
 		<%= link_to "Need Assistance", "#", :id => "submit_NeedAssistance", :data => {:role => "button", :icon => "assistance-needed", :iconpos => "top", :theme => "d" } %>
 	</div>
-    <%= javascript_include_tag "post/common", "post/checkin" %>
+  <%= javascript_include_tag "post/common", "post/checkin" %>
+<% end %>
+
+<%= content_for :scripts do %>
+    <script type="text/javascript">
+        hide_header_footer();
+    </script>
 <% end %>
