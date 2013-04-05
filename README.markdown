@@ -37,11 +37,11 @@ The Vagrant box can be created in any directory.  The key files the make Vagrant
 5. Modify the Vagrantfile to include the following lines
 
 	```
-	config.vm.box = "ssn-development"											# This should match the name given in step 2
-	config.vm.forward_port 3000, 3000											# Forward the default rails port to localhost:3000
-	config.vm.provision :shell, :path => "bootstrap.sh"		# This specifies the file that will be run at bootup
-	config.vm.customize["modifyvm", :id, "--memory", 1024]  # Optional - but increases the performance of the VM
-	config.vm.customize["modifyvm", :id, "--cpus", 2]				# Optional - but increases the performance of the VM
+	config.vm.box = "ssn-development" 	# This should match the name given in step 2
+	config.vm.forward_port 3000, 3000 	# Forward the default rails port to localhost:3000
+	config.vm.provision :shell, :path => "bootstrap.sh" 	# This specifies the file that will be run at bootup
+	config.vm.customize["modifyvm", :id, "--memory", 1024] 	# Optional - but increases the performance of the VM
+	config.vm.customize["modifyvm", :id, "--cpus", 2]		# Optional - but increases the performance of the VM
 	```
 
 6. Create bootstrap.sh and add the following lines.  The commands will be run when the Vagrant box is setup.
@@ -73,9 +73,6 @@ The Vagrant box can be created in any directory.  The key files the make Vagrant
 
 	# Switch to the correct ruby version
 	rvm use 1.9.3-p385
-
-	# Switch to the vagrant directory
-	cd /vagrant
 	```
 
 7. Start the vagrant VM and initialize an SSH session
