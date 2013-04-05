@@ -19,7 +19,7 @@ The Vagrant box can be created in any directory.  The key files the make Vagrant
 2. Download the official Ubuntu 12.04 32-bit Base Box (see http://vagrantbox.es for the most up-to-date link) and install it
 
 	```
-	vagrant box add ssn-development [path-to-your-download]
+	vagrant box add ssn_development http://cloud-images.ubuntu.com/precise/current/precise-server-cloudimg-vagrant-amd64-disk1.box
 	```
 
 3. Change to the social-network-engine folder. 
@@ -37,11 +37,11 @@ The Vagrant box can be created in any directory.  The key files the make Vagrant
 5. Modify the Vagrantfile to include the following lines
 
 	```
-	config.vm.box = "ssn-development" 	# This should match the name given in step 2
-	config.vm.forward_port 3000, 3000 	# Forward the default rails port to localhost:3000
-	config.vm.provision :shell, :path => "bootstrap.sh" 	# This specifies the file that will be run at bootup
-	config.vm.customize["modifyvm", :id, "--memory", 1024] 	# Optional - but increases the performance of the VM
-	config.vm.customize["modifyvm", :id, "--cpus", 2]		# Optional - but increases the performance of the VM
+	config.vm.box = "ssn_development" 
+	config.vm.forward_port 3000, 3000 
+	config.vm.provision :shell, :path => "bootstrap.sh" 
+	config.vm.customize["modifyvm", :id, "--memory", 1024] 
+	config.vm.customize["modifyvm", :id, "--cpus", 2]		
 	```
 
 6. Create bootstrap.sh and add the following lines.  The commands will be run when the Vagrant box is setup.
