@@ -49,7 +49,7 @@ describe User do
 	end
   end
 	
-  describe "ImportFriends" do
+  describe "UpdateFriends" do
     before(:each) do
       @brian = FactoryGirl.create(:user5)
       @james = FactoryGirl.create(:james)
@@ -58,7 +58,7 @@ describe User do
     end
 
     it "should add Facebook friends with an SSN account to the user's friends" do
-      @victor.ImportFriends([@brian.uid, @james.uid])
+      @victor.UpdateFriends([@brian.uid, @james.uid])
       @victor.friends.length.should equal(2)
       @victor.friends.index{|f| f.id == @brian.id}.should_not be_nil
       @victor.friends.index{|f| f.id == @james.id}.should_not be_nil
@@ -66,7 +66,7 @@ describe User do
     end
 
     it "should add Facebook friends with an SSN account and ignore those without an account" do
-      @victor.ImportFriends([@brian.uid, @james.uid, "101", "102"])
+      @victor.UpdateFriends([@brian.uid, @james.uid, "101", "102"])
       @victor.friends.length.should equal(2)
       @victor.friends.index{|f| f.id == @brian.id}.should_not be_nil
       @victor.friends.index{|f| f.id == @james.id}.should_not be_nil
@@ -75,11 +75,63 @@ describe User do
 
     it "should not re-add Facebook friends that are already my friends" do
       @victor.friends << @brian
-      @victor.ImportFriends([@brian.uid, @james.uid])
+      @victor.UpdateFriends([@brian.uid, @james.uid])
       @victor.friends.length.should equal(2)
       @victor.friends.index{|f| f.id == @brian.id}.should_not be_nil
       @victor.friends.index{|f| f.id == @james.id}.should_not be_nil
       @victor.friends.index{|f| f.id == @jason.id}.should be_nil
+    end
+
+    it "should remove Facebook friends that I removed in Facebook" do
+      @victor.friends << [@brian, @james]
+      @victor.UpdateFriends([@brian.uid])
+      @victor.friends.length.should equal(1)
+      @victor.friends.index{|f| f.id == @brian.id}.should_not be_nil
+      @victor.friends.index{|f| f.id == @james.id}.should be_nil
+      @victor.friends.index{|f| f.id == @jason.id}.should be_nil
+    end
+  end
+	
+  describe "UpdateOrganizations" do
+    before(:each) do
+      @org1 = FactoryGirl.create(:org1)
+      @org2 = FactoryGirl.create(:org2)
+      @org3 = FactoryGirl.create(:org3)
+      @victor = FactoryGirl.create(:victor)
+    end
+
+    it "should add organizations with an SSN account to the user's orgnaizations" do
+      @victor.UpdateOrganizations([@org1.facebook_id, @org2.facebook_id])
+      @victor.organizations.length.should equal(2)
+      @victor.organizations.index{|f| f.id == @org1.id}.should_not be_nil
+      @victor.organizations.index{|f| f.id == @org2.id}.should_not be_nil
+      @victor.organizations.index{|f| f.id == @org3.id}.should be_nil
+    end
+
+    it "should add Facebook organizations with an SSN account and ignore those without an account" do
+      @victor.UpdateOrganizations([@org1.facebook_id, @org2.facebook_id, "101", "102"])
+      @victor.organizations.length.should equal(2)
+      @victor.organizations.index{|f| f.id == @org1.id}.should_not be_nil
+      @victor.organizations.index{|f| f.id == @org2.id}.should_not be_nil
+      @victor.organizations.index{|f| f.id == @org3.id}.should be_nil
+    end
+
+    it "should not re-add Facebook organizations that are already my organizations" do
+      @victor.organizations << @org1
+      @victor.UpdateOrganizations([@org1.facebook_id, @org2.facebook_id])
+      @victor.organizations.length.should equal(2)
+      @victor.organizations.index{|f| f.id == @org1.id}.should_not be_nil
+      @victor.organizations.index{|f| f.id == @org2.id}.should_not be_nil
+      @victor.organizations.index{|f| f.id == @org3.id}.should be_nil
+    end
+
+    it "should remove Facebook organizations that I removed in Facebook" do
+      @victor.organizations << [@org1, @org2]
+      @victor.UpdateOrganizations([@org1.facebook_id])
+      @victor.organizations.length.should equal(1)
+      @victor.organizations.index{|f| f.id == @org1.id}.should_not be_nil
+      @victor.organizations.index{|f| f.id == @org2.id}.should be_nil
+      @victor.organizations.index{|f| f.id == @org3.id}.should be_nil
     end
   end
 end
