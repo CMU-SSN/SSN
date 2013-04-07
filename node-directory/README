@@ -1,0 +1,16 @@
+For deployment.
+
+Prerequesites:
+- Have a Heroku account and a Heroku app
+- Install the Heroku toolbelt
+- Login with Heroku:
+  $ heroku login
+- Copy your public key to Heroku:
+  $ heroku keys:add ~/.ssh/id_rsa.pub
+
+To deploy the application run:
+$ ./deploy.sh <path to node-directory> <Heroku application name>
+
+The deployment script will output what it is doing as it works. Check the output for any issues.
+
+Good luck!
