@@ -53,3 +53,6 @@ gem 'capistrano'
 
 # Use thin instead of WEBrick
 gem 'thin'
+
+# For periofic tasks
+gem 'whenever'
