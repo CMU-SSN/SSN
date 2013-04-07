@@ -5,30 +5,6 @@ class FacebookTabAppController < ApplicationController
   def signup
   end
 
-  def refresh
-    # TODO(vmarmol): Improve this and make it testable
-    User.all().each do |user|
-      @graph = @@koala_api.new(user.token)
-
-      user.friends.destroy_all
-      user.organizations.destroy_all
-
-      # Import friends
-      user.ImportFriends(@graph.get_connections("me", "friends").map{
-            |i| i["id"]})
-
-      # Import orgs
-      @graph.get_connections("me", "accounts").each do |org|
-        org_object = Organization.find_by_facebook_id(org["id"])
-        if not org_object.nil?
-          org_object.users << user
-        end
-      end
-    end
-
-    render :json => "ok"
-  end
-
   def load_account
     @user = current_user
 
