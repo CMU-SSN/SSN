@@ -10,7 +10,16 @@ namespace :daily do
     User.all().each do |user|
       # Don't fail if there is an error for a user's update
       begin
-        user.UpdateData()
+        # Get friends and organizations from Facebook
+        # NOTE: friend object returned from Facebook has the form:
+        #   { "name" : "<friend name>", "id" : "<friend Facebook id>"}
+        @graph = Koala::Facebook::API.new(user.token)
+        friend_ids = @graph.get_connections("me", "friends").map{
+            |i| i["id"]}
+        org_ids = @graph.get_connections("me", "accounts").map{
+            |i| i["id"]}
+        user.UpdateData(friend_ids, org_ids, @graph.get_picture("me"))
+
         num_success += 1
       rescue
         num_failed += 1

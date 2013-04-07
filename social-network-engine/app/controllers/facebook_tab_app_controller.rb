@@ -18,15 +18,15 @@ class FacebookTabAppController < ApplicationController
       no_errors = @user.update_attributes(params[:user])
 
       if no_errors
-        # Get friends from Facebook
+        # Get friends and organizations from Facebook
         # NOTE: friend object returned from Facebook has the form:
         #   { "name" : "<friend name>", "id" : "<friend Facebook id>"}
         @graph = @@koala_api.new(@user.token)
-        @user.ImportFriends(@graph.get_connections("me", "friends").map{
-            |i| i["id"]})
-
-        # Get organizations from Facebook
+        friend_ids = @graph.get_connections("me", "friends").map{
+            |i| i["id"]}
         orgs = @graph.get_connections("me", "accounts")
+        org_ids = orgs.map{
+            |i| i["id"]}
 
         # Only look at organizations that we administer
         orgs.select!{|o| not o["perms"].find_index("ADMINISTER").nil?}
@@ -37,12 +37,11 @@ class FacebookTabAppController < ApplicationController
           if my_orgs.index{|o| o.facebook_id == org["id"]}.nil?
             org_object = Organization.find_by_facebook_id(org["id"])
 
-            # Get org picture
-            profile_pic_name = Util::save_picture(@graph.get_picture(orgs.first["id"]))
-
             # Create the organization if it does not already exist.
             # Mark "Government organization"s as cities
             if org_object.nil?
+              # Get org picture
+              profile_pic_name = Util::save_picture(@graph.get_picture(orgs.first["id"]))
               org_object = Organization.create!(
                   :name => org["name"],
                   :facebook_id => org["id"],
@@ -50,14 +49,16 @@ class FacebookTabAppController < ApplicationController
                   :profile_pic => profile_pic_name)
             end
 
-            # Make this user an admin and interested in the organization
+            # Make this user an admin in the organization
             org_object.managers << @user
-            org_object.users << @user
           end
         end
 
-        # If there are organizations, load those
+        # Update friends, organizations, and profile picture
         @user.reload
+        @user.UpdateData(friend_ids, org_ids, @graph.get_picture("me"))
+
+        # If there are organizations, load those
         @organizations = @user.organizations_managed
         if not @organizations.empty?
           render 'load_organizations'

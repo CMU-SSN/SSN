@@ -20,15 +20,41 @@ class User < ActiveRecord::Base
   # The organizations the user is interested in
   has_and_belongs_to_many :organizations
 
-  def ImportFriends(facebook_friend_ids)
-    self_friends = self.friends
-    # Look for existing users who are Facebook friends
-    User.find(:all, :conditions => ["uid IN (?)", facebook_friend_ids]).each do |potential_friend|
+  # Allows us to mock util for tests
+  @@util_save_picture = Util.method(:save_picture)
 
-      # Add friends that aren't my friends already
-      if self_friends.index{|f| f.id == potential_friend.id}.nil?
-        self.friends << potential_friend
-      end
+  def UpdateFriends(facebook_friend_ids)
+    # Look for existing users who are Facebook friends
+    existing_friends = User.find(:all, :conditions => ["uid IN (?)", facebook_friend_ids])
+    if not existing_friends.nil?
+      # Mirror the friends in Facebook
+      self.friends.destroy_all
+      self.friends << existing_friends
     end
+  end
+
+  def UpdateOrganizations(org_ids)
+    # Look for existing organizations that exist in SSN
+    existing_orgs = Organization.find(:all, :conditions => ["facebook_id IN (?)", org_ids])
+    if not existing_orgs.nil?
+      # Mirror the organizations in Facebook
+      self.organizations.destroy_all
+      self.organizations << existing_orgs
+    end
+  end
+
+  def UpdateProfilePicture(profile_pic)
+    profile_pic_name = @@util_save_picture.call(profile_pic)
+    self.profile_pic = profile_pic_name
+    self.save!
+  end
+
+  # Updates a user's friends, organizations, and profile picture. 
+  # TODO: Make this smarter about downloading the picture, try not to change it
+  # if it has not changed.
+  def UpdateData(friend_ids, org_ids, profile_pic)
+    self.UpdateFriends(friend_ids)
+    self.UpdateOrganizations(org_ids)
+    self.UpdateProfilePicture(profile_pic)
   end
 end
