@@ -1,60 +1,61 @@
 require 'spec_helper'
 
 describe User do
-
   describe "model" do
-  def valid_user_attributes
-  { :email => 'TestUser@test.com', :password => 'testPassword'}
-  end
+    def valid_user_attributes
+      { :email => 'TestUser@test.com', :password => 'testPassword'}
+    end
   
-  before(:each) do
-    @user = User.new
-  end
+    before(:each) do
+      @user = User.new
+    end
   
-  it "should have an email" do
-    @user.assign_attributes valid_user_attributes.except(:email)
-    @user.should_not be_valid
-    @user.email = valid_user_attributes[:email]
-    @user.should be_valid
-  end
+    it "should have an email" do
+      @user.assign_attributes valid_user_attributes.except(:email)
+      @user.should_not be_valid
+      @user.email = valid_user_attributes[:email]
+      @user.should be_valid
+    end
 	
-	  it "should have a password" do
-    @user.assign_attributes valid_user_attributes.except(:password)
-    @user.should_not be_valid
-    @user.password = valid_user_attributes[:password]
-    @user.should be_valid
-  end
+    it "should have a password" do
+      @user.assign_attributes valid_user_attributes.except(:password)
+      @user.should_not be_valid
+      @user.password = valid_user_attributes[:password]
+      @user.should be_valid
+    end
 	
-	it "should allow mass assignment of assignable attributes" do	
-	  assignable_attributes = [:name, :profile_pic, :email, :password, :password_confirmation, :remember_me, :token_expiration, :provider, :uid, :token]
-	  assignable_attributes.each do |assignable_attribute|
-			should allow_mass_assignment_of assignable_attribute
-		end
-	end 
+    it "should allow mass assignment of assignable attributes" do	
+      assignable_attributes = [:name, :profile_pic, :email, :password, :password_confirmation, :remember_me, :token_expiration, :provider, :uid, :token]
+      assignable_attributes.each do |assignable_attribute|
+        should allow_mass_assignment_of assignable_attribute
+      end
+    end 
 	
-	it "should have many posts" do 
-		should have_many(:posts)
-	end
+    it "should have many posts" do 
+      should have_many(:posts)
+    end
 	
-	it "should have and belong to many friends" do 
-		should have_and_belong_to_many(:friends)
-	end
+    it "should have and belong to many friends" do 
+      should have_and_belong_to_many(:friends)
+    end
 	
-	it "should have and belong to many managed organizations" do 
-		should have_and_belong_to_many(:organizations_managed)
-	end
+    it "should have and belong to many managed organizations" do 
+      should have_and_belong_to_many(:organizations_managed)
+    end
 	
-	it "should have and belong to many organizations" do 
-		should have_and_belong_to_many(:organizations)
-	end
+    it "should have and belong to many organizations" do 
+      should have_and_belong_to_many(:organizations)
+    end
   end
 	
   describe "UpdateFriends" do
     before(:each) do
-      @brian = FactoryGirl.create(:user5)
-      @james = FactoryGirl.create(:james)
-      @jason = FactoryGirl.create(:jason)
-      @victor = FactoryGirl.create(:victor)
+      VCR.use_cassette 'model/user_update_friends' do
+        @brian = FactoryGirl.create(:user5)
+        @james = FactoryGirl.create(:james)
+        @jason = FactoryGirl.create(:jason)
+        @victor = FactoryGirl.create(:victor)
+      end
     end
 
     it "should add Facebook friends with an SSN account to the user's friends" do
@@ -94,10 +95,12 @@ describe User do
 	
   describe "UpdateOrganizations" do
     before(:each) do
-      @org1 = FactoryGirl.create(:org1)
-      @org2 = FactoryGirl.create(:org2)
-      @org3 = FactoryGirl.create(:org3)
-      @victor = FactoryGirl.create(:victor)
+      VCR.use_cassette 'model/user_update_organizations' do
+        @org1 = FactoryGirl.create(:org1)
+        @org2 = FactoryGirl.create(:org2)
+        @org3 = FactoryGirl.create(:org3)
+        @victor = FactoryGirl.create(:victor)
+      end
     end
 
     it "should add organizations with an SSN account to the user's orgnaizations" do
