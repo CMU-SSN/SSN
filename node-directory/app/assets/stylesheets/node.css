@@ -2,3 +2,48 @@
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
 */
+
+.row, .col { overflow: hidden; position: absolute; }
+.row { left: 0; right: 0; }
+.col { top: 0; bottom: 0; }
+.scroll-y { overflow-y: auto; }
+
+h1 {
+  font-family:arial;
+  font-size:18pt;
+  margin:0px;
+}
+
+.searchContent {
+  top:0;
+  width:100%;
+  height:150px;
+  background-color:#ddd;
+  border-bottom-color:black;
+  border-bottom-width:1px;
+  border-bottom-style:solid;
+}
+
+.searchInnerContent {
+  padding:20px;
+}
+
+.resultsMapContent {
+  top:151px;
+  width:100%;
+  bottom:0;
+}
+
+.resultsContent {
+  width:250px;
+}
+
+.mapContent {
+  left:250px;
+  width:100%;
+}
+
+#map-canvas {
+  width:100%;
+  height:100%;
+}
