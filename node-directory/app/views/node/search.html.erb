@@ -49,6 +49,7 @@
 
 <script type="text/javascript">
   var map;
+  var results = <%= @results.to_json.html_safe %>;
 
   // Do a search on the user's location
   function positionSuccess(position) {
@@ -58,35 +59,69 @@
 
   // Searches for a specified lat long
   function doSearch(latitude, longitude) {
-    console.log("Implement: ("+latitude+","+longitude+")");
+    window.location = "?q=(" + latitude + "," + longitude + ")";
+  }
+
+  // Loads the map.
+  function loadMap(lat, lng) {
+    var latLng = new google.maps.LatLng(lat, lng);
+    var mapOptions = {
+      center: latLng,
+      zoom: 14,
+      disableDefaultUI: true,
+      panControl: true,
+      zoomControl: true,
+      mapTypeControl: true,
+      scaleControl: true,
+      streetViewControl: true,
+      overviewMapControl: true,
+      mapTypeId: google.maps.MapTypeId.HYBRID
+    };
+    map = new google.maps.Map(document.getElementById("map-canvas"),
+        mapOptions);
+
+    // Search for locations near where the user clicked.
+    google.maps.event.addListener(map, 'click', function(e) {
+      doSearch(e.latLng.lat(), e.latLng.lng());
+    });
+
+    // Add a marker for each result if they exist
+    if (results != null) {
+      for (var i = 0; i < results.length) {
+        // TODO
+      }
+    }
+  }
+
+  // Loads the map on location error. Center on Palo Alto.
+  function positionError() {
+    loadMap(37.44836, -122.137732);
   }
 
   // Initialize the map, centered on Palo Alto, CA.
   function initialize() {
-        var mapOptions = {
-          center: new google.maps.LatLng(37.44836, -122.137732),
-          zoom: 14,
-          disableDefaultUI: true,
-          panControl: true,
-          zoomControl: true,
-          mapTypeControl: true,
-          scaleControl: true,
-          streetViewControl: true,
-          overviewMapControl: true,
-          mapTypeId: google.maps.MapTypeId.HYBRID
-        };
-        map = new google.maps.Map(document.getElementById("map-canvas"),
-            mapOptions);
+    // Try to center map on user's location if location is supported and there
+    // was not a query (resuls is nil)
+    if (navigator.geolocation && results == null) {
+      navigator.geolocation.getCurrentPosition(positionSuccess,
+                                               positionError);
+    } else {
+      // There is a query, try to get it from there.
 
-        // Search for locations near where the user clicked.
-        google.maps.event.addListener(map, 'dblclick', function(e) {
-          doSearch(e.latLng.lat(), e.latLng.lng());
-        });
-
-        // Try to center map on user's location.
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(positionSuccess);
-        }
+      // Add all results to the bounding box so we can center on those
+      var bounds =  new google.maps.LatLngBounds();
+      for (var i = 0; i < results.length; i++) {
+        bounds.extend(new google.maps.LatLng(results[i].latitude,
+                                             results[i].longitude));
       }
-      google.maps.event.addDomListener(window, 'load', initialize);
+
+      // Center on palo alto if there are no results
+      if (results.length == 0) {
+        loadMap(37.44836, -122.137732);
+      } else {
+        loadMap(bounds.getCenter().lat(), bounds.getCenter().lng());
+      }
+    }  
+  }
+  google.maps.event.addDomListener(window, 'load', initialize);
 </script>
