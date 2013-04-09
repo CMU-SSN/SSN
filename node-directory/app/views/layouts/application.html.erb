@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html class="fullPage">
 <head>
   <title>NodeDirectory</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5sgJUhYdTSm2yiptWYa382CSyeu2XhqQ&sensor=true">
+  </script>
 </head>
-<body>
+<body class="fullPage">
 
 <%= yield %>
 
