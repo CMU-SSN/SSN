@@ -50,6 +50,7 @@
 <script type="text/javascript">
   var map;
   var results = <%= @results.to_json.html_safe %>;
+  var infowindow = new google.maps.InfoWindow();
 
   // Do a search on the user's location
   function positionSuccess(position) {
@@ -87,8 +88,22 @@
 
     // Add a marker for each result if they exist
     if (results != null) {
-      for (var i = 0; i < results.length) {
-        // TODO
+      for (var i = 0; i < results.length; i++) {
+        // Add the marker
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(results[i].latitude,
+                                             results[i].longitude),
+            map: map,
+            title: results[i].name
+        });
+
+        // Add infowindow for when the marker is clicked
+        google.maps.event.addListener(marker, 'click', (function(marker, res) {
+        return function() {
+          infowindow.setContent(res.name);
+          infowindow.open(map, marker);
+        }
+      })(marker, results[i]));
       }
     }
   }
