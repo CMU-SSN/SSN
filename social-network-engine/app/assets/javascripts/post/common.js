@@ -50,7 +50,7 @@ function geotagPost(onSuccess) {
                     $("#post_longitude").val(position.coords.longitude);
 
                     if (onSuccess)
-                        onSuccess();
+                        onSuccess(position.coords.latitude, position.coords.longitude);
                 }
                 navigator.geolocation.clearWatch(watchID);
             }, function (error) {
