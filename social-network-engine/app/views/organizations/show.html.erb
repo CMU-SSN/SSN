@@ -12,28 +12,18 @@
 					
 				<div class="profile-container" data-role="navbar">
 					<ul>
-						<li><%= link_to_function "Posts", 'postsOnly()',  :data => {:role => "button", :icon => "posts", :iconpos => "top"}, :class => 'postsButton ui-btn-active'  %></li>
-						<li><%= link_to_function "Friends", 'friendsOnly()', :data => {:role => "button", :icon => "friends", :iconpos => "top"}, :class => 'friendsButton' %></li>
+						<li><%= link_to "Posts", organizations_posts_path, :remote => true, :data => {:role => "button", :icon => "posts", :iconpos => "top"}, :class => 'postsButton ui-btn-active', :id => @organization.id %></li>
+						<li><%= link_to "Followers", organizations_followers_path, :remote => true, :data => {:role => "button", :icon => "friends", :iconpos => "top"}, :class => 'friendsButton', :id => @organization.id %></li>
 					</ul>
 			</div>
 			
 		</div>
 	</div>
 
-  <!-- Posts --> 	
-	<div id="posts" class="posts" data-token="<%= @token %>" data-theme="a">
-		<% if !@posts.nil? && @posts.length > 0 %>
+	<div class="organizationData" data-token="<%= @token %>" data-theme="a">
+			<% if !@posts.nil? && @posts.length > 0 %>
 				<% @posts.each do |post| %>
 					<%= render "partials/feed_item", :post => post, :path => @path %>
-				<% end %>
-		<% end %>
-	</div>
-		
-	<!-- Friends -->	
-	<div class="friends" data-token="<%= @token %>" data-theme="a">
-		<% if !@organization.users.nil? && @organization.users.length > 0 %>
-				<% @organization.users.each do |user| %>
-					<%= render "partials/user_item", :user => user, :path => @path %>
 				<% end %>
 		<% end %>
 	</div>

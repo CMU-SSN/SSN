@@ -1,0 +1,5 @@
+<% if !@user.friends.nil? && @user.friends.length > 0 %>
+$(".userData").html("<% @user.friends.each do |friend| %><%= escape_javascript(render "partials/user_item", :user => friend, :path => @path, :feedItemId => @feedItemId) %><% end %>");
+<% else %>
+	$(".userData").html("");
+<% end %>
