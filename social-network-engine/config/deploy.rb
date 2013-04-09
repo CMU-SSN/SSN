@@ -5,7 +5,7 @@ server "ssn.cmusv.mobi", :web, :app, :db, primary: true
 set :deploy_subdir, "social-network-engine"
 
 set :application, "SSN"
-set :user, "jason"
+set :user, "deployer"
 set :deploy_to, "/home/#{user}/apps/#{application}"
 set :deploy_via, :remote_cache
 set :use_sudo, false
