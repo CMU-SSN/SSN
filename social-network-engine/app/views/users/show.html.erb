@@ -15,7 +15,7 @@
 						<li><%= link_to "Posts", users_posts_path, :remote => true, :data => {:role => "button", :icon => "posts", :iconpos => "top"}, :class => 'postsButton ui-btn-active', :id => @user.id %></li>
 						<li><%= link_to "Following", users_followings_path, :remote => true, :data => {:role => "button", :icon => "friends", :iconpos => "top"}, :class => 'followingsButton', :id => @user.id %></li>
 						<li><%= link_to "Followers", users_followers_path, :remote => true, :data => {:role => "button", :icon => "friends", :iconpos => "top"}, :class => 'friendsButton', :id => @user.id %></li>
-						<li><%= link_to "Organizations", users_organizations_path, :remote => true, :data => {:role => "button", :icon => "organizations", :iconpos => "top"}, :class => 'organizationsButton', :id => @user.id %></li>
+						<li><%= link_to "Orgs", users_organizations_path, :remote => true, :data => {:role => "button", :icon => "organizations", :iconpos => "top"}, :class => 'organizationsButton', :id => @user.id %></li>
 					</ul>
 			</div>
 			
