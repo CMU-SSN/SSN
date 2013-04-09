@@ -29,14 +29,67 @@
 	border-radius: 0px;
 }
 
-.posts {
-	display:block;
+.user-left {
+	margin-right:100px; 
+	display:inline-block;
 }
 
-.friends {
+.user-right {
+	float:right;
+	width:105px;
+	margin-left:-100%;
+	padding-top:60px;	
+}
+
+.disabled {
 	display:none;
 }
 
-.organizations {
-	display:none;
+.removeUserButton {
+	background: linear-gradient(#FFFFFF, #F1F1F1) repeat scroll 0 0 #EEEEEE;
+	background: url("glyphicons/glyphicons_007_user_remove.png") no-repeat 32px 16px;
+	border-radius:3px;
+	border: 1px solid #CCCCCC;
+	text-decoration:none;
+	padding: 42px 20px 10px;
+	color: #2F3E46;
+  font-weight: bold;
+  text-shadow: 0 1px 0 #FFFFFF;
+	font-size:12.5px;
+}
+.addUserButton {
+	background: linear-gradient(#FFFFFF, #F1F1F1) repeat scroll 0 0 #EEEEEE;
+	background: url("glyphicons/glyphicons_006_user_add.png") no-repeat 30px 16px;
+	border-radius:3px;
+	border: 1px solid #CCCCCC;
+	text-decoration:none;
+	padding: 42px 25px 10px;
+	color: #2F3E46;
+  font-weight: bold;
+  text-shadow: 0 1px 0 #FFFFFF;
+	font-size:12.5px;
+}
+.removeOrganizationButton {
+	background: linear-gradient(#FFFFFF, #F1F1F1) repeat scroll 0 0 #EEEEEE;
+	background: url("glyphicons/glyphicons_340_globe_remove.png") no-repeat 32px 12px;
+	border-radius:3px;
+	border: 1px solid #CCCCCC;
+	text-decoration:none;
+	padding: 40px 20px 10px;
+	color: #2F3E46;
+  font-weight: bold;
+  text-shadow: 0 1px 0 #FFFFFF;
+	font-size:12.5px;
+}
+.addOrganizationButton {
+	background: linear-gradient(#FFFFFF, #F1F1F1) repeat scroll 0 0 #EEEEEE;
+	background: url("glyphicons/glyphicons_340_globe_add.png") no-repeat 30px 12px;
+	border-radius:3px;
+	border: 1px solid #CCCCCC;
+	text-decoration:none;
+	padding: 40px 24px 10px;
+	color: #2F3E46;
+  font-weight: bold;
+  text-shadow: 0 1px 0 #FFFFFF;
+	font-size:12.5px;
 }

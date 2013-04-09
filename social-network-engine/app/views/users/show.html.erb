@@ -12,38 +12,19 @@
 					
 				<div class="profile-container" data-role="navbar">
 					<ul>
-						<li><%= link_to_function "Posts", 'postsOnly()',  :data => {:role => "button", :icon => "posts", :iconpos => "top"}, :class => 'postsButton ui-btn-active'  %></li>
-						<li><%= link_to_function "Friends", 'friendsOnly()', :data => {:role => "button", :icon => "friends", :iconpos => "top"}, :class => 'friendsButton' %></li>
-						<li><%= link_to_function "Organizations", 'organizationsOnly()', :data => {:role => "button", :icon => "organizations", :iconpos => "top"}, :class => 'organizationsButton'  %></li>
+						<li><%= link_to "Posts", users_posts_path, :remote => true, :data => {:role => "button", :icon => "posts", :iconpos => "top"}, :class => 'postsButton ui-btn-active', :id => @user.id %></li>
+						<li><%= link_to "Following", users_followings_path, :remote => true, :data => {:role => "button", :icon => "friends", :iconpos => "top"}, :class => 'followingsButton', :id => @user.id %></li>
+						<li><%= link_to "Followers", users_followers_path, :remote => true, :data => {:role => "button", :icon => "friends", :iconpos => "top"}, :class => 'friendsButton', :id => @user.id %></li>
+						<li><%= link_to "Organizations", users_organizations_path, :remote => true, :data => {:role => "button", :icon => "organizations", :iconpos => "top"}, :class => 'organizationsButton', :id => @user.id %></li>
 					</ul>
 			</div>
 			
 		</div>
-	</div>
-
-  <!-- Posts --> 	
-	<div id="posts" class="posts" data-token="<%= @token %>" data-theme="a">
-		<% if !@posts.nil? && @posts.length > 0 %>
+	</div>	
+	<div class="userData" data-token="<%= @token %>" data-theme="a">
+			<% if !@posts.nil? && @posts.length > 0 %>
 				<% @posts.each do |post| %>
 					<%= render "partials/feed_item", :post => post, :path => @path %>
-				<% end %>
-		<% end %>
-	</div>
-		
-	<!-- Friends -->	
-	<div class="friends" data-token="<%= @token %>" data-theme="a">
-		<% if !@user.friends.nil? && @user.friends.length > 0 %>
-				<% @user.friends.each do |friend| %>
-					<%= render "partials/user_item", :user => friend, :path => @path %>
-				<% end %>
-		<% end %>
-	</div>
-	
-	<!-- Organizations -->	
-	<div class="organizations" data-token="<%= @token %>" data-theme="a">
-		<% if !@user.organizations.nil? && @user.organizations.length > 0 %>
-				<% @user.organizations.each do |organization| %>
-					<%= render "partials/organization_item", :organization => organization, :path => @path %>
 				<% end %>
 		<% end %>
 	</div>
@@ -52,7 +33,6 @@
 <%= content_for :scripts do %>
 	<script type="text/javascript">
 		$(document).on('pageshow', function() {
-			resetUserOrg();
 			hide_header_footer();
 		});	
 	</script>
