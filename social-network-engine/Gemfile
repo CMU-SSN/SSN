@@ -39,6 +39,8 @@ end
 
 gem 'geocoder'
 
+gem 'unicorn'
+
 # Deploy with Capistrano
 gem 'capistrano'
 
