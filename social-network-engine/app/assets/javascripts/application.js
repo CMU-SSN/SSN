@@ -11,6 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery.mobile-setup
 //= require jquery_ujs
 //= require jquery.mobile-1.3.0
 //= require jsrender
