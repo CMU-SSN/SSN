@@ -1,0 +1,5 @@
+<% if !@organization.users.nil? && @organization.users.length > 0 %>
+$(".organizationData").html("<% @organization.users.each do |user| %><%= escape_javascript(render "partials/user_item", :user => user, :path => @path, :feedItemId => @feedItemId) %><% end %>");
+<% else %>
+	$(".userData").html("");
+<% end %>
