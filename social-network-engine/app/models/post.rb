@@ -17,6 +17,9 @@ class Post < ActiveRecord::Base
     end
   end
   after_validation :reverse_geocode
+  
+  attr_accessible :image
+  has_attached_file :image
 
   ALL_CLEAR_STATUS = "STATUS_OK"
   NEEDS_ASSISTANCE_STATUS = "STATUS_NEEDS_ASSISTANCE"
