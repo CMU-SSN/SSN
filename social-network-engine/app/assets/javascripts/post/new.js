@@ -9,6 +9,14 @@ var setup = function () {
         });
     }
 
+		if ($("#post_image").length > 0) {
+			$("#post_image").hide();
+			$("#img_preview").hide();	
+
+			$("#attach_picture").click(function(e) {
+				$("#post_image").click();
+			});
+		}
 };
 
 (function () {

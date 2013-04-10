@@ -6,26 +6,27 @@
 
 <% content_for :content do %>
 	<div class="post-form">
-		<%= form_for @post, :url => {:action => "create"}, :html => {:method => :post} do |f| %>
+		<%= form_for @post, :url => {:action => "create"}, :html => { :method => :post, :multipart => "true", :data => { :ajax => "false" }} do |f| %>
 			<%= f.hidden_field :latitude %>
 			<%= f.hidden_field :longitude %>
 			<%= f.hidden_field :text %>
 			<%= f.hidden_field :status, :value => "false" %>
+			<%= f.file_field :image, :accept => "image/*", :onChange => "previewImage(this);", :data => { :role => "none" } %>
 			<%= text_area_tag "new_post_text", "", :placeholder => "What's happening?" %>
 	  <% end %>
-	  <div data-role="navbar">
+		<div data-role="navbar">
 	    <ul>
-	      <li><%= link_to "Attach Picture", "#", :data => {:role => "button", :icon => "picture", :iconpos => "top"} %></li>
-	      <li><%= link_to "Attach Link", "#", :data => {:role => "button", :icon => "link", :iconpos => "top"} %></li>
+				<%= link_to "Attach Picture", "#", :data => { :role => "button", :icon => "picture", :iconpos => "top" }, :id => "attach_picture" %>
 	    </ul>
 	  </div>
+		<div id="img_preview"></div>
 	  <%= link_to "Post", "#", :id => "submit_NewPost", :data => {:role => "button", :theme => "b"} %></li>
 	</div>
   <%= javascript_include_tag "post/common","post/new" %>
 <% end %>
 
 <%= content_for :scripts do %>
-    <script type="text/javascript">
-        hide_header_footer();
-    </script>
+	<script type="text/javascript">
+		hide_header_footer();
+	</script>
 <% end %>
