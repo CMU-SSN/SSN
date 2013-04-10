@@ -1,0 +1,21 @@
+<div class="ui-bar status-bar gray">
+  <p id="filter-summary">All posts</p>
+  <%= link_to "Filter", "", :id => "filter-btn", :class => "ui-btn-right ui-icon-alt filter", :data => {:role => "button", :mini => "true", :icon => "arrow-d", :iconpos => "right"} %>
+  <%= link_to "Clear Filter", "", :id => "clear-filter-btn", :style => "display:none", :class => "ui-btn-right ui-icon-alt filter", :data => {:role => "button", :mini => "true", :icon => "delete", :iconpos => "left"} %>
+
+  <fieldset data-role="controlgroup" id="geo-filter" style="display: none;">
+    <!--splitter-->
+    <div style="border-top: 1px solid #b3b3b3; height: 10px; margin-left: -20px; margin-right: -20px"></div>
+    <label style="line-height: 32px;">Address:</label>
+    <% location_icon = image_tag "glyphicons/glyphicons_233_direction.png", :size => "15x15" %>
+    <%= link_to location_icon, "", :id => "current-location-btn", :class => "ui-btn-corner-all", :data => {:role => "button", :mini => "true"} %>
+
+    <div style="clear: both;"></div>
+    <input type="text" maxlength="150" data-mini="false" name="location" id="location" value="" placeholder="Zip code or valid address">
+
+    <label style="line-height: 32px;">Distance (miles):</label>
+    <input type="range" id="radius" name="radius" id="slider-fill-mini" value="100" min="0" max="100" step="5" data-highlight="true">
+
+  </fieldset>
+
+</div>

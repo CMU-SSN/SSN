@@ -36,7 +36,7 @@ class Post < ActiveRecord::Base
 
   # Filters all posts to those this user is interested in. Also limits the posts
   # returned and allows the specification of an offset.
-  def self.Filter(user, limit, last_id)
+  def self.Filter(user, limit, last_id, location=nil, radius=nil)
     # Get the IDs of all organizations the user is following
     org_ids = user.organizations.map{|o| o.id}
 
@@ -58,9 +58,18 @@ class Post < ActiveRecord::Base
     end
 
     # Include the user information
-    Post.includes([:user, :organization]).find(:all,
+    unless  location.is_a? Array
+      location = "'#{location}'"
+    end
+
+    geoCondition = (!location.nil? && !radius.nil?) ? ".near(#{location}, #{radius.to_i}, :order=>'distance')" : ''
+    eval("Post.includes([:user, :organization])#{geoCondition}.find(:all,
         :conditions => conditions,
         :limit => limit,
-        :order => "updated_at DESC")
+        :order => 'updated_at DESC')")
+    #Post.includes([:user, :organization]).near("95131", 30, :order => "distance").find(:all,
+    #    :conditions => conditions,
+    #    :limit => limit,
+    #    :order => "updated_at DESC")
   end
 end

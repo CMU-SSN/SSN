@@ -4,9 +4,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     # Filter all posts for the current user that happened after the specified token
-    @posts = Post::Filter(current_user, 100, params['token'])
-    @token = @posts.first.id if !@posts.nil? && !@posts.first.nil?
-		@path = "../"
+    filter()
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,8 +12,8 @@ class PostsController < ApplicationController
   end
 
   def refresh
-    @posts = Post::Filter(current_user, 100, params['token'])
-    @token = @posts.first.id if !@posts.nil? && !@posts.first.nil?
+    filter()
+
     respond_to do |format|
       format.html { render :partial => "partials/refresh" }
     end
@@ -70,6 +68,15 @@ class PostsController < ApplicationController
     end
   end
 
+  def where_am_i
+    result = Geocoder.search([params['latitude'].to_f, params['longitude'].to_f])
+
+    address = result.first.address if !result.nil? && result.count > 0
+    respond_to do |format|
+      format.json {render :json => {:address => result.first.address}}
+    end
+  end
+
   private
 
   def setupForNewPost
@@ -83,5 +90,16 @@ class PostsController < ApplicationController
 
     @post_as = session[:post_as]
 
+  end
+
+  def filter
+    if (!params['latitude'].nil? && !params['longitude'].nil?)
+      location = [params['latitude'].to_f, params['longitude'].to_f]
+    elsif (!params['location'].nil?)
+      location = params['location']
+    end
+    @posts = Post::Filter(current_user, 100, params['token'], location, params['radius'])
+    @token = @posts.first.id if !@posts.nil? && !@posts.first.nil?
+    @path = "../"
   end
 end

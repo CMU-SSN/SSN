@@ -29,14 +29,79 @@
 	border-radius: 0px;
 }
 
-.posts {
-	display:block;
+.user-left {
+	margin-right:60px; 
+	display:inline-block;
 }
 
-.friends {
+.user-right {
+	float:right;
+	width:60px;
+	margin-left:-100%;
+	padding-top:60px;	
+}
+
+.disabled {
 	display:none;
 }
 
-.organizations {
-	display:none;
+.removeUserButton {
+	background: linear-gradient(#FFFFFF, #F1F1F1) repeat scroll 0 0 #EEEEEE;
+	background: url("glyphicons/glyphicons_007_user_remove.png") no-repeat 9px 9px;
+	border-radius:3px;
+	border: 1px solid #CCCCCC;
+	text-decoration:none;
+	padding: 34px 2px 0px;
+	color: #2F3E46 !important;
+  font-weight: bold;
+  text-shadow: 0 1px 0 #FFFFFF;
+	font-size:10px;
+}
+.addUserButton {
+	background: linear-gradient(#FFFFFF, #F1F1F1) repeat scroll 0 0 #EEEEEE;
+	background: url("glyphicons/glyphicons_006_user_add.png") no-repeat 8px 9px;
+	border-radius:3px;
+	border: 1px solid #CCCCCC;
+	text-decoration:none;
+	padding: 34px 2px 0px;
+	color: #2F3E46 !important;
+  font-weight: bold;
+  text-shadow: 0 1px 0 #FFFFFF;
+	font-size:12.5px;
+}
+.removeOrganizationButton {
+	background: linear-gradient(#FFFFFF, #F1F1F1) repeat scroll 0 0 #EEEEEE;
+	background: url("glyphicons/glyphicons_340_globe_remove.png") no-repeat 9px 9px;
+	border-radius:3px;
+	border: 1px solid #CCCCCC;
+	text-decoration:none;
+	padding: 34px 2px 0px;
+	color: #2F3E46 !important;
+  font-weight: bold;
+  text-shadow: 0 1px 0 #FFFFFF;
+	font-size:10px;
+}
+.addOrganizationButton {
+	background: linear-gradient(#FFFFFF, #F1F1F1) repeat scroll 0 0 #EEEEEE;
+	background: url("glyphicons/glyphicons_340_globe_add.png") no-repeat 10px 9px;
+	border-radius:3px;
+	border: 1px solid #CCCCCC;
+	text-decoration:none;
+	padding: 34px 2px 0px;
+	color: #2F3E46  !important;
+  font-weight: bold;
+  text-shadow: 0 1px 0 #FFFFFF;
+	font-size:12.5px;
+}
+.ui-mini .followingsButton .ui-btn-inner  {
+	font-size:9px;
+}
+.ui-mini .friendsButton  .ui-btn-inner {
+	font-size:9px;
+}
+.ui-mini .organizationsButton .ui-btn-inner  {
+	font-size:9px;
+}
+.ui-mini .postsButton .ui-btn-inner {
+	font-size:9px;
 }

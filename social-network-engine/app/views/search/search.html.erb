@@ -18,6 +18,7 @@
           </div>
       <% end %>
     </div>
+		<br />
     <% # Display results if a search has been made  %>
     <% if not @results.nil? %>
         <% # A search was done. Display results or sorry if none  %>
@@ -26,11 +27,11 @@
             <% @results.slice(0, SearchResult::PAGE_SIZE).each do |result| %>
                 <% # Find out what type of result this is and display that template  %>
                 <% if result[:type].to_i == SearchResult::Type::USER.to_i %>
-                    <%= render "partials/user_item", :user => result[:user], :path => "" %>
+                    <%= render "partials/user_item", :user => result[:user], :path => "", :feedItemId => @feedItemId %>
                 <% elsif result[:type].to_i == SearchResult::Type::POST.to_i %>
                     <%= render "partials/feed_item", :post => result[:post], :path => "" %>
                 <% elsif result[:type].to_i == SearchResult::Type::ORGANIZATION.to_i %>
-                    <%= render "partials/organization_item", :organization => result[:organization], :path => "" %>
+                    <%= render "partials/organization_item", :organization => result[:organization], :path => "", :feedItemId => @feedItemId %>
                 <% end %>
             <% end %>
             <% # Pagination controls %>
