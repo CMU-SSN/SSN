@@ -58,7 +58,6 @@ class PostsController < ApplicationController
     if session[:post_as] == 'self'
       current_user.posts.create!(params[:post])
     else
-      print session[:post_as]
       post = current_user.posts.build(params[:post])
       post.organization = current_user.organizations.where("organization_id = ?", session[:post_as]).first
       post.save
