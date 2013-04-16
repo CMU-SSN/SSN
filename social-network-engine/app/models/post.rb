@@ -3,7 +3,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :organization
   validates :text, :length => {
-      :minimum   => 1,
+      :minimum   => 0,
       :maximum   => 140,
       :tokenizer => lambda { |str| str.scan(/\w+/) }
   }
