@@ -2,7 +2,7 @@
 	<h1>City of Palo Alto SSN :: Cool City Neighborhood</h1>
 	<h2 class="login-header">Sign In</h2>
 	<div class="login"> 
-		<%= content_tag(:div, flash[:alert], :id => "flash-alert") if flash[:alert] %>	
+		<%= content_tag(:div, flash[:alert], :id => "flash-alert") unless flash[:alert].blank? %>	
 		<%= link_to user_omniauth_authorize_path(:facebook, :redirect_uri => "#{request.protocol}#{request.host_with_port}#{root_path}"), :class => 'facebook-btn', :rel => 'external', :data => { :role => 'button', :theme => 'f' } do %>
 			<span class="facebook-icon"></span>		
 			<p>Sign in with Facebook</p>
