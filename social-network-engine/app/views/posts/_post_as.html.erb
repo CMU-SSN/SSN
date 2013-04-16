@@ -10,7 +10,7 @@
 	self_label = prefix + "_" + Post::POST_AS_SELF + "_label"
 %>
 
-<% if current_user.organizations.length != 0 %>
+<% if current_user.organizations_managed.length != 0 %>
 	<div id="<%= navbar %>" class="ui-bar status-bar" data-selected="<%= post_as %>" data-self="<%= self_value %>">
 		<p id="<%= name_label %>"></p>
 		<%= link_to "Change", "", :id => changeBtn, :class => "ui-btn-right ui-icon-alt", :data => { :role => "button", :mini => "true", :icon => "arrow-d", :iconpos => "right" } %>
@@ -22,7 +22,7 @@
 			<% end %>
 			<label for="<%= self_id %>" id="<%= self_label %>" data-text="<%= current_user.name %>"><%= current_user.name %></label>
 			
-			<% current_user.organizations.each do |org| %>
+			<% current_user.organizations_managed.each do |org| %>
 				<% 
 					org_id = prefix + "_" + org.id.to_s 
 					org_label = prefix + "_" + org.id.to_s + "_label"				
