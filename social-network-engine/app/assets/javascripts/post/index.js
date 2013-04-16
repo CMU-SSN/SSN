@@ -53,14 +53,14 @@
     function filterCurrentLocation() {
         geotagPost(function(lat, lng){
             /*Set address*/
-            $.ajax({
-                url: "/location",
-                dataType: "json",
-                data: {latitude: lat, longitude: lng},
-                success: function(data){
-                    $("#location").val(data.address);
-                }
-            });
+//            $.ajax({
+//                url: "/location",
+//                dataType: "json",
+//                data: {latitude: lat, longitude: lng},
+//                success: function(data){
+//                    $("#location").val(data.address);
+//                }
+//            });
 
             pullFeeds({ latitude: lat, longitude: lng, radius: $("#radius").val() });
 
@@ -99,7 +99,7 @@
         });
 
         $("#radius").live("change", function(){
-            filter();
+            filterCurrentLocation();
         })
     });
 })();

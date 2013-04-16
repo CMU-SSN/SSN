@@ -98,6 +98,7 @@ class PostsController < ApplicationController
     elsif (!params['location'].nil?)
       location = params['location']
     end
+    @max_distance = Post.max_distance_from_position(location)
     @posts = Post::Filter(current_user, 100, params['token'], location, params['radius'])
     @token = @posts.first.id if !@posts.nil? && !@posts.first.nil?
     @path = "../"
