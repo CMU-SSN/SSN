@@ -17,6 +17,9 @@ class Post < ActiveRecord::Base
     end
   end
   after_validation :reverse_geocode
+  
+  attr_accessible :image
+  has_attached_file :image
 
   ALL_CLEAR_STATUS = "STATUS_OK"
   NEEDS_ASSISTANCE_STATUS = "STATUS_NEEDS_ASSISTANCE"
@@ -68,5 +71,17 @@ class Post < ActiveRecord::Base
     #    :conditions => conditions,
     #    :limit => limit,
     #    :order => "updated_at DESC")
+  end
+
+
+  def self.max_distance_from_position(location)
+    return 0 if location.nil?
+    posts = Post.Filter(current_user, 100, nil)
+    max_distance = 0
+    posts.each do |post|
+      distance = Geocoder::Calculations.distance_between(location, [post.latitude, post.longitude])
+      max_distance = distance if distance > max_distance
+    end
+    max_distance
   end
 end

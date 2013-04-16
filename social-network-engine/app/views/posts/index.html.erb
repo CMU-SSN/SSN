@@ -7,7 +7,12 @@
 	<h3>All Posts</h3>
 	<!-- Header Right Button -->
 	<%= link_to "", search_path, :class => "header-icon-search", :data => { :role => "button", :transition => "slide" } %>
-    <%= render "partials/geo_filter" %>
+    <% if @max_distance > 1 %>
+        <% display = 'block' %>
+    <% else %>
+        <% display = 'none' %>
+    <% end %>
+    <%= render "partials/geo_filter", :display => display, :max_distance => @max_distance %>
 <% end %>
 
 

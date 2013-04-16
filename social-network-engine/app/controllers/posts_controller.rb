@@ -56,7 +56,6 @@ class PostsController < ApplicationController
     if session[:post_as] == 'self'
       current_user.posts.create!(params[:post])
     else
-      print session[:post_as]
       post = current_user.posts.build(params[:post])
       post.organization = current_user.organizations.where("organization_id = ?", session[:post_as]).first
       post.save
@@ -99,6 +98,7 @@ class PostsController < ApplicationController
     elsif (!params['location'].nil?)
       location = params['location']
     end
+    @max_distance = Post.max_distance_from_position(location)
     @posts = Post::Filter(current_user, 100, params['token'], location, params['radius'])
     @token = @posts.first.id if !@posts.nil? && !@posts.first.nil?
     @path = "../"
