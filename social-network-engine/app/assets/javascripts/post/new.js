@@ -4,11 +4,17 @@ var setup = function () {
 
     if ($("#submit_NewPost").length > 0) {
         $("#submit_NewPost").click(function () {
-						$("#post_text").val($("#new_post_text").val());
-						if ($("#post_text").length == 0) {
-							$("#post_text").val(" ");
+						var valid = false;
+						if ($("#new_post_text").val().length > 0) {
+							$("#post_text").val($("#new_post_text").val());		
+							valid = true;					
+						} else if ($("#post_image").val().length > 0) {
+							valid = true;
 						}
-						submitPost();
+						
+						if (valid) {
+							submitPost();
+						}
 				});
     }
 
