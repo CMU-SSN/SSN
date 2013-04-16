@@ -32,6 +32,7 @@
 .user-left {
 	margin-right:60px; 
 	display:inline-block;
+	max-width: 235px;
 }
 
 .user-right {
@@ -93,15 +94,15 @@
   text-shadow: 0 1px 0 #FFFFFF;
 	font-size:12.5px;
 }
-.ui-mini .followingsButton .ui-btn-inner  {
+.ui-mini .userFollowingsButton .ui-btn-inner  {
 	font-size:9px;
 }
-.ui-mini .friendsButton  .ui-btn-inner {
+.ui-mini .userFriendsButton  .ui-btn-inner {
 	font-size:9px;
 }
-.ui-mini .organizationsButton .ui-btn-inner  {
+.ui-mini .userOrganizationsButton .ui-btn-inner  {
 	font-size:9px;
 }
-.ui-mini .postsButton .ui-btn-inner {
+.ui-mini .userPostsButton .ui-btn-inner {
 	font-size:9px;
 }
