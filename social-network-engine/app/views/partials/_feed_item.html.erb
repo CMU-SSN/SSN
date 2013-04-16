@@ -47,4 +47,9 @@
 			<p class="feed-text"><%= post.text %></p>
 		</div>
 	<% end %>
+	<% if post.image? %>
+		<div class="feed-image">
+			<%= image_tag post.image.url %>
+		</div>
+	<% end %>
 </div>

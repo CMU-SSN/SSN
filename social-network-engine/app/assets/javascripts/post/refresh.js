@@ -17,6 +17,12 @@ $(document).ready(function () {
                 if (feedItems.length > 0) {
                     $("#posts").prepend(feedItems);
                 }
+
+                if (parseInt(jqHtml.children("#max-distance").text()) > 1 && $("#geo-filter-panel").is(":visible") == false)
+                {
+                    window.location = window.location;
+                }
+
             });
         }
 
