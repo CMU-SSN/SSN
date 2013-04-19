@@ -43,32 +43,46 @@ function setupBindings(prefix) {
 };
 
 function geotagPost(onSuccess) {
+		$.mobile.showPageLoadingMsg();
     if (navigator.geolocation) {
         var watchID = navigator.geolocation.watchPosition(function (position) {
                 if (position && position.coords && position.coords.latitude && position.coords.longitude) {
                     $("#post_latitude").val(position.coords.latitude);
                     $("#post_longitude").val(position.coords.longitude);
 
-                    if (onSuccess)
-                        onSuccess(position.coords.latitude, position.coords.longitude);
+                    if (onSuccess) {
+												onSuccess(position.coords.latitude, position.coords.longitude);
+												$.mobile.hidePageLoadingMsg();
+										}
                 }
                 navigator.geolocation.clearWatch(watchID);
             }, function (error) {
                 console.log("in error block");
                 navigator.geolocation.clearWatch(watchID);
-                switch (error.code) {
+								var errorText = "Geolocation Error: ";
+								switch (error.code) {
                     case error.TIMEOUT:
+												errorText += "Timeout";
                         break;
                     case error.POSITION_UNAVAILABLE:
+												errorText += "Position Unavailable";
                         break;
                     case error.PERMISSION_DENIED:
+												errorText += "Permission Denied";
                         break;
                     case error.UNKNOWN_ERROR:
+												errorText += "Unknown Error";
                         break;
                 }
+								errorText += ".\nPlease turn on geolocation and give your device's browser permissions.\nPost without geolocation data?"
+								$.mobile.hidePageLoadingMsg();
+								var confirmPostAnyway=confirm(errorText);
+								if (confirmPostAnyway == true) {
+										onSuccess();
+								}
             },
             {
-                timeout: 30000,
+                timeout: 5000, //5 seconds
                 enableHighAccuracy: true
             });
         return;

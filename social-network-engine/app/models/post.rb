@@ -6,7 +6,7 @@ class Post < ActiveRecord::Base
       :minimum   => 1,
       :maximum   => 140,
       :tokenizer => lambda { |str| str.scan(/\w+/) }
-  }
+  }, :unless => :image_file_size?
   geocoded_by :address
   after_validation :geocode
   reverse_geocoded_by :latitude, :longitude do |obj,results|
