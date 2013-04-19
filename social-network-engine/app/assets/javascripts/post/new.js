@@ -23,7 +23,10 @@ var setup = function () {
 			$("#img_preview").hide();	
 
 			$("#attach_picture").click(function(e) {
-				$("#post_image").click();
+				if( window.FormData === undefined ) {
+					alert("This browser likely doesn't support file upload. Trying anyway.\nIf nothing happens try a different browser.")
+				} 
+				$("#post_image").click();				
 			});
 		}
 };
