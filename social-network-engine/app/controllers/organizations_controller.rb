@@ -34,6 +34,7 @@ class OrganizationsController < ApplicationController
 	def followers
 		@organization = Organization.find(params[:id])
 		@path = "../"
+		@feedItemId = "organizationFollowerFeedItemId"		
 	end
 	
 	def posts

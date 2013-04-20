@@ -8,19 +8,27 @@
 <% end %>
 
 <% content_for :content do %>
-
-	<div class="feed-item">
+	<div class="feed-item" style="min-width:300px;">
 		<div class="feed-header">
-					<img src="<%= @path %><%= @organization.profile_pic %>" class="author-img"/>
-					<h2 class="profile-name"><%= @organization.name %></h2>
-					
+			<div class="user-left">
+				<img src="<%= @path %><%= @organization.profile_pic %>" class="author-img"/>
+				<h2 class="profile-name"><%= @organization.name %></h2>
+			</div>
+			<div class="user-right-profile">
+				<% unless current_user.organizations.include? @organization%>
+					<%= link_to_function "Follow", "followOrganization(#{@organization.id}, #{current_user.id})", :class => 'addOrganizationButton', :name => "followOrganization#{@organization.id}"  %>
+					<%= link_to_function "Remove", "removeOrganization(#{@organization.id}, #{current_user.id})", :class => 'disabled removeOrganizationButton', :name => "removeOrganization#{@organization.id}"  %>			
+				<% else %>
+					<%= link_to_function "Follow", "followOrganization(#{@organization.id}, #{current_user.id})", :class => 'disabled addOrganizationButton', :name => "followOrganization#{@organization.id}"  %>
+					<%= link_to_function "Remove", "removeOrganization(#{@organization.id}, #{current_user.id})", :class => 'removeOrganizationButton', :name => "removeOrganization#{@organization.id}"  %>			
+				<% end %>	
+			</div>
 				<div class="profile-container" data-role="navbar">
 					<ul>
 						<li><%= link_to "Posts", organizations_posts_path, :remote => true, :data => {:role => "button", :icon => "posts", :iconpos => "top"}, :class => 'organizationPostsButton ui-btn-active', :id => @organization.id %></li>
 						<li><%= link_to "Followers", organizations_followers_path, :remote => true, :data => {:role => "button", :icon => "friends", :iconpos => "top"}, :class => 'organizationFriendsButton', :id => @organization.id %></li>
 					</ul>
-			</div>
-			
+			</div>			
 		</div>
 	</div>
 
