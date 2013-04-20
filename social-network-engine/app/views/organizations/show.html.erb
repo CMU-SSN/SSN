@@ -1,3 +1,7 @@
+<% content_for :page do %>
+		<div data-role="page" data-theme="a" id="organizationsShow">
+<% end %>
+
 <% content_for :header do %>
 	<%= link_to "", posts_path, :class => "header-icon-close", :data => { :role => "button", :transition => "slidedown" } %>	
   <h3>Organization Profile</h3>	
@@ -30,17 +34,3 @@
 		<% end %>	
 	</div>
 <% end %>
-
-<%= content_for :scripts do %>
-	<script type="text/javascript">
-		$(document).on('pageshow', function() {
-			hide_header_footer();
-		});
-		
-		$(document).on('pagebeforeshow', function() {		
-			//if multiple profiles have been viewed, jquerymobile will store all of the .postsButtons. The last one always seems to be the current one
-			$(".organizationPostsButton :last", this).click();
-		});		
-	</script>
-<% end %>
-

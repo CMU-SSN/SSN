@@ -1,3 +1,7 @@
+<% content_for :page do %>
+		<div data-role="page" data-theme="a" id="index">
+<% end %>
+
 <% content_for :header do %>
 	<!-- Header Left Button -->
 	<% if user_signed_in? %>
@@ -15,15 +19,8 @@
     <%= render "partials/geo_filter", :display => display, :max_distance => @max_distance %>
 <% end %>
 
-
-
 <% content_for :content do %>
     <div id="posts" data-token="<%= @token %>" data-theme="a">
-      <% if !@posts.nil? && @posts.length > 0 %>
-          <% @posts.each do |post| %>
-              <%= render "partials/feed_item", :post => post, :path => @path %>
-          <% end %>
-      <% end %>
     </div>
 <% end %>
 
