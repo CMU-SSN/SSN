@@ -65,7 +65,7 @@
         });
     }
 
-    $(document).on("pageshow", "#index",  function() {
+    $(document).on("pageshow", function() {
         var paginationManager = pagination();
         paginationManager.init(loadPage, 1).check();
 
