@@ -1,0 +1,3 @@
+<% if !@posts.nil? && @posts.length > 0 %>
+	$("#posts").html("<% @posts.each do |post| %><%= escape_javascript(render "partials/feed_item", :post => post, :path => @path) %><% end %>");
+<% end %>
