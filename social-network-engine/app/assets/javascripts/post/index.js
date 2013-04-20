@@ -99,6 +99,10 @@
         });
 
         $("#radius").live("change", function(){
+            if ($("#radius").val() == 0)
+            {
+                return;
+            }
             filterCurrentLocation();
         })
     });
