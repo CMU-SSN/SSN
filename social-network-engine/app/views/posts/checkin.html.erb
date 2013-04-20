@@ -1,3 +1,7 @@
+<% content_for :page do %>
+		<div data-role="page" data-theme="a" id="postCheckin">
+<% end %>
+
 <% content_for :header do %>
 	<%= link_to "", posts_path, :class => "header-icon-close", :data => { :role => "button", :transition => "slidedown" } %>	
   <h3>Check-In</h3>	
@@ -17,10 +21,4 @@
 		<%= link_to "Need Assistance", "#", :id => "submit_NeedAssistance", :data => {:role => "button", :icon => "assistance-needed", :iconpos => "top", :theme => "d" } %>
 	</div>
   <%= javascript_include_tag "post/common", "post/checkin" %>
-<% end %>
-
-<%= content_for :scripts do %>
-    <script type="text/javascript">
-        hide_header_footer();
-    </script>
 <% end %>

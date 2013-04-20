@@ -77,8 +77,6 @@ class PostsController < ApplicationController
     end
   end
 
-  private
-
   def setupForNewPost
     @post = Post.new
 
@@ -103,4 +101,8 @@ class PostsController < ApplicationController
     @token = @posts.first.id if !@posts.nil? && !@posts.first.nil?
     @path = "../"
   end
+	
+	def reloadPosts
+		filter()
+	end
 end
