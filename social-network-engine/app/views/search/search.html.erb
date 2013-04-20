@@ -1,3 +1,7 @@
+<% content_for :page do %>
+		<div data-role="page" data-theme="a" id="search">
+<% end %>
+
 <% content_for :header do %>
 		<%= link_to "", posts_path, :class => "header-icon-back", :data => { :role => "button" } %>
     <h3>Search</h3>
@@ -50,10 +54,4 @@
             </div>
         <% end %>
     <% end %>
-<% end %>
-
-<%= content_for :scripts do %>
-	<script type="text/javascript">
-		hide_header_footer();
-	</script>
 <% end %>

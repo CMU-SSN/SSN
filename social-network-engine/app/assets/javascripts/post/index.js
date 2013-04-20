@@ -11,18 +11,11 @@
 
     function pullFeeds(parameters)
     {
-        $.get('/refresh', parameters).done(function (data) {
-            var jqHtml = $(data);
-
-            var feedItems = jqHtml.children(".feed-item");
-
-            $("#posts").empty();
-            if (feedItems.length > 0) {
-                $("#posts").prepend(feedItems);
-            }
-        });
+			$.ajax({
+				url: "/reloadPosts"
+			});
     }
-
+		
     function resetFilter() {
         /*Reset filter values*/
         $("#location").val("");

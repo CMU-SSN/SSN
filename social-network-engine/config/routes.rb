@@ -29,6 +29,8 @@ Sne::Application.routes.draw do
 	match'/organizations/posts/:id' => 'organizations#posts', :as => :organizations_posts
 	match'/organizations/followers/:id' => 'organizations#followers', :as => :organizations_followers
 	
+	match'/reloadPosts' => 'posts#reloadPosts'
+	
   devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks' }
 
   match 'main' => 'posts#index'
