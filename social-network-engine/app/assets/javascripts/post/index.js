@@ -65,6 +65,30 @@
         });
     }
 
+    $(document).on("pageshow", function() {
+        var paginationManager = pagination();
+        paginationManager.init(loadPage, 1).check();
+
+        function loadPage(page)
+        {
+            var last_token = $('#posts').data('last-token');
+            $.get('/refresh', { token: last_token, backward:'true' }).done(function (data) {
+                var jqHtml = $(data);
+                var newToken = jqHtml.children("#last-token").text();
+                if (newToken) {
+                    $("#posts").data('last-token', newToken);
+                }
+
+                var feedItems = jqHtml.children(".feed-item");
+
+                if (feedItems.length > 0) {
+                    $("#posts").append(feedItems);
+                    paginationManager.check();
+                }
+            });
+        }
+    });
+
     $(document).ready( function(){
 
         $("#filter-btn").live("click", function(){
@@ -92,7 +116,11 @@
         });
 
         $("#radius").live("change", function(){
+            if ($("#radius").val() == 0)
+            {
+                return;
+            }
             filterCurrentLocation();
-        })
+        });
     });
 })();
