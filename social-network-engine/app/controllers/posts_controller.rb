@@ -12,7 +12,12 @@ class PostsController < ApplicationController
   end
 
   def refresh
-    filter()
+    # when load older pages should specify this
+    if (params['backward'] == 'true')
+      filter(true)
+    else
+      filter()
+    end
 
     respond_to do |format|
       format.html { render :partial => "partials/refresh" }
@@ -90,15 +95,18 @@ class PostsController < ApplicationController
 
   end
 
-  def filter
+  def filter(older = false)
     if (!params['latitude'].nil? && !params['longitude'].nil?)
       location = [params['latitude'].to_f, params['longitude'].to_f]
     elsif (!params['location'].nil?)
       location = params['location']
     end
+    token = params['token']
+    token = {:id => token, :backward => true} if older
     @max_distance = Post.max_distance_from_position(current_user, location)
-    @posts = Post::Filter(current_user, 100, params['token'], location, params['radius'])
+    @posts = Post::Filter(current_user, 5, token, location, params['radius'])
     @token = @posts.first.id if !@posts.nil? && !@posts.first.nil?
+    @last_token = @posts.last.id if !@posts.nil? && !@posts.last.nil?
     @path = "../"
   end
 	
