@@ -36,6 +36,9 @@ class Post < ActiveRecord::Base
 
   # Filters all posts to those this user is interested in. Also limits the posts
   # returned and allows the specification of an offset.
+  # Pass last_id a hash to load newer or older posts, such as {:id=>1, :backward=>false}.
+  # :backward => true will load older posts and :backward => false will load newer posts.
+  # When last_id is an Id value, new posts will be retrieved.
   def self.Filter(user, limit, last_id, location=nil, radius=nil)
     # Get the IDs of all organizations the user is following
     org_ids = user.organizations.map{|o| o.id}
@@ -54,7 +57,15 @@ class Post < ActiveRecord::Base
       conditions = ["user_id IN (?) OR organization_id IN (?)", friend_ids, org_ids]
 
     else
-      conditions = ["id > ? AND (user_id IN (?) OR organization_id IN (?))", last_id, friend_ids, org_ids]
+      if last_id.kind_of?(Hash)
+        if last_id[:backward]
+          conditions = ["id < ? AND (user_id IN (?) OR organization_id IN (?))", last_id[:id], friend_ids, org_ids]
+        else
+          conditions = ["id > ? AND (user_id IN (?) OR organization_id IN (?))", last_id[:id], friend_ids, org_ids]
+        end
+      else # last_id is a single Id value
+        conditions = ["id > ? AND (user_id IN (?) OR organization_id IN (?))", last_id, friend_ids, org_ids]
+      end
     end
 
     # Include the user information
@@ -67,10 +78,6 @@ class Post < ActiveRecord::Base
         :conditions => conditions,
         :limit => limit,
         :order => 'updated_at DESC')")
-    #Post.includes([:user, :organization]).near("95131", 30, :order => "distance").find(:all,
-    #    :conditions => conditions,
-    #    :limit => limit,
-    #    :order => "updated_at DESC")
   end
 
 
