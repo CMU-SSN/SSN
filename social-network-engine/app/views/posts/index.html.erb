@@ -15,8 +15,6 @@
     <%= render "partials/geo_filter", :display => display, :max_distance => @max_distance %>
 <% end %>
 
-
-
 <% content_for :content do %>
     <div id="posts" data-token="<%= @token %>" data-theme="a">
       <% if !@posts.nil? && @posts.length > 0 %>

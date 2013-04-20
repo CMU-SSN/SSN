@@ -74,9 +74,9 @@ class Post < ActiveRecord::Base
   end
 
 
-  def self.max_distance_from_position(location)
+  def self.max_distance_from_position(user, location)
     return 0 if location.nil?
-    posts = Post.Filter(current_user, 100, nil)
+    posts = Post.Filter(user, 100, nil)
     max_distance = 0
     posts.each do |post|
       distance = Geocoder::Calculations.distance_between(location, [post.latitude, post.longitude])

@@ -18,9 +18,9 @@ $(document).ready(function () {
                     $("#posts").prepend(feedItems);
                 }
 
-                if (parseInt(jqHtml.children("#max-distance").text()) > 1 && $("#geo-filter-panel").is(":visible") == false)
+                if (parseInt(jqHtml.children("#max-distance").text()) > 1 )
                 {
-                    window.location = window.location;
+                    $('#geo-filter-panel').append('<input type="range" id="radius" name="radius" id="slider-fill-mini" value="1" min="0" max="10" step="5" data-highlight="true">');
                 }
 
             });
