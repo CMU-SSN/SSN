@@ -45,15 +45,6 @@
 
     function filterCurrentLocation() {
         geotagPost(function(lat, lng){
-            /*Set address*/
-//            $.ajax({
-//                url: "/location",
-//                dataType: "json",
-//                data: {latitude: lat, longitude: lng},
-//                success: function(data){
-//                    $("#location").val(data.address);
-//                }
-//            });
 
             pullFeeds({ latitude: lat, longitude: lng, radius: $("#radius").val() });
 
@@ -66,33 +57,44 @@
     }
 
     var paginationManager = pagination();
+    paginationManager.init(loadPage, 1);
+
+    function loadPage(page)
+    {
+        var last_token = $('#posts').data('last-token');
+        $.get('/refresh', { token: last_token, backward:'true' }).done(function (data) {
+            var jqHtml = $(data);
+            var newToken = jqHtml.children("#last-token").text();
+
+            var feedItems = jqHtml.children(".feed-item");
+
+            if (feedItems.length > 0 && $("#posts").is(":visible")) {
+                $("#posts").append(feedItems);
+                if (newToken) {
+                    $("#posts").data('last-token', newToken);
+                }
+                paginationManager.check();
+            }
+        });
+    }
+
     $(document).on("pageshow", "#index", function() {
 
-        paginationManager.init(loadPage, 1).check();
-
-        function loadPage(page)
-        {
-            var last_token = $('#posts').data('last-token');
-            $.get('/refresh', { token: last_token, backward:'true' }).done(function (data) {
-                var jqHtml = $(data);
-                var newToken = jqHtml.children("#last-token").text();
-
-                var feedItems = jqHtml.children(".feed-item");
-
-                if (feedItems.length > 0 && $("#posts").is(":visible")) {
-                    $("#posts").append(feedItems);
-                    if (newToken) {
-                        $("#posts").data('last-token', newToken);
-                    }
-                    paginationManager.check();
-                }
-            });
-        }
+        $.ajax({
+            beforeSend: function () {
+                $.mobile.showPageLoadingMsg();
+            }, //Show spinner
+            complete: function () {
+                $.mobile.hidePageLoadingMsg()
+            }, //Hide spinner
+            success: function () {
+                paginationManager.check();
+            },
+            url: "/reloadPosts"
+        });
     });
 
     $(document).ready( function(){
-
-        paginationManager.init(loadPage, 1).check();
 
         $("#filter-btn").live("click", function(){
             if ($("#geo-filter").is(":visible")) { hideGeoFilter(); }

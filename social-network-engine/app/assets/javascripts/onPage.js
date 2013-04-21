@@ -13,13 +13,13 @@ $(document).on('pagebeforeshow', "#usersShow",  function() {
 	$(".userPostsButton :last", this).click();
 });
 		
-$(document).on("pageshow", "#index",  function() {
-	$.ajax({
-		beforeSend: function() { $.mobile.showPageLoadingMsg(); }, //Show spinner
-    complete: function() { $.mobile.hidePageLoadingMsg() }, //Hide spinner	
-		url: "/reloadPosts"
-	});
-});
+//$(document).on("pageshow", "#index",  function() {
+//	$.ajax({
+//		beforeSend: function() { $.mobile.showPageLoadingMsg(); }, //Show spinner
+//    complete: function() { $.mobile.hidePageLoadingMsg() }, //Hide spinner
+//		url: "/reloadPosts"
+//	});
+//});
 
 $(document).on('pageshow', "#done",  function() {	
   hide_header_footer();
