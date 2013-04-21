@@ -58,14 +58,14 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    if session[:post_as] == 'self'
-      current_user.posts.create!(params[:post])
-    else
-      post = current_user.posts.build(params[:post])
-      post.organization = current_user.organizations.where("organization_id = ?", session[:post_as]).first
-      post.save
-    end
-
+		
+    if session[:post_as] != 'SELF'
+			organization = Organization.find(session[:post_as])
+			organization.posts.create!(params[:post])
+		else
+		  current_user.posts.create!(params[:post])
+		end
+		
     respond_to do |format|
       flash[:notice] = "Post created successfully!"
       format.html { redirect_to '/posts#index', notice: 'Post was successfully created.' }
