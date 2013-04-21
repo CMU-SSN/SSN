@@ -1,4 +1,4 @@
-function followUser(user) {
+function followUser(user, currentUser) {
 	$.ajax({
 	  beforeSend: function() { $.mobile.showPageLoadingMsg(); }, //Show spinner
     complete: function() { $.mobile.hidePageLoadingMsg() }, //Hide spinner
@@ -8,6 +8,10 @@ function followUser(user) {
     success: function(){
 	    $("[name='followUser" + user + "']").addClass('disabled');
 			$("[name='removeUser" + user + "']").removeClass('disabled');
+			
+			if(currentUser != null) {
+				$("#userFollowerFeedItemId" + currentUser).show();
+			}
 		},
 		error: function(){
 			alert('Failure following user.');
@@ -15,7 +19,7 @@ function followUser(user) {
 	});
 }
 
-function removeUser(user) {
+function removeUser(user, currentUser) {
 	$.ajax({
 	  beforeSend: function() { $.mobile.showPageLoadingMsg(); }, //Show spinner
     complete: function() { $.mobile.hidePageLoadingMsg() }, //Hide spinner	
@@ -26,6 +30,10 @@ function removeUser(user) {
 			$("[name='followUser" + user + "']").removeClass('disabled');
 	    $("[name='removeUser" + user + "']").addClass('disabled');
 			$("#followingFeedItemId" + user).hide();
+			
+			if(currentUser != null) {
+				$("#userFollowerFeedItemId" + currentUser).hide();
+			}
 		},
 		error: function(){
 			alert('Failure removing user.');
@@ -33,7 +41,7 @@ function removeUser(user) {
 	});
 }
 
-function followOrganization(organization) {
+function followOrganization(organization, currentUser) {
 	$.ajax({
 	  beforeSend: function() { $.mobile.showPageLoadingMsg(); }, //Show spinner
     complete: function() { $.mobile.hidePageLoadingMsg() }, //Hide spinner	
@@ -43,6 +51,10 @@ function followOrganization(organization) {
     success: function(){
 	    $("[name='followOrganization" + organization + "']").addClass('disabled');
 			$("[name='removeOrganization" + organization + "']").removeClass('disabled');
+			
+			if(currentUser != null) {
+				$("#organizationFollowerFeedItemId" + currentUser).show();
+			}
 		},
 		error: function(){
 			alert('Failure following organization.');
@@ -50,7 +62,7 @@ function followOrganization(organization) {
 	});
 }
 
-function removeOrganization(organization) {
+function removeOrganization(organization, currentUser) {
 	$.ajax({
 	  beforeSend: function() { $.mobile.showPageLoadingMsg(); }, //Show spinner
     complete: function() { $.mobile.hidePageLoadingMsg() }, //Hide spinner	
@@ -61,6 +73,10 @@ function removeOrganization(organization) {
 	    $("[name='removeOrganization" + organization + "']").addClass('disabled');
 			$("[name='followOrganization" + organization + "']").removeClass('disabled');
 			$("#followingFeedItemId" + organization).hide();
+			
+			if(currentUser != null) {
+				$("#organizationFollowerFeedItemId" + currentUser).hide();
+			}
 		},
 		error: function(){
 			alert('Failure removing organization.');

@@ -1,6 +1,6 @@
 
 .profile-name {
-	font-size: 1.75em;
+	font-size: 1.25em;
 	margin-left: 68px;
 	padding-top: 10px;
 	color: #333;
@@ -40,6 +40,13 @@
 	width:60px;
 	margin-left:-100%;
 	padding-top:60px;	
+}
+
+.user-right-profile {
+	float:right;
+	width:60px;
+	margin-left:-100%;
+	padding-top:40px;	
 }
 
 .disabled {
