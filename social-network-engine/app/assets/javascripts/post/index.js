@@ -65,8 +65,9 @@
         });
     }
 
-    $(document).on("pageshow", function() {
-        var paginationManager = pagination();
+    var paginationManager = pagination();
+    $(document).on("pageshow", "#index", function() {
+
         paginationManager.init(loadPage, 1).check();
 
         function loadPage(page)
@@ -75,14 +76,14 @@
             $.get('/refresh', { token: last_token, backward:'true' }).done(function (data) {
                 var jqHtml = $(data);
                 var newToken = jqHtml.children("#last-token").text();
-                if (newToken) {
-                    $("#posts").data('last-token', newToken);
-                }
 
                 var feedItems = jqHtml.children(".feed-item");
 
-                if (feedItems.length > 0) {
+                if (feedItems.length > 0 && $("#posts").is(":visible")) {
                     $("#posts").append(feedItems);
+                    if (newToken) {
+                        $("#posts").data('last-token', newToken);
+                    }
                     paginationManager.check();
                 }
             });
@@ -90,6 +91,8 @@
     });
 
     $(document).ready( function(){
+
+        paginationManager.init(loadPage, 1).check();
 
         $("#filter-btn").live("click", function(){
             if ($("#geo-filter").is(":visible")) { hideGeoFilter(); }
