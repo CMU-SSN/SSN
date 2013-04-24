@@ -16,4 +16,6 @@
 //= require jquery.mobile-1.3.0
 //= require jsrender
 //= require jquery.timeago
+//= require binaryajax
+//= require exif
 //= require_directory .

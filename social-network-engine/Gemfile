@@ -51,4 +51,5 @@ gem 'thin'
 gem 'whenever'
 
 # For file uploads
-gem "paperclip", "~> 3.0"
+gem "rmagick"
+gem "carrierwave"

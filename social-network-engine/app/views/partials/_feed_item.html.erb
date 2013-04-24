@@ -20,7 +20,7 @@
   </div>
 	<% if post.image? %>
 		<div class="feed-image">
-			<%= image_tag post.image.url %>
+			<%= image_tag post.image_url.to_s %>
 		</div>
 	<% end %>
 </div>

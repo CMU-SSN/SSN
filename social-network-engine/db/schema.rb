@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130424041111) do
+ActiveRecord::Schema.define(:version => 20130423175826) do
 
   create_table "friends", :force => true do |t|
     t.integer  "user_id"
@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(:version => 20130424041111) do
 
   create_table "posts", :force => true do |t|
     t.string   "text"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.integer  "user_id"
     t.string   "address"
     t.float    "latitude"
@@ -62,10 +62,7 @@ ActiveRecord::Schema.define(:version => 20130424041111) do
     t.string   "zipcode"
     t.boolean  "status"
     t.integer  "organization_id"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
+    t.string   "image"
   end
 
   create_table "statuses", :force => true do |t|
