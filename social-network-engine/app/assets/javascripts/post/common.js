@@ -47,8 +47,8 @@ function geotagPost(onSuccess) {
     if (navigator.geolocation) {
         var watchID = navigator.geolocation.watchPosition(function (position) {
                 if (position && position.coords && position.coords.latitude && position.coords.longitude) {
-                    $("#post_latitude").val(position.coords.latitude);
-                    $("#post_longitude").val(position.coords.longitude);
+                    $("[id$='latitude']").val(position.coords.latitude);
+                    $("[id$='longitude']").val(position.coords.longitude);
 
                     if (onSuccess) {
 												onSuccess(position.coords.latitude, position.coords.longitude);
@@ -91,7 +91,7 @@ function geotagPost(onSuccess) {
 
 function submitPost(){
     geotagPost(function(){
-        $("#new_post").submit();
+        $("[id^='new']").submit();
     });
 }
 

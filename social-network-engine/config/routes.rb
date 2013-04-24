@@ -1,4 +1,5 @@
 Sne::Application.routes.draw do
+  resources :status
   resources :posts, :only => [:index, :new, :create]
 	resources :organizations, :only =>[:show]
 	get 'context' => 'posts#post_context'

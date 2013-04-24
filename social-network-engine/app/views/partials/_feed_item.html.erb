@@ -14,39 +14,10 @@
     <% else %>
         <p class="post-time"><%= time_ago_in_words(post.created_at) %> ago</p>
     <% end %>
-    <% if post.status %>
-        <% if post.text == Post::ALL_CLEAR_STATUS %>
-            <div class="status">
-              <%= image_tag "glyphicons/glyphicons_193_circle_ok.png" %>
-            </div>
-        <% elsif post.text == Post::NEEDS_ASSISTANCE_STATUS %>
-            <div class="status">
-              <%= image_tag "glyphicons/glyphicons_196_circle_exclamation_mark.png" %>
-            </div>
-        <% elsif post.text == Post::NEEDS_HELP_STATUS %>
-            <div class="status">
-              <%= image_tag "glyphicons/glyphicons_298_hospital.png" %>
-            </div>
-        <% end %>
-    <% end %>
   </a>
-	<% if post.text == Post::ALL_CLEAR_STATUS %>
-		<div class="feed-content-green">
-			<p class="feed-text">Everything is OK</p>
-		</div>
-	<% elsif post.text == Post::NEEDS_ASSISTANCE_STATUS %>
-		<div class="feed-content-yellow">
-			<p class="feed-text">Need Help ASAP</p>
-		</div>
-	<% elsif post.text == Post::NEEDS_HELP_STATUS %>
-		<div class="feed-content-red">
-			<p class="feed-text">Immediate Help Required</p>
-		</div>
-	<% else %>
-		<div class="feed-content">
-			<p class="feed-text"><%= post.text %></p>
-		</div>
-	<% end %>
+  <div class="feed-content">
+    <p class="feed-text"><%= post.text %></p>
+  </div>
 	<% if post.image? %>
 		<div class="feed-image">
 			<%= image_tag post.image.url %>
