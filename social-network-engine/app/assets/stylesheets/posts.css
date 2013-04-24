@@ -21,6 +21,12 @@
     height: 20px;
 }
 
+.ui-icon-status {
+    background: url("glyphicons/glyphicons_088_adress_book.png");
+    background-size: 20px 20px;
+    border-radius: 0px;
+}
+
 .ui-icon-check-in {
     background: url("glyphicons/glyphicons_152_check.png");
     background-size: 20px 20px;
@@ -219,7 +225,7 @@
     height: 30px;
     width: 30px;
     float: right;
-    margin-top: 8px;
+    margin-top: 15px;
     padding-left: 5px;
 }
 

@@ -38,11 +38,11 @@ class PostsController < ApplicationController
   # GET /posts/checkin
   def checkin
 
-    setupForNewPost
+    @status = Status.new
 
     respond_to do |format|
       format.html
-      format.json { render json: @post }
+      format.json { render json: @status }
     end
   end
 
@@ -80,6 +80,14 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.json {render :json => {:address => result.first.address}}
     end
+  end
+
+  def create_status
+
+  end
+
+  def update_status
+
   end
 
   def setupForNewPost
