@@ -54,7 +54,7 @@ class PostsController < ApplicationController
       format.json { render :json => {:status => 200} }
     end
   end
-
+  
   # POST /posts
   # POST /posts.json
   def create

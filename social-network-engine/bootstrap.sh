@@ -6,8 +6,9 @@ apt-get update
 # Install required packages
 apt-get install -y git-core
 apt-get install -y git
-apt-get install -y imagemagick	# Required for paperclip gem
-apt-get install -y ghostscript	# Required for paperclip gem
+
+# Packages required for Carrierwave
+apt-get install -y build-essential imagemagick libmagickcore-dev libmagickwand-dev
 
 # Install RVM if required
 if [ ! -e /usr/local/rvm/bin/rvm ]
