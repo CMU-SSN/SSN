@@ -57,7 +57,7 @@ module SearchResult
       active_class = 'ui-btn-active'
     end
 
-    type_link = view.search_path(:type => current_type.to_s, :q => query.to_s)
+    type_link = view.search_path(:type => current_type.to_s, :q => query.to_s, :force => 1)
     view.link_to Type::ToName(current_type), type_link, :class => active_class
   end
 

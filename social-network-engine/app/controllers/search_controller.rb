@@ -48,14 +48,15 @@ class SearchController < ApplicationController
   end
 
   # Try the query of the specified type and at the specified page. If there are
-  # no results of the specified type other types should be checked as well.
-  def perform_search query, type, page_num
+  # no results of the specified type other types should be checked as well. If
+  # force is specified, only this type is searched.
+  def perform_search query, type, page_num, force
     results = []
     offset = page_num.to_i * SearchResult::PAGE_SIZE.to_i
     # Fetch one more (which we won't displays so that we know if we can page)
     limit = SearchResult::PAGE_SIZE.to_i + 1
 
-    if offset > 0
+    if offset > 0 or not force.nil?
       # We are requesting another page so there must be results for this type,
       # only search this type.
       results = search_by_type query, type, limit, offset
@@ -83,6 +84,7 @@ class SearchController < ApplicationController
     @type = params[:type]
     @page_num = params[:page]
     @results = nil
+    @force = params[:force]
 
     # Default to posts
     if @type.nil? or @type.empty?
@@ -96,7 +98,7 @@ class SearchController < ApplicationController
 
     # Search if a query was specified
     if not @query.nil? and not @query.strip().empty?
-      @results, @type = perform_search @query, @type, @page_num
+      @results, @type = perform_search @query, @type, @page_num, @force
     end
   end
 end
