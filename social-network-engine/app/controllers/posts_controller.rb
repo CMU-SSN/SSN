@@ -37,7 +37,6 @@ class PostsController < ApplicationController
 
   # GET /posts/checkin
   def checkin
-
     @status = Status.new
 
     respond_to do |format|
@@ -58,7 +57,6 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-		
     if session[:post_as] != 'SELF'
 			organization = Organization.find(session[:post_as])
 			organization.posts.create!(params[:post])
