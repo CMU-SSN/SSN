@@ -10,6 +10,7 @@
     <div>
       <%= form_tag search_path do %>
           <%= text_field_tag 'q', @query, :placeholder => "Enter search here", :type => "search" %>
+          <%= hidden_field_tag 'type', @type %>
           <%= submit_tag 'Search', :data => {:role => 'button', :theme => 'b'} %>
       <% end %>
       <% if not @results.nil? %>
