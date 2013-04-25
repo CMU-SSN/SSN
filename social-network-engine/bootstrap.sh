@@ -7,9 +7,6 @@ apt-get update
 apt-get install -y git-core
 apt-get install -y git
 
-# Packages required for Carrierwave
-apt-get install -y build-essential imagemagick libmagickcore-dev libmagickwand-dev
-
 # Install RVM if required
 if [ ! -e /usr/local/rvm/bin/rvm ]
 	then
