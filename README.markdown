@@ -55,8 +55,6 @@ The Vagrant box can be created in any directory.  The key files the make Vagrant
 	# Install required packages
 	apt-get install -y git-core
 	apt-get install -y git
-	apt-get install -y imagemagick	# Required for paperclip gem
-	apt-get install -y ghostscript	# Required for paperclip gem
 
 	# Install RVM if required
 	if [ ! -e /usr/local/rvm/bin/rvm ]
