@@ -1,4 +1,16 @@
 (function () {
+    function getQueryString(name) {
+      name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+      var regexS = "[\\?&]" + name + "=([^&#]*)";
+      var regex = new RegExp(regexS);
+      var results = regex.exec(window.location.search);
+      if(results == null) {
+        return "";
+      } else {
+        return decodeURIComponent(results[1].replace(/\+/g, " "));
+      }
+    }
+
     function showGeoFilter(){
         $("#geo-filter").show();
         $("#filter-btn").find(".ui-icon").removeClass("ui-icon-arrow-d").addClass("ui-icon-arrow-u");
@@ -12,7 +24,7 @@
     function pullFeeds(parameters)
     {
 			$.ajax({
-				url: "/reloadPosts"
+				url: "/reloadPosts?f=" + getQueryString("f")
 			});
     }
 		
@@ -62,7 +74,7 @@
     function loadPage(page)
     {
         var last_token = $('#posts').data('last-token');
-        $.get('/refresh', { token: last_token, backward:'true' }).done(function (data) {
+        $.get('/refresh', { token: last_token, backward:'true', f: getQueryString("f") }).done(function (data) {
             var jqHtml = $(data);
             var newToken = jqHtml.children("#last-token").text();
 
@@ -90,7 +102,7 @@
             success: function () {
                 paginationManager.check();
             },
-            url: "/reloadPosts"
+            url: "/reloadPosts?f=" + getQueryString("f")
         });
     });
 

@@ -36,32 +36,48 @@ class Post < ActiveRecord::Base
   # Pass last_id a hash to load newer or older posts, such as {:id=>1, :backward=>false}.
   # :backward => true will load older posts and :backward => false will load newer posts.
   # When last_id is an Id value, new posts will be retrieved.
-  def self.Filter(user, limit, last_id, location=nil, radius=nil)
-    # Get the IDs of all organizations the user is following
-    org_ids = user.organizations.map{|o| o.id}
+  # If filter is false, all posts are fetched. Otherwise, we get the posts for
+  # the user's friends, organizations, and all cities.
+  def self.Filter(user, limit, last_id, location=nil, radius=nil, filter=false) 
+    if filter
+      # Get the IDs of all organizations the user is following
+      org_ids = user.organizations.map{|o| o.id}
 
-    # Add the IDs of the cities since all cities are organizations
-    org_ids += Organization::AllCities().map{|c| c.id}
+      # Add the IDs of the cities since all cities are organizations
+      org_ids += Organization::AllCities().map{|c| c.id}
 
-    # Get the IDs of all friends
-    friend_ids = user.friends.map{|f| f.id}
+      # Get the IDs of all friends
+      friend_ids = user.friends.map{|f| f.id}
 
-    # Include the user's own posts
-    friend_ids << user.id
+      # Include the user's own posts
+      friend_ids << user.id
+
+      filter_conditions = ["(user_id IN (?) OR organization_id IN (?))", friend_ids, org_ids]
+    else
+      # Just get all posts.
+      filter_conditions = ""
+    end
 
     # Get posts after the last ID if one was specified
     if last_id.nil? || last_id.length == 0
-      conditions = ["user_id IN (?) OR organization_id IN (?)", friend_ids, org_ids]
+      conditions = filter_conditions
 
     else
       if last_id.kind_of?(Hash)
         if last_id[:backward]
-          conditions = ["id < ? AND (user_id IN (?) OR organization_id IN (?))", last_id[:id], friend_ids, org_ids]
+          conditions = ["id < ?", last_id[:id]]
         else
-          conditions = ["id > ? AND (user_id IN (?) OR organization_id IN (?))", last_id[:id], friend_ids, org_ids]
+          conditions = ["id > ?", last_id[:id]]
         end
       else # last_id is a single Id value
-        conditions = ["id > ? AND (user_id IN (?) OR organization_id IN (?))", last_id, friend_ids, org_ids]
+        conditions = ["id > ?", last_id]
+      end
+
+      # Add the filters if they exist.
+      if not filter_conditions.empty?
+        conditions[0] = conditions[0] + " AND " + filter_conditions[0]
+        conditions.push(filter_conditions[1])
+        conditions.push(filter_conditions[2])
       end
     end
 

@@ -4,6 +4,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     # Filter all posts for the current user that happened after the specified token
+    @f = params[:f]
     filter()
 
     respond_to do |format|
@@ -102,6 +103,14 @@ class PostsController < ApplicationController
   end
 
   def filter(older = false)
+    # Unless following was specified, don't do filtering
+    if not params[:f].nil? and params[:f] == PostsHelper::FilterType::FOLLOWING
+      print "\n\nFilter ON\n\n"
+      filter = true
+    else
+      filter = false
+    end
+
     if (!params['latitude'].nil? && !params['longitude'].nil?)
       location = [params['latitude'].to_f, params['longitude'].to_f]
     elsif (!params['location'].nil?)
@@ -110,7 +119,7 @@ class PostsController < ApplicationController
     token = params['token']
     token = {:id => token, :backward => true} if older
     @max_distance = Post.max_distance_from_position(current_user, location)
-    @posts = Post::Filter(current_user, 5, token, location, params['radius'])
+    @posts = Post::Filter(current_user, 5, token, location, params['radius'], filter)
     @token = @posts.first.id if !@posts.nil? && !@posts.first.nil?
     @last_token = @posts.last.id if !@posts.nil? && !@posts.last.nil?
     @path = "../"
