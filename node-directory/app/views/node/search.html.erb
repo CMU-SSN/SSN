@@ -64,7 +64,7 @@
   }
 
   // Loads the map.
-  function loadMap(lat, lng) {
+  function loadMap(lat, lng, bounds) {
     var latLng = new google.maps.LatLng(lat, lng);
     var mapOptions = {
       center: latLng,
@@ -80,6 +80,11 @@
     };
     map = new google.maps.Map(document.getElementById("map-canvas"),
         mapOptions);
+
+    // If bounds were specified, ensure they fit.
+    if (bounds) {
+      map.fitBounds(bounds);
+    }
 
     // Search for locations near where the user clicked.
     google.maps.event.addListener(map, 'click', function(e) {
@@ -99,18 +104,19 @@
 
         // Add infowindow for when the marker is clicked
         google.maps.event.addListener(marker, 'click', (function(marker, res) {
-        return function() {
-          infowindow.setContent(res.name);
-          infowindow.open(map, marker);
-        }
-      })(marker, results[i]));
+          return function() {
+            infowindow.setContent($("<a>").attr("href", res.link).text(res.name));
+            infowindow.open(map, marker);
+          }
+        })(marker, results[i]));
       }
+      
     }
   }
 
   // Loads the map on location error. Center on Palo Alto.
   function positionError() {
-    loadMap(37.44836, -122.137732);
+    loadMap(37.44836, -122.137732, null);
   }
 
   // Initialize the map, centered on Palo Alto, CA.
@@ -132,9 +138,9 @@
 
       // Center on palo alto if there are no results
       if (results.length == 0) {
-        loadMap(37.44836, -122.137732);
+        loadMap(37.44836, -122.137732, null);
       } else {
-        loadMap(bounds.getCenter().lat(), bounds.getCenter().lng());
+        loadMap(bounds.getCenter().lat(), bounds.getCenter().lng(), bounds);
       }
     }  
   }
