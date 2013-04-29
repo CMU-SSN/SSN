@@ -90,7 +90,55 @@
         });
     }
 
+    function getCurrentLocation(onFinish){
+        if (navigator.geolocation) {
+            var watchID = navigator.geolocation.watchPosition(function (position) {
+                    if (position && position.coords && position.coords.latitude && position.coords.longitude) {
+                        if (onFinish) {
+                            onFinish(position.coords.latitude, position.coords.longitude);
+                        }
+                    }
+                    navigator.geolocation.clearWatch(watchID);
+                }, function (error) {
+                    console.log("in error block");
+                    navigator.geolocation.clearWatch(watchID);
+                    switch (error.code) {
+                        case error.TIMEOUT:
+                            errorText += "Timeout";
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            errorText += "Position Unavailable";
+                            break;
+                        case error.PERMISSION_DENIED:
+                            errorText += "Permission Denied";
+                            break;
+                        case error.UNKNOWN_ERROR:
+                            errorText += "Unknown Error";
+                            break;
+                    }
+                    onFinish();
+                },
+                {
+                    timeout: 5000, //5 seconds
+                    enableHighAccuracy: true
+                });
+            return;
+        }
+    }
+
     $(document).on("pageshow", "#index", function() {
+
+        // update status button with geo information
+        getCurrentLocation(function (latitude, longitude) {
+            if(latitude && longitude)
+            {
+                var href = $($("a[data-id='status']")[0]).attr("href");
+                href = href.split("?")[0];
+                href = href + "?latitude=" + latitude + "&longitude=" + longitude
+                $("a[data-id='status']").attr("href", href);
+            }
+        });
+
 
         $.ajax({
             beforeSend: function () {
@@ -107,6 +155,13 @@
     });
 
     $(document).ready( function(){
+//        $("a[data-id='status']").live("click", function(){
+//            alert("catch ya");
+//            getCurrentLocation(function(latitude, longitude){
+//                var href = $(this).attr("href");
+//                $(this).attr("href", href + "?latitude=" + latitude + "&longitude=" + longitude );
+//            });
+//        });
 
         $("#filter-btn").live("click", function(){
             if ($("#geo-filter").is(":visible")) { hideGeoFilter(); }

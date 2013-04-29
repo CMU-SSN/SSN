@@ -7,6 +7,7 @@
             <div class="status">
               <%= image_tag "glyphicons/glyphicons_193_circle_ok.png" %>
             </div>
+            <a style="visibility: hidden" class="all-clear" data-role="button" data-theme="b" data-mini="true" data-inline="true">All Clear</a>
         <% elsif status.status == Post::NEEDS_ASSISTANCE_STATUS %>
             <div class="status">
               <%= image_tag "glyphicons/glyphicons_196_circle_exclamation_mark.png" %>
