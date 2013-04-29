@@ -1,6 +1,6 @@
 class Status < ActiveRecord::Base
   attr_accessible :status, :latitude, :longitude
-  attr_accessor :clear
+  attr_accessor :clear, :distance, :direction
   belongs_to :user
   before_save :set_severity
   private
