@@ -10,7 +10,9 @@ class StatusController < ApplicationController
     end
     if lat && lng
       @statuses = @statuses.sort_by do  |a|
-        Geocoder::Calculations.distance_between([a.latitude,a.longitude], [lat,lng])
+        a.distance = Geocoder::Calculations.distance_between([a.latitude,a.longitude], [lat,lng])
+        a.direction = Geocoder::Calculations.compass_point Geocoder::Calculations.bearing_between([lat, lng], [a.latitude,a.longitude])
+        a.distance
       end
     end
     @path = "../"
