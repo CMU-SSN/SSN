@@ -2,7 +2,7 @@
   <a href="<%= user_path(status.user) %>" class="feed-header">
     <img src="<%= path %><%= status.user.profile_pic %>" class="author-img"/>
     <h2 class="author-name"><%= status.user.name %></h2>
-    <% if !status.distance.nil? || !status.direction.nil? %>
+    <% if !status.distance.nil? && !status.direction.nil? && !status.clear %>
         <p class="post-time"><%= '%.2f' % status.distance %> miles
           <%= status.direction %></p>
     <% end %>

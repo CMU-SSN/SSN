@@ -1,16 +1,16 @@
 class Status < ActiveRecord::Base
-  attr_accessible :status, :latitude, :longitude
+  attr_accessible :status, :latitude, :longitude, :severity
   attr_accessor :clear, :distance, :direction
   belongs_to :user
   before_save :set_severity
   private
   def set_severity
     if (status == Post::ALL_CLEAR_STATUS)
-      @severity = 0
+      self.severity = 0
     elsif (status == Post::NEEDS_ASSISTANCE_STATUS)
-      @severity = 1
+      self.severity = 1
     else
-      @severity = 2
+      self.severity = 2
     end
   end
 end
