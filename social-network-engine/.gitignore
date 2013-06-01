@@ -30,6 +30,5 @@ coverage/*
 .vagrant
 *.vagrant
 Vagrantfile
-public/profile-pics/*
 ._noip*
 config/facebook.yml

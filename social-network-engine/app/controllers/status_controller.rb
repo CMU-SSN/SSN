@@ -9,7 +9,6 @@ class StatusController < ApplicationController
       status
     end
     if lat && lng && !lat.to_s.empty? && !lng.to_s.empty?
-      logger.debug "[" + lat.to_s + "," + lng.to_s + "]>>>>>>>>>>>>>>>>>>"
       @statuses = @statuses.sort_by do  |a|
         a.distance = Geocoder::Calculations.distance_between([a.latitude,a.longitude], [lat,lng])
         a.direction = Geocoder::Calculations.compass_point Geocoder::Calculations.bearing_between([lat, lng], [a.latitude,a.longitude])

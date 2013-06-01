@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-  attr_accessible :text, :address, :latitude, :longitude, :status
+  attr_accessible :text, :address, :latitude, :longitude, :status, :city, :zipcode
   belongs_to :user
   belongs_to :organization
   validates :text, :length => {
