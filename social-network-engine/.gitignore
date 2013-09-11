@@ -32,3 +32,4 @@ coverage/*
 Vagrantfile
 ._noip*
 config/facebook.yml
+public/profile-pics
