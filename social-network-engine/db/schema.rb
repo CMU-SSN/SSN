@@ -76,8 +76,8 @@ ActiveRecord::Schema.define(:version => 20130429065607) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                  :default => "",                                     :null => false
+    t.string   "encrypted_password",     :default => "",                                     :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -86,13 +86,13 @@ ActiveRecord::Schema.define(:version => 20130429065607) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at",                                                                 :null => false
+    t.datetime "updated_at",                                                                 :null => false
     t.string   "provider"
     t.string   "uid"
     t.string   "token"
     t.datetime "token_expiration"
-    t.string   "profile_pic"
+    t.string   "profile_pic",            :default => "profile-pics/default_profile_pic.png"
     t.string   "name"
   end
 
