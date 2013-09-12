@@ -5,6 +5,7 @@ Sne::Application.routes.draw do
 	get 'context' => 'posts#post_context'
   get 'checkin' => 'posts#checkin'
   get 'signup' => 'facebook_tab_app#signup'
+  get 'signupnofb' => 'Devise::RegistrationsController#create'
   get 'location' => 'posts#where_am_i'
 
   # All facebook_tab_app actions just get forwarded

@@ -36,5 +36,9 @@
 			<span class="facebook-icon"></span>		
 			<p>Sign up with Facebook</p>
 		<% end %>
+        <%= link_to new_user_registration_path, :class => 'facebook-btn', :rel => 'external', :data => { :role => 'button', :theme => 'b' } do %>
+            <span class="signup-without-facebook"></span>
+			<p>Sign up</p>
+		<% end %>
 	</div>
 <% end %>
