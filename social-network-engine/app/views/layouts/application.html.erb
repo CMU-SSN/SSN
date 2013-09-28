@@ -16,7 +16,8 @@
 	    <%= yield :content %>
 	  </div>
 		<div data-role="footer" data-id="footer" data-position="fixed">
-			<%= yield :footer %>
+      <%= render 'partials/menu' %>
+      <%= yield :footer %>
 		</div>
 	</div>
 	<%= yield :scripts %>
