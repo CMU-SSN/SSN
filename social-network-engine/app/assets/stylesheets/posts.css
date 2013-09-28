@@ -1,5 +1,5 @@
 .header-icon-logout {
-    background: url("glyphicons/glyphicons_203_lock.png") center no-repeat;
+    background: url("glyphicons/glyphicons_207_remove_2.png") center no-repeat;
     background-size: 20px 20px;
     height: 30px;
 }
@@ -11,7 +11,7 @@
 }
 
 .header-icon-close {
-    background: url("glyphicons/glyphicons_207_remove_2.png") center no-repeat;
+    background: url("glyphicons/glyphicons_210_left_arrow.png") center no-repeat;
     background-size: 15px 15px;
     height: 30px;
 }
@@ -21,35 +21,6 @@
     height: 20px;
 }
 
-.ui-icon-status {
-    background: url("glyphicons/glyphicons_088_adress_book.png");
-    background-size: 20px 20px;
-    border-radius: 0px;
-}
-
-.ui-icon-check-in {
-    background: url("glyphicons/glyphicons_152_check.png");
-    background-size: 20px 20px;
-    border-radius: 0px;
-}
-
-.ui-icon-post {
-    background: url("glyphicons/glyphicons_244_conversation.png");
-    background-size: 20px 20px;
-    border-radius: 0px;
-}
-
-.ui-icon-profile {
-    background: url("glyphicons/glyphicons_003_user.png");
-    background-size: 20px 20px;
-    border-radius: 0px;
-}
-
-.ui-icon-settings {
-    background: url("glyphicons/glyphicons_136_cogwheel.png");
-    background-size: 20px 20px;
-    border-radius: 0px;
-}
 
 .ui-icon-picture {
     background: url("glyphicons/glyphicons_011_camera.png");
