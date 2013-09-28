@@ -1,0 +1,41 @@
+.ui-icon-status {
+    background: url("glyphicons/glyphicons_088_adress_book.png");
+    background-size: 20px 20px;
+    border-radius: 0px;
+}
+
+.ui-icon-check-in {
+    background: url("glyphicons/glyphicons_152_check.png");
+    background-size: 20px 20px;
+    border-radius: 0px;
+}
+
+.ui-icon-timeline {
+    background: url("glyphicons/glyphicons_088_adress_book.png");
+    background-size: 20px 20px;
+    border-radius: 0px;
+}
+
+.ui-icon-post {
+    background: url("glyphicons/glyphicons_244_conversation.png");
+    background-size: 20px 20px;
+    border-radius: 0px;
+}
+
+.ui-icon-profile {
+    background: url("glyphicons/glyphicons_003_user.png");
+    background-size: 20px 20px;
+    border-radius: 0px;
+}
+
+.ui-icon-settings {
+    background: url("glyphicons/glyphicons_136_cogwheel.png");
+    background-size: 20px 20px;
+    border-radius: 0px;
+}
+
+.ui-icon-extra-content {
+    background: url("glyphicons/glyphicons_144_folder_open.png");
+    background-size: 20px 20px;
+    border-radius: 0px;
+}
