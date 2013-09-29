@@ -1,7 +1,9 @@
 class Post < ActiveRecord::Base
-  attr_accessible :text, :address, :latitude, :longitude, :status, :city, :zipcode
+  attr_accessible :text, :address, :latitude, :longitude, :status, :city, :zipcode, :severity
   belongs_to :user
   belongs_to :organization
+	#has_one :status, :dependent => :destroy
+
   validates :text, :length => {
       :minimum   => 1,
       :maximum   => 140,

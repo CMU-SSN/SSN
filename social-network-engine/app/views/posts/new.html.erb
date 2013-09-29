@@ -16,6 +16,13 @@
 			<%= f.hidden_field :text %>
 			<%= f.hidden_field :status, :value => "false" %>
 			<%= text_area_tag "new_post_text", "", :placeholder => "What's happening?" %>
+
+      <%= f.radio_button :severity, 0 %>
+      <%= label :severity, 'OK' %>
+      <%= f.radio_button :severity, 1 %>
+      <%= label :severity, 'Need assistance' %>
+      <%= f.radio_button :severity, 2 %>
+      <%= label :severity, 'Emergency' %>
 	  <% end %>
 	  <%= link_to "Post", "#", :id => "submit_NewPost", :data => {:role => "button", :theme => "b"} %></li>
 	</div>

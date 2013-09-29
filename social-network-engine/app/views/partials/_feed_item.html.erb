@@ -1,4 +1,17 @@
-<div class="feed-item">
+<% if post.severity.nil? %>
+  <div class="feed-item">
+<% else %>
+  <% case post.severity %>
+    <% when 0 %>
+      <div class="feed-item-ok">
+    <% when 1 %>
+      <div class="feed-item-assistance">
+    <% when 2 %>
+    <div class="feed-item-emergency">
+    <% else %>
+  <% end %>
+<% end %>
+
     <% if post.organization.nil? %>
 			<a href="<%= user_path(post.user) %>" class="feed-header">
         <img src="<%= path %><%= post.user.profile_pic %>" class="author-img"/>
@@ -8,12 +21,25 @@
         <img src="<%= path %><%= post.organization.profile_pic %>" class="author-img"/>
         <h2 class="author-name"><%= post.organization.name %></h2>
     <% end %>
-    <% if !post.city.nil? || !post.zipcode.nil? %>
-        <p class="post-time"><%= time_ago_in_words(post.created_at) %> ago
-          near <%= post.city %> <%= post.zipcode %></p>
-    <% else %>
-        <p class="post-time"><%= time_ago_in_words(post.created_at) %> ago</p>
-    <% end %>
+
+    <p class="post-time"><%= time_ago_in_words(post.created_at) %> ago
+      <% if !post.city.nil? || !post.zipcode.nil? %>
+            near <%= post.city %> <%= post.zipcode %>
+      <% end %>
+      <% if !post.severity.nil? %>
+        <% case post.severity %>
+          <% when 0 %>
+            OK
+          <% when 1 %>
+            Need Assistance
+          <% when 2 %>
+            Emergency
+          <% else %>
+        <% end %>
+      <% else %>
+        No Status
+      <% end %>
+    </p>
   </a>
   <div class="feed-content">
     <p class="feed-text"><%= post.text %></p>

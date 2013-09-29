@@ -1,7 +1,10 @@
 class Status < ActiveRecord::Base
   attr_accessible :status, :latitude, :longitude, :severity
   attr_accessor :clear, :distance, :direction
-  belongs_to :user
+
+	#belongs_to :post
+	#belongs_to :user  (currently linkage is user-post-status)
+
   before_save :set_severity
   private
   def set_severity
