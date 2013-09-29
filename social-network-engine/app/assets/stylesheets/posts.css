@@ -94,6 +94,39 @@
     box-shadow: 1px 1px 3px #555;
 }
 
+.feed-item-ok {
+    background: url("backgrounds/paper_fibers.png");
+    background-repeat: repeat;
+    border-radius: .3em;
+    margin-bottom: 15px;
+    box-shadow: 1px 1px 3px #555;
+    border-style:solid;
+    border-color: #006837;
+    border-width: 8px;
+}
+
+.feed-item-assistance {
+    background: url("backgrounds/paper_fibers.png");
+    background-repeat: repeat;
+    border-radius: .3em;
+    margin-bottom: 15px;
+    box-shadow: 1px 1px 3px #555;
+    border-style:solid;
+    border-color: #ffcc33;
+    border-width: 8px;
+}
+
+.feed-item-emergency {
+    background: url("backgrounds/paper_fibers.png");
+    background-repeat: repeat;
+    border-radius: .3em;
+    margin-bottom: 15px;
+    box-shadow: 1px 1px 3px #555;
+    border-style:solid;
+    border-color:#c1272d;
+    border-width: 8px;
+}
+
 .feed-header {
     padding-bottom: 3px;
     text-decoration: none;
