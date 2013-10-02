@@ -17,12 +17,12 @@
 			<%= f.hidden_field :status, :value => "false" %>
 			<%= text_area_tag "new_post_text", "", :placeholder => "What's happening?" %>
 
-      <%= f.radio_button :severity, 0 %>
-      <%= label :severity, 'OK' %>
-      <%= f.radio_button :severity, 1 %>
-      <%= label :severity, 'Need assistance' %>
-      <%= f.radio_button :severity, 2 %>
-      <%= label :severity, 'Emergency' %>
+      <%= f.radio_button :severity, 0 , style: 'margin-left: -20px; margin-top: 4px'%>
+      <%= label :severity, 'OK', style: 'color:grey; margin-left: 20px;' %>
+      <%= f.radio_button :severity, 1 , style: 'margin-left: -20px; margin-top: 4px'%>
+      <%= label :severity, 'Need assistance', style: 'color:grey; margin-left: 20px;' %>
+      <%= f.radio_button :severity, 2 , style: 'margin-left: -20px; margin-top: 4px'%>
+      <%= label :severity, 'Emergency', style: 'color:grey; margin-left: 20px;' %>
 	  <% end %>
 	  <%= link_to "Post", "#", :id => "submit_NewPost", :data => {:role => "button", :theme => "b"} %></li>
 	</div>
