@@ -3,15 +3,11 @@
 <% end %>
 
 <%= content_for :content do %>
-	<h1>City of Palo Alto SSN :: Cool City Neighborhood</h1>
-	<h2 class="login-header">Sign In</h2>
+	<h1>Survivable Social Network</h1>
+	<h2 class="login-header">Already Registered</h2>
 	<div class="login"> 
-		<%= content_tag(:div, flash[:alert], :id => "flash-alert") unless flash[:alert].blank? %>	
-		<%= link_to user_omniauth_authorize_path(:facebook, :redirect_uri => "#{request.protocol}#{request.host_with_port}#{root_path}"), :class => 'facebook-btn', :rel => 'external', :data => { :role => 'button', :theme => 'f' } do %>
-			<span class="facebook-icon"></span>		
-			<p>Sign in with Facebook</p>
-		<% end %>	
-		<p>Or Using Your Local SSN Account</p>
+
+		<p>Using Your Local SSN Account</p>
 		<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :data => { :ajax => 'false' }}) do |f| %>
 		    <div data-role="fieldcontain" class="ui-hide-label">
 		      <%= f.label :email %>
@@ -30,15 +26,12 @@
 		    <%= f.submit "Sign in", :id => 'loginFormSubmit', :data => { :role => 'button', :theme => 'b' }%>
 		<% end %>
 	</div>
-	<h2 class="login-header">Create New Account</h2>
+	<h2 class="login-header">New User</h2>
 	<div class="login">
-		<%= link_to signup_path, :class => 'facebook-btn', :rel => 'external', :data => { :role => 'button', :theme => 'f' } do %>
-			<span class="facebook-icon"></span>		
-			<p>Sign up with Facebook</p>
-		<% end %>
+
         <%= link_to new_user_registration_path, :class => 'facebook-btn', :rel => 'external', :data => { :role => 'button', :theme => 'b' } do %>
             <span class="signup-without-facebook"></span>
-			<p>Sign up</p>
+			<p>Create new account</p>
 		<% end %>
 	</div>
 <% end %>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>The City of Palo Alto's Survivable Social Network</title>
+  <title>Survivable Social Network</title>
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -16,7 +16,9 @@
 	    <%= yield :content %>
 	  </div>
 		<div data-role="footer" data-id="footer" data-position="fixed">
-      <%= render 'partials/menu' %>
+         <% if user_signed_in? %>
+          <%= render 'partials/menu' %>
+              <% end %>
       <%= yield :footer %>
 		</div>
 	</div>

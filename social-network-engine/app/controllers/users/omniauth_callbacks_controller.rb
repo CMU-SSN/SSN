@@ -12,6 +12,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     expiration_date
   end
 
+
   def facebook
     auth = request.env["omniauth.auth"]
 

@@ -22,7 +22,8 @@ Sne::Application.routes.draw do
 	match '/followOrganization/:id' => 'organizations#add_organization'
 	
 	match '/removeOrganization/:id' => 'organizations#remove_organization'
-	
+
+  #match '/users' => 'posts#index'
 	match'/users/posts/:id' => 'users#posts', :as => :users_posts
 	match'/users/followings/:id' => 'users#followings', :as => :users_followings
 	match'/users/followers/:id' => 'users#followers', :as => :users_followers
@@ -33,7 +34,10 @@ Sne::Application.routes.draw do
 	
 	match'/reloadPosts' => 'posts#reloadPosts'
 	
+  #devise_for :users, :path => 'posts'
   devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks' }
+  #devise_for :users, :controllers => { :application_controller => 'application_controller' }
+
 
   match 'main' => 'posts#index'
   root :to => 'posts#index'
