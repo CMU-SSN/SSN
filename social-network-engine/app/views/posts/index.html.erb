@@ -6,7 +6,7 @@
   <div>
     <!-- Header Left Button -->
     <% if user_signed_in? %>
-      <%= link_to "", destroy_user_session_path, :class => "header-icon-logout", :method => "delete", :target => "_self", :data => { :role => "button", :inline => true }, :style => "top:-1px" %>
+      <%= link_to "", destroy_user_session_path, :class => "header-icon-logout ui-btn-right", :method => "delete", :target => "_self", :data => { :role => "button", :inline => true }, :style => "top:8px" %>
     <% end %>
 
     <!-- Selection middle -->
@@ -18,7 +18,7 @@
     </div>
 
     <!-- Header Right Button -->
-    <%= link_to "", search_path, :class => "header-icon-search ui-btn-right", :style => "top:8px", :data => { :role => "button", :transition => "slide", :inline => true } %>
+    <%= link_to "", search_path, :class => "header-icon-search", :style => "top:-1px", :data => { :role => "button", :transition => "slide", :inline => true } %>
 
     <% if @max_distance > 1 %>
         <% display = 'block' %>
