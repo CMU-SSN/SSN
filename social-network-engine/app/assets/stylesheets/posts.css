@@ -1,20 +1,4 @@
-.header-icon-logout {
-    background: url("glyphicons/glyphicons_207_remove_2.png") center no-repeat;
-    background-size: 20px 20px;
-    height: 30px;
-}
 
-.header-icon-search {
-    background: url("glyphicons/glyphicons_027_search.png") center no-repeat;
-    background-size: 20px 20px;
-    height: 30px;
-}
-
-.header-icon-close {
-    background: url("glyphicons/glyphicons_210_left_arrow.png") center no-repeat;
-    background-size: 15px 15px;
-    height: 30px;
-}
 
 .ui-icon {
     width: 20px;
