@@ -90,9 +90,7 @@ function geotagPost(onSuccess) {
 }
 
 function submitPost(){
-    geotagPost(function(){
-        $("[id^='new']").submit();
-    });
+    $("[id^='new']").submit();
 }
 
 function onPageShow(prefix) {
