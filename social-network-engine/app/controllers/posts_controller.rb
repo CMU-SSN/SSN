@@ -111,15 +111,15 @@ class PostsController < ApplicationController
       filter = false
     end
 
-    if (!params['latitude'].nil? && !params['longitude'].nil?)
-      location = [params['latitude'].to_f, params['longitude'].to_f]
-    elsif (!params['location'].nil?)
-      location = params['location']
-    end
+    # if (!params['latitude'].nil? && !params['longitude'].nil?)
+    #   location = [params['latitude'].to_f, params['longitude'].to_f]
+    # elsif (!params['location'].nil?)
+    #   location = params['location']
+    # end
     token = params['token']
     token = {:id => token, :backward => true} if older
     @max_distance = Post.max_distance_from_position(current_user, location)
-    @posts = Post::Filter(current_user, 5, token, location, params['radius'], filter)
+    @posts = Post::Filter(current_user, 5, token, nil, nil, filter)
     @token = @posts.first.id if !@posts.nil? && !@posts.first.nil?
     @last_token = @posts.last.id if !@posts.nil? && !@posts.last.nil?
     @path = "../"
