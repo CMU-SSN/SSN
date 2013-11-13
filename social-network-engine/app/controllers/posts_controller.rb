@@ -5,7 +5,8 @@ class PostsController < ApplicationController
   def index
     # Filter all posts for the current user that happened after the specified token
     @f = params[:f]
-    filter()
+    @max_distance = 0
+    @posts = Post::get(current_user, (not params[:f].nil? and params[:f] == PostsHelper::FilterType::FOLLOWING))
 
     respond_to do |format|
       format.html # index.html.erb
