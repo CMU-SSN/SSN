@@ -129,15 +129,15 @@
     $(document).on("pageshow", "#index", function() {
 
         // update status button with geo information
-        getCurrentLocation(function (latitude, longitude) {
-            if(latitude && longitude)
-            {
-                var href = $($("a[data-id='status']")[0]).attr("href");
-                href = href.split("?")[0];
-                href = href + "?latitude=" + latitude + "&longitude=" + longitude
-                $("a[data-id='status']").attr("href", href);
-            }
-        });
+        // getCurrentLocation(function (latitude, longitude) {
+        //     if(latitude && longitude)
+        //     {
+        //         var href = $($("a[data-id='status']")[0]).attr("href");
+        //         href = href.split("?")[0];
+        //         href = href + "?latitude=" + latitude + "&longitude=" + longitude
+        //         $("a[data-id='status']").attr("href", href);
+        //     }
+        // });
 
 
         $.ajax({
