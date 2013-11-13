@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   validates_presence_of :email
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :profile_pic, :email, :password, :password_confirmation, :remember_me, :token_expiration, :provider, :uid, :token
+  attr_accessible :name, :profile_pic, :email, :password, :password_confirmation, :remember_me, :token_expiration, :provider, :uid, :token, :voip_ext
   has_many :posts, :dependent => :destroy
 
   # has_many :status, :dependent => :destroy

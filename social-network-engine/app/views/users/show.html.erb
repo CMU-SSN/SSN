@@ -15,6 +15,9 @@
 			<div class="user-left">
 				<img src="<%= @path %><%= @user.profile_pic %>" class="author-img"/>
 				<h2 class="profile-name"><%= @user.name %></h2>
+        <% unless @user.voip_ext.nil? %>
+          <p class="profile-callno">Call number: <a href="sip://<%= @user.voip_ext %>"><%= @user.voip_ext %></a></p>
+        <% end %>
 			</div>
 			
 			<% unless current_user == @user%>
