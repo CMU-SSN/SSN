@@ -15,9 +15,22 @@
 			<div class="user-left">
 				<img src="<%= @path %><%= @user.profile_pic %>" class="author-img"/>
 				<h2 class="profile-name"><%= @user.name %></h2>
-        <% unless @user.voip_ext.nil? %>
-          <p class="profile-callno">Call number: <a href="sip://<%= @user.voip_ext %>"><%= @user.voip_ext %></a></p>
-        <% end %>
+
+        <p class="profile-callno">
+          <% if current_user == @user %>
+            <% if current_user.voip_ext.nil? %>
+              No IP phone registered: <%= link_to "register your IP phone", user_voip_start_path %>
+            <% else %>
+              Your IP phone number: <%= @user.voip_ext %>
+            <% end %>
+          <% elsif !(@user.voip_ext.nil?) %>
+            <% if current_user.voip_ext.nil? %>
+              This user has IP phone: <%= link_to "register your IP phone", user_voip_start_path %>
+            <% else %>
+              IP phone number: <a href="sip://<%= @user.voip_ext %>"><%= @user.voip_ext %></a>
+            <% end %>
+          <% end %>
+        </p>
 			</div>
 			
 			<% unless current_user == @user%>

@@ -1,0 +1,20 @@
+<% content_for :page do %>
+		<div data-role="page" data-theme="a" id="usersShow">
+<% end %>
+
+<% content_for :header do %>
+	<%= link_to "", posts_path, :class => "header-icon-close", :data => { :role => "button", :transition => "slidedown" } %>
+  <h3>Register IP phone</h3>
+<% end %>
+
+<% content_for :content do %>
+  <div class="login">
+    <h3>Install IP phone application</h3>
+    <p data-theme="a">To make IP calls, you need to install IP phone applicaiton on your smartphone.
+      We recommend Zoiper, which are available for both iOS and Android.
+      After you install the application, please proceed to obtain your phone number.</p>
+    <%= link_to user_voip_register_path, :class => 'facebook-btn', :rel => 'external', :data => { :role => 'button', :theme => 'b' } do %>
+			<p>Obtain phone number</p>
+		<% end %>
+  </div>
+<% end %>

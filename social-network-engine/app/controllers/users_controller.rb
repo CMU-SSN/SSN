@@ -57,4 +57,29 @@ class UsersController < ApplicationController
 			@feedItemId = "followingFeedItemId"
 		end
 	end
+
+	def voip_start
+		@user = User.find(params[:id])
+		voip_user_check(@user)
+	end
+
+	def voip_register
+		@user = User.find(params[:id])
+		if voip_user_check(@user)
+			@user.voip_ext = User.maximum("voip_ext") + 1
+			@user.save
+		end
+	end
+
+	# voip_user_check:
+	# Check if the user is adding VoIP extension to own account
+	# and he does not have extension yet
+	def voip_user_check(user)
+		if user != current_user || !(user.voip_ext.nil?)
+			redirect_to root_path
+			return false
+		else
+			return true
+		end
+	end
 end

@@ -27,6 +27,8 @@ Sne::Application.routes.draw do
 	match'/users/followings/:id' => 'users#followings', :as => :users_followings
 	match'/users/followers/:id' => 'users#followers', :as => :users_followers
 	match'/users/organizations/:id' => 'users#organizations', :as => :users_organizations
+	match'/users/voip_start/:id' => 'users#voip_start', :as => :user_voip_start
+	match'/users/voip_register/:id' => 'users#voip_register', :as => :user_voip_register
 	
 	match'/organizations/posts/:id' => 'organizations#posts', :as => :organizations_posts
 	match'/organizations/followers/:id' => 'organizations#followers', :as => :organizations_followers
