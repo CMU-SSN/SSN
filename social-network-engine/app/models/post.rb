@@ -106,4 +106,18 @@ class Post < ActiveRecord::Base
     end
     max_distance
   end
+
+  def self.get(user, filter=false) 
+    if filter
+      friend_ids = user.friends.map{|f| f.id}
+      friend_ids << user.id
+      filter_conditions = ["user_id IN (?)", friend_ids]
+    else
+      filter_conditions = ""
+    end
+
+    eval("Post.find(:all,
+        :conditions => filter_conditions,
+        :order => 'updated_at DESC')")
+  end
 end

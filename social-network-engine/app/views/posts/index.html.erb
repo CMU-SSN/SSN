@@ -30,12 +30,17 @@
 <% end %>
 
 <% content_for :content do %>
-    <div id="posts" data-token="<%= @token %>" data-last-token="<%= @last_token %>" data-theme="a" name="postsName">
-    </div>
+	<div class="posts" data-token="<%= @token %>" data-theme="a">
+		<% if !@posts.nil? && @posts.length > 0 %>
+			<% @posts.each do |post| %>
+				<%= render "partials/feed_item", :post => post, :path => @path %>
+			<% end %>
+		<% end %>
+	</div>
 <% end %>
 
 <% content_for :scripts do %>
-  <%= javascript_include_tag "pagination", "post/refresh", "post/common", "post/index" %>
+  <%= javascript_include_tag "post/common", "post/index" %>
   <script language="javascript">
     // Formats the URL and redirects.
     function filterBy(filterFieldNum) {
