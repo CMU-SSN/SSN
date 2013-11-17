@@ -25,7 +25,7 @@
             <% end %>
           <% elsif !(@user.voip_ext.nil?) %>
             <% if current_user.voip_ext.nil? %>
-              This user has IP phone: <%= link_to "register your IP phone", user_voip_start_path %>
+              This user has IP phone: <%= link_to "register your IP phone", user_voip_start_path(current_user) %>
             <% else %>
               IP phone number: <a href="sip://<%= @user.voip_ext %>"><%= @user.voip_ext %></a>
             <% end %>
