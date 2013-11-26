@@ -63,17 +63,30 @@ class UsersController < ApplicationController
 		voip_user_check(@user)
 	end
 
+	# voip_register:
+	# Assign VoIP extension from the first number to
+	# the last number consecutively (e.g. 401-600)
 	def voip_register
 		@user = User.find(params[:id])
 		if voip_user_check(@user)
-			@user.voip_ext = User.maximum("voip_ext") + 1
-			@user.save
+			first = 400 # The first extension assigned
+			last = 600 # The largest extension assigned
+			assigned = User.maximum("voip_ext") # The largest currently assigned extension
+
+			if assigned.nil?
+				@user.voip_ext = first
+			elsif assigned == last
+				# Todo: redirect to error message
+			else
+				@user.voip_ext = assigned + 1
+				@user.save
+			end
 		end
 	end
 
 	# voip_user_check:
-	# Check if the user is adding VoIP extension to own account
-	# and he does not have extension yet
+	# Check if the user is adding VoIP extension to its own account
+	# and s/he does not have extension yet
 	def voip_user_check(user)
 		if user != current_user || !(user.voip_ext.nil?)
 			redirect_to root_path
